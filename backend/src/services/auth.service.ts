@@ -132,14 +132,14 @@ export class AuthService {
   }
 
   public async verify(token: string | undefined): Promise<User | string | null> {
-    if (!token) return 'Unauthorized';
+    if (!token) throw new HttpException(401, 'unauthorized: No token provided');
     try {
       const decoded = verify(token, SECRET_KEY) as DataStoredInToken;
       const user = await UserModel.findById(decoded.id);
-      if (!user) return 'User not found';
+      if (!user) throw new HttpException(401, 'unauthorized: User not found');
       return sanitize(user) as any;
     } catch (error) {
-      return 'Unauthorized';
+      throw new HttpException(401, 'unauthorized: Invalid token');
     }
   }
 
