@@ -1,0 +1,93 @@
+# docker-compose.mongo.yml — production stack for express-upload WITH in-cluster MongoDB.
+#
+# Brings up: backend (Express API), frontend (Next.js standalone), and a
+# compose-managed MongoDB. Use this file when you want everything in
+# one stack. For external Mongo, use docker-compose.no-mongo.yml
+# instead and set MONGODB_URI in the root .env.
+#
+# Run with: `docker compose -f docker-compose.mongo.yml up -d`
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: express-upload-mongo
+    restart: unless-stopped
+    # Auth is OPTIONAL — these are commented out by default. Uncomment
+    # MONGO_INITDB_ROOT_USERNAME/PASSWORD in the root .env AND switch
+    # MONGODB_URI to the authed form to enable.
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+    #   MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: express-upload-backend
+    restart: unless-stopped
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 5601
+      # MONGODB_URI in the root .env wins. If unset, fall back to the
+      # in-cluster mongo service.
+      MONGODB_URI: ${MONGODB_URI:-mongodb://mongo:27017/image-upload}
+      LOG_DIR: /app/logs
+      UPLOAD_ROOT: /var/express-uploads
+      SECRET_KEY: ${SECRET_KEY:-change-me-in-real-deployments}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-7d}
+      # Bootstrap users seeded at startup (if set). Safe to re-run: existing
+      # users with the same email are left untouched.
+      BOOTSTRAP_ADMIN_EMAIL: ${BOOTSTRAP_ADMIN_EMAIL:-}
+      BOOTSTRAP_ADMIN_PASSWORD: ${BOOTSTRAP_ADMIN_PASSWORD:-}
+      BOOTSTRAP_ADMIN_NAME: ${BOOTSTRAP_ADMIN_NAME:-Admin}
+      BOOTSTRAP_USER_EMAIL: ${BOOTSTRAP_USER_EMAIL:-}
+      BOOTSTRAP_USER_PASSWORD: ${BOOTSTRAP_USER_PASSWORD:-}
+      BOOTSTRAP_USER_NAME: ${BOOTSTRAP_USER_NAME:-User}
+      # `app.ts` reads `process.env.FRONTEND_ORIGIN` and adds it to the
+      # CORS allowlist on top of the hardcoded entries.
+      FRONTEND_ORIGIN: ${FRONTEND_ORIGIN:-http://localhost:3055}
+    ports:
+      - "${BACKEND_PORT:-5601}:5601"
+    volumes:
+      # Persist uploads across container restarts and expose them on the host.
+      - express-uploads:/var/express-uploads
+      - backend-logs:/app/logs
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        # Build-time fallback. The value baked here is used by the SSR
+        # pass and as the URL the very first client paint sees, before
+        # `_app.tsx`'s effect finishes its /api/_config fetch.
+        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:5601}
+    container_name: express-upload-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    environment:
+      NODE_ENV: production
+      PORT: 3055
+      # Runtime value — picked up by `pages/api/_config.ts` on every
+      # request. Overriding this env var and `docker compose up -d`
+      # (no rebuild) takes effect on the next browser reload.
+      NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:5601}
+    ports:
+      - "${FRONTEND_PORT:-3055}:3055"
+
+volumes:
+  mongo-data:
+  express-uploads:
+  backend-logs:

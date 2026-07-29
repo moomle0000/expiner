@@ -1,0 +1,13 @@
+node_modules
+.next
+.git
+.gitignore
+.env
+.env.*
+!.env.docker
+*.log
+.DS_Store
+bun.lock
+bun.lockb
+tsconfig.tsbuildinfo
+Dockerfile

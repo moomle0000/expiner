@@ -1,0 +1,154 @@
+2025-05-15 15:11:51 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/monthly-invoice.controller.ts[0m:[93m55[0m:[93m59[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m55[0m       const result = await this.leasePeriodInvoiceService.(req.params.id);
+[7m  [0m [91m                                                          ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/monthly-invoice.controller.ts[0m:[93m55[0m:[93m59[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m55[0m       const result = await this.leasePeriodInvoiceService.(req.params.id);
+[7m  [0m [91m                                                          ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-15 15:12:10 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/monthly-invoice.controller.ts[0m:[93m55[0m:[93m90[0m - [91merror[0m[90m TS1135: [0mArgument expression expected.
+
+[7m55[0m       const result = await this.leasePeriodInvoiceService.generateInvoicesForLeasePeriod(,req.params.id);
+[7m  [0m [91m                                                                                         ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/monthly-invoice.controller.ts[0m:[93m55[0m:[93m90[0m - [91merror[0m[90m TS1135: [0mArgument expression expected.
+
+[7m55[0m       const result = await this.leasePeriodInvoiceService.generateInvoicesForLeasePeriod(,req.params.id);
+[7m  [0m [91m                                                                                         ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-15 15:12:53 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/monthly-invoice.controller.ts[0m:[93m55[0m:[93m94[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m55[0m       const result = await this.leasePeriodInvoiceService.generateInvoicesForLeasePeriod(req.,req.params.id);
+[7m  [0m [91m                                                                                             ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/monthly-invoice.controller.ts[0m:[93m55[0m:[93m94[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m55[0m       const result = await this.leasePeriodInvoiceService.generateInvoicesForLeasePeriod(req.,req.params.id);
+[7m  [0m [91m                                                                                             ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-15 15:13:08 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/monthly-invoice.controller.ts[0m:[93m56[0m:[93m94[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m56[0m       const result = await this.leasePeriodInvoiceService.generateInvoicesForLeasePeriod(req.,req.params.id);
+[7m  [0m [91m                                                                                             ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/monthly-invoice.controller.ts[0m:[93m56[0m:[93m94[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m56[0m       const result = await this.leasePeriodInvoiceService.generateInvoicesForLeasePeriod(req.,req.params.id);
+[7m  [0m [91m                                                                                             ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-15 15:13:14 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/monthly-invoice.controller.ts[0m:[93m56[0m:[93m97[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m56[0m       const result = await this.leasePeriodInvoiceService.generateInvoicesForLeasePeriod(tokens.,req.params.id);
+[7m  [0m [91m                                                                                                ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/monthly-invoice.controller.ts[0m:[93m56[0m:[93m97[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m56[0m       const result = await this.leasePeriodInvoiceService.generateInvoicesForLeasePeriod(tokens.,req.params.id);
+[7m  [0m [91m                                                                                                ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-15 15:13:50 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/monthly-invoice.controller.ts[0m:[93m57[0m:[93m101[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m57[0m       const result = await this.leasePeriodInvoiceService.generateInvoicesForLeasePeriod(decoded.id req.params.id,);
+[7m  [0m [91m                                                                                                    ~~~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/monthly-invoice.controller.ts[0m:[93m57[0m:[93m101[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m57[0m       const result = await this.leasePeriodInvoiceService.generateInvoicesForLeasePeriod(decoded.id req.params.id,);
+[7m  [0m [91m                                                                                                    ~~~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-15 15:41:23 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/financialAnalysistc.service.ts[0m:[93m111[0m:[93m56[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m111[0m         monthlyCosts[monthIndex] += item.cost || item. || 0;
+[7m   [0m [91m                                                       ~~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/financialAnalysistc.service.ts[0m:[93m111[0m:[93m56[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m111[0m         monthlyCosts[monthIndex] += item.cost || item. || 0;
+[7m   [0m [91m                                                       ~~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)

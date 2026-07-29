@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign in · express-upload</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .input { transition: border-color 0.15s, box-shadow 0.15s; }
+    .input:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.15); outline: none; }
+    .tab-btn { transition: color 0.15s, border-color 0.15s; }
+    .tab-btn.active { color: #2563eb; border-color: #2563eb; }
+    .strength-bar { transition: width 0.2s, background 0.2s; }
+    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)} }
+    .shake { animation: shake 0.25s ease-in-out; }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen flex items-center justify-center p-4">
+  <div class="w-full max-w-md">
+    <!-- brand -->
+    <div class="flex items-center justify-center gap-2 mb-6">
+      <svg class="w-8 h-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.41a2.25 2.25 0 013.182 0l2.909 2.91m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+      </svg>
+      <span class="text-lg font-semibold text-slate-700 tracking-tight">express-upload</span>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+      <!-- tabs -->
+      <div class="flex border-b border-slate-100">
+        <button id="tabSignIn" class="tab-btn active flex-1 py-4 text-sm font-medium text-slate-500 border-b-2 border-transparent">Sign in</button>
+        <button id="tabSignUp" class="tab-btn flex-1 py-4 text-sm font-medium text-slate-500 border-b-2 border-transparent">Create account</button>
+      </div>
+
+      <!-- sign in form -->
+      <form id="signinForm" class="p-6 space-y-4">
+        <div>
+          <h1 class="text-xl font-semibold text-slate-800">Welcome back</h1>
+          <p class="text-sm text-slate-500 mt-1">Sign in to manage your uploads and API keys.</p>
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-slate-600 mb-1.5">Email</label>
+          <input id="signinEmail" type="email" required autocomplete="email"
+            class="input w-full px-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-800 placeholder:text-slate-400"
+            placeholder="you@example.com">
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-slate-600 mb-1.5">Password</label>
+          <input id="signinPassword" type="password" required autocomplete="current-password"
+            class="input w-full px-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-800 placeholder:text-slate-400"
+            placeholder="••••••••">
+        </div>
+
+        <div class="flex items-center justify-between text-xs">
+          <label class="flex items-center gap-2 text-slate-600">
+            <input id="rememberMe" type="checkbox" class="rounded border-slate-300 text-blue-600 focus:ring-blue-500">
+            Remember me
+          </label>
+          <a href="#" id="forgotLink" class="text-blue-600 hover:text-blue-700">Forgot password?</a>
+        </div>
+
+        <div id="signinError" class="hidden text-xs text-red-600 bg-red-50 border border-red-100 rounded-lg p-2.5"></div>
+
+        <button type="submit" id="signinBtn"
+          class="w-full py-2.5 px-4 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+          Sign in
+        </button>
+      </form>
+
+      <!-- sign up form -->
+      <form id="signupForm" class="p-6 space-y-4 hidden">
+        <div>
+          <h1 class="text-xl font-semibold text-slate-800">Create your account</h1>
+          <p class="text-sm text-slate-500 mt-1">You'll be able to upload, manage, and share files right away.</p>
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-slate-600 mb-1.5">Name</label>
+          <input id="signupName" type="text" required minlength="2" maxlength="64"
+            class="input w-full px-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-800 placeholder:text-slate-400"
+            placeholder="Your name">
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-slate-600 mb-1.5">Email</label>
+          <input id="signupEmail" type="email" required autocomplete="email"
+            class="input w-full px-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-800 placeholder:text-slate-400"
+            placeholder="you@example.com">
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-slate-600 mb-1.5">Password</label>
+          <input id="signupPassword" type="password" required minlength="8" autocomplete="new-password"
+            class="input w-full px-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-800 placeholder:text-slate-400"
+            placeholder="At least 8 characters">
+          <div class="mt-1.5 flex items-center gap-2">
+            <div class="flex-1 h-1 bg-slate-100 rounded overflow-hidden">
+              <div id="strengthBar" class="strength-bar h-full w-0 bg-slate-300"></div>
+            </div>
+            <span id="strengthLabel" class="text-[10px] text-slate-400 font-medium w-16 text-right">empty</span>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-slate-600 mb-1.5">Confirm password</label>
+          <input id="signupConfirm" type="password" required autocomplete="new-password"
+            class="input w-full px-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-800 placeholder:text-slate-400"
+            placeholder="Repeat password">
+        </div>
+
+        <label class="flex items-start gap-2 text-xs text-slate-600">
+          <input id="agreeTerms" type="checkbox" required class="mt-0.5 rounded border-slate-300 text-blue-600 focus:ring-blue-500">
+          <span>I agree to the <a href="#" class="text-blue-600 hover:text-blue-700">terms of service</a> and <a href="#" class="text-blue-600 hover:text-blue-700">privacy policy</a>.</span>
+        </label>
+
+        <div id="signupError" class="hidden text-xs text-red-600 bg-red-50 border border-red-100 rounded-lg p-2.5"></div>
+
+        <button type="submit" id="signupBtn"
+          class="w-full py-2.5 px-4 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+          Create account
+        </button>
+      </form>
+
+      <!-- success state -->
+      <div id="successPanel" class="p-6 space-y-4 hidden">
+        <div class="flex flex-col items-center text-center py-4">
+          <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mb-3">
+            <svg class="w-6 h-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+            </svg>
+          </div>
+          <h2 class="text-lg font-semibold text-slate-800" id="successTitle">You're signed in</h2>
+          <p class="text-sm text-slate-500 mt-1" id="successMessage">Redirecting…</p>
+        </div>
+        <div class="grid grid-cols-2 gap-3 pt-2">
+          <a href="/" class="text-center py-2.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-medium rounded-lg transition-colors">Upload</a>
+          <a href="/dashboard" class="text-center py-2.5 px-4 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors">My dashboard</a>
+        </div>
+        <div id="sessionInfo" class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-left space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] text-slate-500 uppercase tracking-wider">Session</span>
+            <span class="text-[10px] text-green-600 font-medium">Saved (cookie + local cache)</span>
+          </div>
+          <p id="sessionEmail" class="text-xs text-slate-600 font-mono break-all"></p>
+          <details class="text-[10px] text-slate-500">
+            <summary class="cursor-pointer hover:text-slate-700">Show token (treat as a password)</summary>
+            <div class="mt-2 flex items-center gap-2">
+              <input id="tokenInput" readonly class="flex-1 text-[10px] font-mono bg-white border border-slate-200 rounded px-2 py-1 text-slate-600 break-all">
+              <button id="copyTokenBtn" class="text-[10px] text-blue-600 hover:text-blue-700 font-medium">Copy</button>
+            </div>
+          </details>
+        </div>
+        <p class="text-xs text-slate-400 text-center pt-2">
+          Next, <a href="/api/auth/keys" class="text-blue-600 hover:text-blue-700">create an API key</a> to start uploading.
+        </p>
+        <div class="text-center pt-1">
+          <button id="signOutBtn" class="text-xs text-slate-400 hover:text-slate-600 underline">Sign out</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- footer links -->
+    <div class="text-center mt-6 text-xs text-slate-400 space-x-3">
+      <a href="/" class="hover:text-slate-600">Home</a>
+      <span>·</span>
+      <a href="/dashboard" class="hover:text-slate-600">My dashboard</a>
+    </div>
+  </div>
+
+  <script>
+    const $ = id => document.getElementById(id);
+    const API_BASE = '';
+    const REMEMBER_KEY = 'express-upload:remember-email';
+    const SESSION_KEY = 'express-upload:user';
+
+    // The backend sets a non-HttpOnly `Authorization` cookie on /auth/login.
+    // Because the cookie has no HttpOnly flag, document.cookie can read it
+    // and it persists across refresh + page navigation for Max-Age seconds.
+    // The cookie value IS the JWT — it is the session token. Don't share it.
+    const readCookie = (name) => {
+      const target = name + '=';
+      const parts = document.cookie ? document.cookie.split('; ') : [];
+      for (const p of parts) {
+        if (p.startsWith(target)) return p.slice(target.length);
+      }
+      return '';
+    };
+    const getToken = () => readCookie('Authorization');
+
+    // localStorage mirrors the user info (NOT the token) so the UI can show
+    // "logged in as X" instantly without a server round-trip.
+    const getStoredUser = () => {
+      try { return JSON.parse(localStorage.getItem(SESSION_KEY) || 'null'); } catch { return null; }
+    };
+    const setStoredUser = (user) => {
+      if (user) localStorage.setItem(SESSION_KEY, JSON.stringify(user));
+      else localStorage.removeItem(SESSION_KEY);
+    };
+
+    // session probe — combines the localStorage cache (instant) with a server
+    // verify (authoritative). The cookie is auto-sent on same-origin fetches.
+    const getSession = async () => {
+      const cached = getStoredUser();
+      try {
+        const res = await fetch(API_BASE + '/auth/verify', { credentials: 'same-origin' });
+        if (!res.ok) {
+          if (cached) setStoredUser(null);
+          return null;
+        }
+        const body = await res.json();
+        const user = body && body.data ? body.data : null;
+        if (user) setStoredUser(user);
+        return user;
+      } catch {
+        return cached;
+      }
+    };
+
+    // logout — clear the cookie server-side AND the local cache, then reload
+    const signOut = async () => {
+      try { await fetch(API_BASE + '/auth/logout', { method: 'POST', credentials: 'same-origin' }); } catch {}
+      setStoredUser(null);
+      location.reload();
+    };
+
+    // tab switching
+    const setTab = (which) => {
+      const isIn = which === 'in';
+      $('tabSignIn').classList.toggle('active', isIn);
+      $('tabSignUp').classList.toggle('active', !isIn);
+      $('signinForm').classList.toggle('hidden', !isIn);
+      $('signupForm').classList.toggle('hidden', isIn);
+    };
+    $('tabSignIn').addEventListener('click', () => setTab('in'));
+    $('tabSignUp').addEventListener('click', () => setTab('up'));
+
+    // if URL has #signup, default to that tab
+    if (location.hash === '#signup') setTab('up');
+
+    // password strength meter
+    const scorePwd = (s) => {
+      if (!s) return 0;
+      let n = 0;
+      if (s.length >= 8) n++;
+      if (s.length >= 12) n++;
+      if (/[A-Z]/.test(s)) n++;
+      if (/[0-9]/.test(s)) n++;
+      if (/[^A-Za-z0-9]/.test(s)) n++;
+      return n;
+    };
+    const strengthColors = ['bg-slate-200', 'bg-red-400', 'bg-orange-400', 'bg-amber-400', 'bg-lime-400', 'bg-green-500'];
+    const strengthLabels = ['empty', 'weak', 'fair', 'okay', 'good', 'strong'];
+    $('signupPassword').addEventListener('input', (e) => {
+      const score = scorePwd(e.target.value);
+      const pct = (score / 5) * 100;
+      const bar = $('strengthBar');
+      bar.style.width = pct + '%';
+      bar.className = 'strength-bar h-full ' + (e.target.value ? strengthColors[score] : 'bg-slate-300');
+      $('strengthLabel').textContent = strengthLabels[score];
+      $('strengthLabel').className = 'text-[10px] font-medium w-16 text-right ' +
+        (score >= 4 ? 'text-green-600' : score >= 3 ? 'text-amber-600' : score >= 1 ? 'text-red-500' : 'text-slate-400');
+    });
+
+    const showError = (which, msg) => {
+      const el = $(which + 'Error');
+      el.textContent = msg;
+      el.classList.remove('hidden');
+      el.classList.remove('shake');
+      // restart animation
+      void el.offsetWidth;
+      el.classList.add('shake');
+    };
+    const hideError = (which) => $(which + 'Error').classList.add('hidden');
+
+    const showSuccess = (title, message, user) => {
+      $('signinForm').classList.add('hidden');
+      $('signupForm').classList.add('hidden');
+      $('tabSignIn').parentElement.classList.add('hidden');
+      $('successTitle').textContent = title;
+      $('successMessage').textContent = message;
+      $('successPanel').classList.remove('hidden');
+      if (user) setStoredUser(user);
+      // populate the session info panel
+      const stored = user || getStoredUser();
+      if (stored) {
+        const sessionEmail = $('sessionEmail');
+        if (sessionEmail) sessionEmail.textContent = stored.email || stored.username || stored.name || 'unknown';
+        const tokenInput = $('tokenInput');
+        if (tokenInput) tokenInput.value = getToken();
+      }
+      const signOutBtn = $('signOutBtn');
+      if (signOutBtn) signOutBtn.onclick = signOut;
+      const copyBtn = $('copyTokenBtn');
+      if (copyBtn) {
+        copyBtn.onclick = async () => {
+          const tok = getToken();
+          if (!tok) return;
+          try { await navigator.clipboard.writeText(tok); copyBtn.textContent = 'Copied!'; setTimeout(() => copyBtn.textContent = 'Copy', 1500); }
+          catch { copyBtn.textContent = 'Copy failed'; }
+        };
+      }
+    };
+
+    // sign in
+    $('signinForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideError('signin');
+      const btn = $('signinBtn');
+      btn.disabled = true;
+      btn.textContent = 'Signing in…';
+      const email = $('signinEmail').value.trim();
+      const password = $('signinPassword').value;
+      try {
+        const res = await fetch(API_BASE + '/auth/login', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+        });
+        const json = await res.json().catch(() => ({}));
+        if (!res.ok) {
+          showError('signin', json.message || 'Sign in failed. Please try again.');
+          return;
+        }
+        // the server sets an HttpOnly `Authorization` cookie automatically — no localStorage needed.
+        const user = json.data;
+        const name = user?.name || user?.username || user?.email || 'friend';
+        showSuccess("You're signed in", 'Welcome back, ' + name + '.', user);
+      } catch (err) {
+        showError('signin', 'Network error. Is the server running?');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Sign in';
+      }
+    });
+
+    // sign up
+    $('signupForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideError('signup');
+      const name = $('signupName').value.trim();
+      const email = $('signupEmail').value.trim();
+      const password = $('signupPassword').value;
+      const confirm = $('signupConfirm').value;
+      if (password !== confirm) {
+        showError('signup', 'Passwords do not match.');
+        return;
+      }
+      if (password.length < 8) {
+        showError('signup', 'Password must be at least 8 characters.');
+        return;
+      }
+      const btn = $('signupBtn');
+      btn.disabled = true;
+      btn.textContent = 'Creating account…';
+      try {
+        // The /auth/signup endpoint expects { email, password, username?, name? }.
+        // The user's auth.service.ts passes the body through, so include both name and username.
+        const res = await fetch(API_BASE + '/auth/signup', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, username: name, email, password }),
+        });
+        const json = await res.json().catch(() => ({}));
+        if (!res.ok) {
+          showError('signup', json.message || 'Sign up failed. Please try again.');
+          return;
+        }
+        // signup does not auto-login (per the existing auth controller), so call /auth/login next
+        const loginRes = await fetch(API_BASE + '/auth/login', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+        });
+        const loginJson = await loginRes.json().catch(() => ({}));
+        if (loginRes.ok) {
+          // the server sets the HttpOnly cookie on this response
+          showSuccess('Account created', "You're signed in. Next, create an API key to start uploading.", loginJson.data);
+        } else {
+          // account exists but auto-login failed
+          showSuccess('Account created', 'Please sign in with your new credentials.');
+          setTab('in');
+          $('signinEmail').value = email;
+        }
+      } catch (err) {
+        showError('signup', 'Network error. Is the server running?');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Create account';
+      }
+    });
+
+    // pre-fill remembered email
+    const remembered = localStorage.getItem(REMEMBER_KEY);
+    if (remembered) {
+      $('signinEmail').value = remembered;
+      $('rememberMe').checked = true;
+    }
+    $('signinForm').addEventListener('submit', () => {
+      if ($('rememberMe').checked) localStorage.setItem(REMEMBER_KEY, $('signinEmail').value.trim());
+      else localStorage.removeItem(REMEMBER_KEY);
+    });
+
+    // forgot password = no-op (the endpoint is a stub on the backend)
+    $('forgotLink').addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('Password reset is not enabled in this build. Contact an admin.');
+    });
+
+    // sign out (in success panel)
+    $('signOutBtn').addEventListener('click', signOut);
+
+    // init: if a session cookie is already set, skip the forms
+    (async function init() {
+      const session = await getSession();
+      if (session) {
+        const name = session.name || session.username || session.email || 'friend';
+        showSuccess("You're already signed in", 'Welcome back, ' + name + '.', session);
+      }
+      // otherwise, leave both forms visible (default state)
+    })();
+  </script>
+</body>
+</html>

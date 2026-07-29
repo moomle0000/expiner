@@ -1,0 +1,44 @@
+2025-05-16 01:24:18 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/maintenance.service.ts[0m:[93m31[0m:[93m5[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m31[0m     };
+[7m  [0m [91m    ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/maintenance.service.ts[0m:[93m31[0m:[93m5[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m31[0m     };
+[7m  [0m [91m    ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-16 01:24:25 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/maintenance.service.ts[0m:[93m31[0m:[93m5[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m31[0m     };
+[7m  [0m [91m    ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/maintenance.service.ts[0m:[93m31[0m:[93m5[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m31[0m     };
+[7m  [0m [91m    ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)

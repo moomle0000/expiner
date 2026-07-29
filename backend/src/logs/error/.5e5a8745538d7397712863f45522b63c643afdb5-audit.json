@@ -1,0 +1,65 @@
+{
+    "keep": {
+        "days": false,
+        "amount": 30
+    },
+    "auditLog": "D:\\Developer Code\\js\\LM createor\\RentEase\\backend\\src\\logs\\error\\.5e5a8745538d7397712863f45522b63c643afdb5-audit.json",
+    "files": [
+        {
+            "date": 1746543332590,
+            "name": "D:\\Developer Code\\js\\LM createor\\RentEase\\backend\\src\\logs\\error\\2025-05-06.log",
+            "hash": "18aa49edf3979f3d799beb1b01912e5f09cfe57cbbf01a279e6536605cee8e96"
+        },
+        {
+            "date": 1746622514113,
+            "name": "D:\\Developer Code\\js\\LM createor\\RentEase\\backend\\src\\logs\\error\\2025-05-07.log",
+            "hash": "46ff58685d248563564de5600a518947650762bf57c07672c175d766ab94799b"
+        },
+        {
+            "date": 1746724982527,
+            "name": "D:\\Developer Code\\js\\LM createor\\RentEase\\backend\\src\\logs\\error\\2025-05-08.log",
+            "hash": "e21e9b04dcb65179380aae82c3924e3cff32f04b80214fe21b84921ae8e5a8ee"
+        },
+        {
+            "date": 1746742742751,
+            "name": "D:\\Developer Code\\js\\LM createor\\RentEase\\backend\\src\\logs\\error\\2025-05-09.log",
+            "hash": "fb2d7676345f52928b7249e3f07c797c13839c62e28b2df40a09ec893943c690"
+        },
+        {
+            "date": 1746845150754,
+            "name": "D:\\Developer Code\\js\\LM createor\\RentEase\\backend\\src\\logs\\error\\2025-05-10.log",
+            "hash": "1736bb782ae4682b848c426fe863de6f428df8eadd1817fcb0b1fe5963eee657"
+        },
+        {
+            "date": 1746976465394,
+            "name": "D:\\Developer Code\\js\\LM createor\\RentEase\\backend\\src\\logs\\error\\2025-05-11.log",
+            "hash": "bbaca75c7559c1286b86257aab0041fd82c39966eee527d44f91fc9bc026c6a4"
+        },
+        {
+            "date": 1747065069443,
+            "name": "D:\\Developer Code\\js\\LM createor\\RentEase\\backend\\src\\logs\\error\\2025-05-12.log",
+            "hash": "c7a88899f93bfbe12410a10ca252de447f701c1ff73ec10cc080fe5ef4a5cf7d"
+        },
+        {
+            "date": 1747097727336,
+            "name": "D:\\Developer Code\\js\\LM createor\\RentEase\\backend\\src\\logs\\error\\2025-05-13.log",
+            "hash": "6022263114ec60473cec4bcbc32daaf1d55e5975a1ef97eaf272fbcb48fe8a21"
+        },
+        {
+            "date": 1747200611517,
+            "name": "D:\\Developer Code\\js\\LM createor\\RentEase\\backend\\src\\logs\\error\\2025-05-14.log",
+            "hash": "50f3cd53ba6414c16f6ae5c1eaffcd90d8c4832add252c53811d57ce730a9039"
+        },
+        {
+            "date": 1747310929385,
+            "name": "D:\\Developer Code\\js\\LM createor\\RentEase\\backend\\src\\logs\\error\\2025-05-15.log",
+            "hash": "a834f02c23191280c47572b25bbe27806cd4913f3ae3ca3628889a220545e856"
+        },
+        {
+            "date": 1747345927961,
+            "name": "D:\\Developer Code\\js\\LM createor\\RentEase\\backend\\src\\logs\\error\\2025-05-16.log",
+            "hash": "1e68b30cd8690305983d75c34dc61fb75c1c37b2974681604de17919b7002989"
+        }
+    ],
+    "hashType": "sha256"
+}

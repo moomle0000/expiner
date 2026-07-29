@@ -1,0 +1,40 @@
+{
+    "keep": {
+        "days": false,
+        "amount": 30
+    },
+    "auditLog": "D:\\Developer Code\\js\\LM createor\\express-upload\\src\\utils\\log\\error\\.d8ccea406462679b9b095c1e3f642ecbb1e90d47-audit.json",
+    "files": [
+        {
+            "date": 1747587297357,
+            "name": "D:\\Developer Code\\js\\LM createor\\express-upload\\src\\utils\\log\\error\\2025-05-18.log",
+            "hash": "47dc1111c967452bb03a8bf34e712ff441d10365b68846f476ef87c437b698e9"
+        },
+        {
+            "date": 1747758304928,
+            "name": "D:\\Developer Code\\js\\LM createor\\express-upload\\src\\utils\\log\\error\\2025-05-20.log",
+            "hash": "93a23a6ad77be7d0a88560839c797c439adafd6cda66e580f148aa73a1f5c311"
+        },
+        {
+            "date": 1747858815361,
+            "name": "D:\\Developer Code\\js\\LM createor\\express-upload\\src\\utils\\log\\error\\2025-05-21.log",
+            "hash": "0d0c79543fc8d47d5d34a84c1ffeb6f5f3f8f010b883ce95998e516ab15cb21e"
+        },
+        {
+            "date": 1748090995996,
+            "name": "D:\\Developer Code\\js\\LM createor\\express-upload\\src\\utils\\log\\error\\2025-05-24.log",
+            "hash": "88ef7146ca2aa1b0d848aecabc61c5f9c35538815695c2b6022e609b312a9dd4"
+        },
+        {
+            "date": 1748360130234,
+            "name": "D:\\Developer Code\\js\\LM createor\\express-upload\\src\\utils\\log\\error\\2025-05-27.log",
+            "hash": "3ac6836b20fbbac85ede7849e546a200f89f6970578f1c885e93aaf9703d1dcd"
+        },
+        {
+            "date": 1785027329818,
+            "name": "D:\\Developer Code\\js\\LM createor\\express-upload\\src\\utils\\log\\error\\2026-07-26.log",
+            "hash": "d0de5bfacea9e10cc389bb3f797409d2c64f54b51756004e13aa2b5d32ba137d"
+        }
+    ],
+    "hashType": "sha256"
+}

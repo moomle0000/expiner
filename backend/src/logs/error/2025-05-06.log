@@ -1,0 +1,240 @@
+2025-05-06 17:55:33 error: uncaughtException: FinancialAnalysisRoute is not defined
+ReferenceError: FinancialAnalysisRoute is not defined
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\RentEase\backend\src\server.ts:33:7)
+    at Module._compile (node:internal/modules/cjs/loader:1469:14)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:174:12)
+    at phase4 (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\bin.ts:649:14)
+    at bootstrap (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\bin.ts:95:10)
+2025-05-06 17:55:36 error: uncaughtException: listen EACCES: permission denied 0.0.0.0:2222
+Error: listen EACCES: permission denied 0.0.0.0:2222
+    at Server.setupListenHandle [as _listen2] (node:net:1882:21)
+    at listenInCluster (node:net:1961:12)
+    at Server.listen (node:net:2063:7)
+    at Function.listen (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\express\lib\application.js:635:24)
+    at App.listen (D:\Developer Code\js\LM createor\RentEase\backend\src\app.ts:35:14)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\RentEase\backend\src\server.ts:41:5)
+    at Module._compile (node:internal/modules/cjs/loader:1469:14)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+2025-05-06 17:57:51 error: uncaughtException: listen EACCES: permission denied 0.0.0.0:2222
+Error: listen EACCES: permission denied 0.0.0.0:2222
+    at Server.setupListenHandle [as _listen2] (node:net:1882:21)
+    at listenInCluster (node:net:1961:12)
+    at Server.listen (node:net:2063:7)
+    at Function.listen (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\express\lib\application.js:635:24)
+    at App.listen (D:\Developer Code\js\LM createor\RentEase\backend\src\app.ts:35:14)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\RentEase\backend\src\server.ts:41:5)
+    at Module._compile (node:internal/modules/cjs/loader:1469:14)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+2025-05-06 18:00:13 error: uncaughtException: Missing initializer in const declaration
+D:\Developer Code\js\LM createor\RentEase\backend\src\controllers\financialAnalysis.controller.ts:40
+                const d;
+                      ^
+
+SyntaxError: Missing initializer in const declaration
+    at wrapSafe (node:internal/modules/cjs/loader:1378:20)
+    at Module._compile (node:internal/modules/cjs/loader:1428:41)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at require (node:internal/modules/helpers:179:18)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\RentEase\backend\src\routes\financialAnalysis.routes.ts:2:1)
+2025-05-06 18:00:17 error: uncaughtException: Missing initializer in const declaration
+D:\Developer Code\js\LM createor\RentEase\backend\src\controllers\financialAnalysis.controller.ts:40
+                const over;
+                      ^^^^
+
+SyntaxError: Missing initializer in const declaration
+    at wrapSafe (node:internal/modules/cjs/loader:1378:20)
+    at Module._compile (node:internal/modules/cjs/loader:1428:41)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at require (node:internal/modules/helpers:179:18)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\RentEase\backend\src\routes\financialAnalysis.routes.ts:2:1)
+2025-05-06 18:00:22 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/financialAnalysis.controller.ts[0m:[93m45[0m:[93m41[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m45[0m       const overview = Dashboardervices.
+[7m  [0m [91m                                        [0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/financialAnalysis.controller.ts[0m:[93m45[0m:[93m41[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m45[0m       const overview = Dashboardervices.
+[7m  [0m [91m                                        [0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-06 18:00:33 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/financialAnalysis.controller.ts[0m:[93m45[0m:[93m46[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m45[0m       const overview = this.Dashboardervices.
+[7m  [0m [91m                                             [0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/financialAnalysis.controller.ts[0m:[93m45[0m:[93m46[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m45[0m       const overview = this.Dashboardervices.
+[7m  [0m [91m                                             [0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-06 18:00:35 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/financialAnalysis.controller.ts[0m:[93m45[0m:[93m46[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m45[0m       const overview = this.Dashboardervices.
+[7m  [0m [91m                                             [0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/financialAnalysis.controller.ts[0m:[93m45[0m:[93m46[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m45[0m       const overview = this.Dashboardervices.
+[7m  [0m [91m                                             [0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-06 19:31:15 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/overview.service.ts[0m:[93m679[0m:[93m3[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m679[0m   public async generateChartData(buildingIds: any[]) {
+[7m   [0m [91m  ~~~~~~[0m
+[96msrc/services/overview.service.ts[0m:[93m679[0m:[93m10[0m - [91merror[0m[90m TS1434: [0mUnexpected keyword or identifier.
+
+[7m679[0m   public async generateChartData(buildingIds: any[]) {
+[7m   [0m [91m         ~~~~~[0m
+[96msrc/services/overview.service.ts[0m:[93m679[0m:[93m45[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m679[0m   public async generateChartData(buildingIds: any[]) {
+[7m   [0m [91m                                            ~[0m
+[96msrc/services/overview.service.ts[0m:[93m679[0m:[93m51[0m - [91merror[0m[90m TS1011: [0mAn element access expression should take an argument.
+
+[7m679[0m   public async generateChartData(buildingIds: any[]) {
+[7m   [0m [91m                                                  [0m
+[96msrc/services/overview.service.ts[0m:[93m679[0m:[93m54[0m - [91merror[0m[90m TS1005: [0m';' expected.
+
+[7m679[0m   public async generateChartData(buildingIds: any[]) {
+[7m   [0m [91m                                                     ~[0m
+[96msrc/services/overview.service.ts[0m:[93m919[0m:[93m1[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m919[0m }
+[7m   [0m [91m~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/overview.service.ts[0m:[93m679[0m:[93m3[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m679[0m   public async generateChartData(buildingIds: any[]) {
+[7m   [0m [91m  ~~~~~~[0m
+[96msrc/services/overview.service.ts[0m:[93m679[0m:[93m10[0m - [91merror[0m[90m TS1434: [0mUnexpected keyword or identifier.
+
+[7m679[0m   public async generateChartData(buildingIds: any[]) {
+[7m   [0m [91m         ~~~~~[0m
+[96msrc/services/overview.service.ts[0m:[93m679[0m:[93m45[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m679[0m   public async generateChartData(buildingIds: any[]) {
+[7m   [0m [91m                                            ~[0m
+[96msrc/services/overview.service.ts[0m:[93m679[0m:[93m51[0m - [91merror[0m[90m TS1011: [0mAn element access expression should take an argument.
+
+[7m679[0m   public async generateChartData(buildingIds: any[]) {
+[7m   [0m [91m                                                  [0m
+[96msrc/services/overview.service.ts[0m:[93m679[0m:[93m54[0m - [91merror[0m[90m TS1005: [0m';' expected.
+
+[7m679[0m   public async generateChartData(buildingIds: any[]) {
+[7m   [0m [91m                                                     ~[0m
+[96msrc/services/overview.service.ts[0m:[93m919[0m:[93m1[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m919[0m }
+[7m   [0m [91m~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-06 19:32:36 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/overview.service.ts[0m:[93m28[0m:[93m28[0m - [91merror[0m[90m TS1110: [0mType expected.
+
+[7m28[0m       const buildingIds :  = buildings.map(building => building._id);
+[7m  [0m [91m                           ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/overview.service.ts[0m:[93m28[0m:[93m28[0m - [91merror[0m[90m TS1110: [0mType expected.
+
+[7m28[0m       const buildingIds :  = buildings.map(building => building._id);
+[7m  [0m [91m                           ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-06 19:32:39 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/overview.service.ts[0m:[93m28[0m:[93m28[0m - [91merror[0m[90m TS1110: [0mType expected.
+
+[7m28[0m       const buildingIds :  = buildings.map(building => building._id);
+[7m  [0m [91m                           ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/overview.service.ts[0m:[93m28[0m:[93m28[0m - [91merror[0m[90m TS1110: [0mType expected.
+
+[7m28[0m       const buildingIds :  = buildings.map(building => building._id);
+[7m  [0m [91m                           ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)

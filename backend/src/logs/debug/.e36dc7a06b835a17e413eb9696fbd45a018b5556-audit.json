@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": false,
+        "amount": 30
+    },
+    "auditLog": "D:\\Developer Code\\work\\express-upload\\backend\\src\\logs\\debug\\.e36dc7a06b835a17e413eb9696fbd45a018b5556-audit.json",
+    "files": [
+        {
+            "date": 1785108064359,
+            "name": "D:\\Developer Code\\work\\express-upload\\backend\\src\\logs\\debug\\2026-07-27.log",
+            "hash": "4498a36991a15af6ef57eff66e04d45a5c8ee068dd2d9cdf303630dae5db934a"
+        }
+    ],
+    "hashType": "sha256"
+}

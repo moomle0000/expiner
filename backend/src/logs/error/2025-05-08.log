@@ -1,0 +1,12 @@
+2025-05-08 20:23:46 error: uncaughtException: connect ETIMEDOUT 192.168.100.157:27017
+MongooseServerSelectionError: connect ETIMEDOUT 192.168.100.157:27017
+    at NativeConnection.Connection.openUri (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\mongoose\lib\connection.js:825:32)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\mongoose\lib\index.js:414:10
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:41:5
+    at new Promise (<anonymous>)
+    at promiseOrCallback (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:40:10)
+    at Mongoose._promiseOrCallback (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\mongoose\lib\index.js:1290:10)
+    at Mongoose.connect (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\mongoose\lib\index.js:413:20)
+    at dbConnection (D:\Developer Code\js\LM createor\RentEase\backend\src\database\index.ts:24:31)
+    at App.connectToDatabase (D:\Developer Code\js\LM createor\RentEase\backend\src\app.ts:48:23)
+    at new App (D:\Developer Code\js\LM createor\RentEase\backend\src\app.ts:27:10)

@@ -1,0 +1,328 @@
+2026-07-26 04:00:16 error: uncaughtException: connect ECONNREFUSED 192.168.100.157:27017
+MongooseServerSelectionError: connect ECONNREFUSED 192.168.100.157:27017
+    at NativeConnection.Connection.openUri (D:\Developer Code\js\LM createor\express-upload\node_modules\mongoose\lib\connection.js:825:32)
+    at D:\Developer Code\js\LM createor\express-upload\node_modules\mongoose\lib\index.js:414:10
+    at D:\Developer Code\js\LM createor\express-upload\node_modules\mongoose\lib\helpers\promiseOrCallback.js:41:5
+    at new Promise (<anonymous>)
+    at promiseOrCallback (D:\Developer Code\js\LM createor\express-upload\node_modules\mongoose\lib\helpers\promiseOrCallback.js:40:10)
+    at Mongoose._promiseOrCallback (D:\Developer Code\js\LM createor\express-upload\node_modules\mongoose\lib\index.js:1290:10)
+    at Mongoose.connect (D:\Developer Code\js\LM createor\express-upload\node_modules\mongoose\lib\index.js:413:20)
+    at dbConnection (D:\Developer Code\js\LM createor\express-upload\src\database\index.ts:32:31)
+    at App.connectToDatabase (D:\Developer Code\js\LM createor\express-upload\src\app.ts:46:23)
+    at new App (D:\Developer Code\js\LM createor\express-upload\src\app.ts:26:10)
+2026-07-26 04:32:49 error: uncaughtException: Cannot overwrite `User` model once compiled.
+OverwriteModelError: Cannot overwrite `User` model once compiled.
+    at Mongoose.model (D:\Developer Code\js\LM createor\express-upload\node_modules\mongoose\lib\index.js:587:13)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\express-upload\src\models\user.model.ts:51:35)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)
+    at Module.m._compile (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1618:23)
+    at node:internal/modules/cjs/loader:1943:10
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1533:32)
+    at Module._load (node:internal/modules/cjs/loader:1335:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1556:12)
+2026-07-26 04:32:58 error: uncaughtException: Cannot overwrite `User` model once compiled.
+OverwriteModelError: Cannot overwrite `User` model once compiled.
+    at Mongoose.model (D:\Developer Code\js\LM createor\express-upload\node_modules\mongoose\lib\index.js:587:13)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\express-upload\src\models\user.model.ts:51:35)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)
+    at Module.m._compile (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1618:23)
+    at node:internal/modules/cjs/loader:1943:10
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1533:32)
+    at Module._load (node:internal/modules/cjs/loader:1335:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1556:12)
+2026-07-26 04:33:00 error: uncaughtException: Cannot overwrite `User` model once compiled.
+OverwriteModelError: Cannot overwrite `User` model once compiled.
+    at Mongoose.model (D:\Developer Code\js\LM createor\express-upload\node_modules\mongoose\lib\index.js:587:13)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\express-upload\src\models\user.model.ts:51:35)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)
+    at Module.m._compile (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1618:23)
+    at node:internal/modules/cjs/loader:1943:10
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1533:32)
+    at Module._load (node:internal/modules/cjs/loader:1335:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1556:12)
+2026-07-26 04:33:04 error: uncaughtException: Cannot overwrite `User` model once compiled.
+OverwriteModelError: Cannot overwrite `User` model once compiled.
+    at Mongoose.model (D:\Developer Code\js\LM createor\express-upload\node_modules\mongoose\lib\index.js:587:13)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\express-upload\src\models\user.model.ts:51:35)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)
+    at Module.m._compile (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1618:23)
+    at node:internal/modules/cjs/loader:1943:10
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1533:32)
+    at Module._load (node:internal/modules/cjs/loader:1335:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1556:12)
+2026-07-26 04:33:17 error: uncaughtException: Cannot overwrite `User` model once compiled.
+OverwriteModelError: Cannot overwrite `User` model once compiled.
+    at Mongoose.model (D:\Developer Code\js\LM createor\express-upload\node_modules\mongoose\lib\index.js:587:13)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\express-upload\src\models\user.model.ts:51:35)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)
+    at Module.m._compile (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1618:23)
+    at node:internal/modules/cjs/loader:1943:10
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1533:32)
+    at Module._load (node:internal/modules/cjs/loader:1335:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1556:12)
+2026-07-26 04:33:22 error: uncaughtException: Cannot overwrite `User` model once compiled.
+OverwriteModelError: Cannot overwrite `User` model once compiled.
+    at Mongoose.model (D:\Developer Code\js\LM createor\express-upload\node_modules\mongoose\lib\index.js:587:13)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\express-upload\src\models\user.model.ts:51:35)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)
+    at Module.m._compile (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1618:23)
+    at node:internal/modules/cjs/loader:1943:10
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1533:32)
+    at Module._load (node:internal/modules/cjs/loader:1335:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1556:12)
+2026-07-26 04:33:24 error: uncaughtException: Cannot overwrite `User` model once compiled.
+OverwriteModelError: Cannot overwrite `User` model once compiled.
+    at Mongoose.model (D:\Developer Code\js\LM createor\express-upload\node_modules\mongoose\lib\index.js:587:13)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\express-upload\src\models\user.model.ts:51:35)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)
+    at Module.m._compile (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1618:23)
+    at node:internal/modules/cjs/loader:1943:10
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1533:32)
+    at Module._load (node:internal/modules/cjs/loader:1335:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1556:12)
+2026-07-26 04:33:27 error: uncaughtException: Cannot overwrite `User` model once compiled.
+OverwriteModelError: Cannot overwrite `User` model once compiled.
+    at Mongoose.model (D:\Developer Code\js\LM createor\express-upload\node_modules\mongoose\lib\index.js:587:13)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\express-upload\src\models\user.model.ts:51:35)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)
+    at Module.m._compile (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1618:23)
+    at node:internal/modules/cjs/loader:1943:10
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1533:32)
+    at Module._load (node:internal/modules/cjs/loader:1335:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1556:12)
+2026-07-26 04:33:33 error: uncaughtException: Cannot overwrite `User` model once compiled.
+OverwriteModelError: Cannot overwrite `User` model once compiled.
+    at Mongoose.model (D:\Developer Code\js\LM createor\express-upload\node_modules\mongoose\lib\index.js:587:13)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\express-upload\src\models\user.model.ts:51:35)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)
+    at Module.m._compile (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1618:23)
+    at node:internal/modules/cjs/loader:1943:10
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1533:32)
+    at Module._load (node:internal/modules/cjs/loader:1335:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1556:12)
+2026-07-26 04:33:36 error: uncaughtException: Cannot overwrite `User` model once compiled.
+OverwriteModelError: Cannot overwrite `User` model once compiled.
+    at Mongoose.model (D:\Developer Code\js\LM createor\express-upload\node_modules\mongoose\lib\index.js:587:13)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\express-upload\src\models\user.model.ts:51:35)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)
+    at Module.m._compile (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1618:23)
+    at node:internal/modules/cjs/loader:1943:10
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1533:32)
+    at Module._load (node:internal/modules/cjs/loader:1335:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1556:12)
+2026-07-26 04:33:41 error: uncaughtException: Cannot overwrite `User` model once compiled.
+OverwriteModelError: Cannot overwrite `User` model once compiled.
+    at Mongoose.model (D:\Developer Code\js\LM createor\express-upload\node_modules\mongoose\lib\index.js:587:13)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\express-upload\src\models\user.model.ts:51:35)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)
+    at Module.m._compile (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1618:23)
+    at node:internal/modules/cjs/loader:1943:10
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1533:32)
+    at Module._load (node:internal/modules/cjs/loader:1335:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1556:12)
+2026-07-26 04:33:42 error: uncaughtException: Cannot overwrite `User` model once compiled.
+OverwriteModelError: Cannot overwrite `User` model once compiled.
+    at Mongoose.model (D:\Developer Code\js\LM createor\express-upload\node_modules\mongoose\lib\index.js:587:13)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\express-upload\src\models\user.model.ts:51:35)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)
+    at Module.m._compile (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1618:23)
+    at node:internal/modules/cjs/loader:1943:10
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1533:32)
+    at Module._load (node:internal/modules/cjs/loader:1335:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1556:12)
+2026-07-26 04:34:25 error: uncaughtException: Cannot find module '@services/user.service'
+Require stack:
+- D:\Developer Code\js\LM createor\express-upload\src\middlewares\auth.middleware.ts
+- D:\Developer Code\js\LM createor\express-upload\src\routes\users.route.ts
+- D:\Developer Code\js\LM createor\express-upload\src\server.ts
+Error: Cannot find module '@services/user.service'
+Require stack:
+- D:\Developer Code\js\LM createor\express-upload\src\middlewares\auth.middleware.ts
+- D:\Developer Code\js\LM createor\express-upload\src\routes\users.route.ts
+- D:\Developer Code\js\LM createor\express-upload\src\server.ts
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1456:15)
+    at Module._resolveFilename.sharedData.moduleResolveFilenameHook.installedValue (D:\Developer Code\js\LM createor\express-upload\node_modules\@cspotcode\source-map-support\source-map-support.js:811:30)
+    at Module._resolveFilename (D:\Developer Code\js\LM createor\express-upload\node_modules\tsconfig-paths\src\register.ts:115:36)
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1066:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1071:22)
+    at Module._load (node:internal/modules/cjs/loader:1242:25)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1556:12)
+    at require (node:internal/modules/helpers:152:16)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\express-upload\src\middlewares\auth.middleware.ts:4:1)
+2026-07-26 04:34:30 error: uncaughtException: Cannot find module '@services/user.service'
+Require stack:
+- D:\Developer Code\js\LM createor\express-upload\src\middlewares\auth.middleware.ts
+- D:\Developer Code\js\LM createor\express-upload\src\routes\users.route.ts
+- D:\Developer Code\js\LM createor\express-upload\src\server.ts
+Error: Cannot find module '@services/user.service'
+Require stack:
+- D:\Developer Code\js\LM createor\express-upload\src\middlewares\auth.middleware.ts
+- D:\Developer Code\js\LM createor\express-upload\src\routes\users.route.ts
+- D:\Developer Code\js\LM createor\express-upload\src\server.ts
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1456:15)
+    at Module._resolveFilename.sharedData.moduleResolveFilenameHook.installedValue (D:\Developer Code\js\LM createor\express-upload\node_modules\@cspotcode\source-map-support\source-map-support.js:811:30)
+    at Module._resolveFilename (D:\Developer Code\js\LM createor\express-upload\node_modules\tsconfig-paths\src\register.ts:115:36)
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1066:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1071:22)
+    at Module._load (node:internal/modules/cjs/loader:1242:25)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1556:12)
+    at require (node:internal/modules/helpers:152:16)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\express-upload\src\middlewares\auth.middleware.ts:4:1)
+2026-07-26 04:34:37 error: uncaughtException: Cannot find module '@services/user.service'
+Require stack:
+- D:\Developer Code\js\LM createor\express-upload\src\middlewares\auth.middleware.ts
+- D:\Developer Code\js\LM createor\express-upload\src\routes\users.route.ts
+- D:\Developer Code\js\LM createor\express-upload\src\server.ts
+Error: Cannot find module '@services/user.service'
+Require stack:
+- D:\Developer Code\js\LM createor\express-upload\src\middlewares\auth.middleware.ts
+- D:\Developer Code\js\LM createor\express-upload\src\routes\users.route.ts
+- D:\Developer Code\js\LM createor\express-upload\src\server.ts
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1456:15)
+    at Module._resolveFilename.sharedData.moduleResolveFilenameHook.installedValue (D:\Developer Code\js\LM createor\express-upload\node_modules\@cspotcode\source-map-support\source-map-support.js:811:30)
+    at Module._resolveFilename (D:\Developer Code\js\LM createor\express-upload\node_modules\tsconfig-paths\src\register.ts:115:36)
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1066:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1071:22)
+    at Module._load (node:internal/modules/cjs/loader:1242:25)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1556:12)
+    at require (node:internal/modules/helpers:152:16)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\express-upload\src\middlewares\auth.middleware.ts:4:1)
+2026-07-26 04:34:40 error: uncaughtException: Cannot find module '@services/user.service'
+Require stack:
+- D:\Developer Code\js\LM createor\express-upload\src\middlewares\auth.middleware.ts
+- D:\Developer Code\js\LM createor\express-upload\src\routes\users.route.ts
+- D:\Developer Code\js\LM createor\express-upload\src\server.ts
+Error: Cannot find module '@services/user.service'
+Require stack:
+- D:\Developer Code\js\LM createor\express-upload\src\middlewares\auth.middleware.ts
+- D:\Developer Code\js\LM createor\express-upload\src\routes\users.route.ts
+- D:\Developer Code\js\LM createor\express-upload\src\server.ts
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1456:15)
+    at Module._resolveFilename.sharedData.moduleResolveFilenameHook.installedValue (D:\Developer Code\js\LM createor\express-upload\node_modules\@cspotcode\source-map-support\source-map-support.js:811:30)
+    at Module._resolveFilename (D:\Developer Code\js\LM createor\express-upload\node_modules\tsconfig-paths\src\register.ts:115:36)
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1066:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1071:22)
+    at Module._load (node:internal/modules/cjs/loader:1242:25)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1556:12)
+    at require (node:internal/modules/helpers:152:16)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\express-upload\src\middlewares\auth.middleware.ts:4:1)
+2026-07-26 04:34:42 error: uncaughtException: Cannot find module '@services/user.service'
+Require stack:
+- D:\Developer Code\js\LM createor\express-upload\src\middlewares\auth.middleware.ts
+- D:\Developer Code\js\LM createor\express-upload\src\routes\users.route.ts
+- D:\Developer Code\js\LM createor\express-upload\src\server.ts
+Error: Cannot find module '@services/user.service'
+Require stack:
+- D:\Developer Code\js\LM createor\express-upload\src\middlewares\auth.middleware.ts
+- D:\Developer Code\js\LM createor\express-upload\src\routes\users.route.ts
+- D:\Developer Code\js\LM createor\express-upload\src\server.ts
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1456:15)
+    at Module._resolveFilename.sharedData.moduleResolveFilenameHook.installedValue (D:\Developer Code\js\LM createor\express-upload\node_modules\@cspotcode\source-map-support\source-map-support.js:811:30)
+    at Module._resolveFilename (D:\Developer Code\js\LM createor\express-upload\node_modules\tsconfig-paths\src\register.ts:115:36)
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1066:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1071:22)
+    at Module._load (node:internal/modules/cjs/loader:1242:25)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1556:12)
+    at require (node:internal/modules/helpers:152:16)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\express-upload\src\middlewares\auth.middleware.ts:4:1)
+2026-07-26 04:34:48 error: uncaughtException: Route.get() requires a callback function but got a [object Undefined]
+Error: Route.get() requires a callback function but got a [object Undefined]
+    at Route.<computed> [as get] (D:\Developer Code\js\LM createor\express-upload\node_modules\express\lib\router\route.js:216:15)
+    at router.proto.<computed> [as get] (D:\Developer Code\js\LM createor\express-upload\node_modules\express\lib\router\index.js:521:19)
+    at UserRoute.initializeRoutes (D:\Developer Code\js\LM createor\express-upload\src\routes\users.route.ts:19:17)
+    at new UserRoute (D:\Developer Code\js\LM createor\express-upload\src\routes\users.route.ts:14:10)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\express-upload\src\server.ts:9:95)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)
+    at Module.m._compile (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1618:23)
+    at node:internal/modules/cjs/loader:1943:10
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1533:32)
+2026-07-26 04:34:53 error: uncaughtException: Route.get() requires a callback function but got a [object Undefined]
+Error: Route.get() requires a callback function but got a [object Undefined]
+    at Route.<computed> [as get] (D:\Developer Code\js\LM createor\express-upload\node_modules\express\lib\router\route.js:216:15)
+    at router.proto.<computed> [as get] (D:\Developer Code\js\LM createor\express-upload\node_modules\express\lib\router\index.js:521:19)
+    at UserRoute.initializeRoutes (D:\Developer Code\js\LM createor\express-upload\src\routes\users.route.ts:19:17)
+    at new UserRoute (D:\Developer Code\js\LM createor\express-upload\src\routes\users.route.ts:14:10)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\express-upload\src\server.ts:9:95)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)
+    at Module.m._compile (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1618:23)
+    at node:internal/modules/cjs/loader:1943:10
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1533:32)
+2026-07-26 04:34:56 error: uncaughtException: Route.get() requires a callback function but got a [object Undefined]
+Error: Route.get() requires a callback function but got a [object Undefined]
+    at Route.<computed> [as get] (D:\Developer Code\js\LM createor\express-upload\node_modules\express\lib\router\route.js:216:15)
+    at router.proto.<computed> [as get] (D:\Developer Code\js\LM createor\express-upload\node_modules\express\lib\router\index.js:521:19)
+    at UserRoute.initializeRoutes (D:\Developer Code\js\LM createor\express-upload\src\routes\users.route.ts:19:17)
+    at new UserRoute (D:\Developer Code\js\LM createor\express-upload\src\routes\users.route.ts:14:10)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\express-upload\src\server.ts:9:95)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)
+    at Module.m._compile (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1618:23)
+    at node:internal/modules/cjs/loader:1943:10
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1533:32)
+2026-07-26 04:34:59 error: uncaughtException: Route.get() requires a callback function but got a [object Undefined]
+Error: Route.get() requires a callback function but got a [object Undefined]
+    at Route.<computed> [as get] (D:\Developer Code\js\LM createor\express-upload\node_modules\express\lib\router\route.js:216:15)
+    at router.proto.<computed> [as get] (D:\Developer Code\js\LM createor\express-upload\node_modules\express\lib\router\index.js:521:19)
+    at UserRoute.initializeRoutes (D:\Developer Code\js\LM createor\express-upload\src\routes\users.route.ts:19:17)
+    at new UserRoute (D:\Developer Code\js\LM createor\express-upload\src\routes\users.route.ts:14:10)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\express-upload\src\server.ts:14:3)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)
+    at Module.m._compile (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1618:23)
+    at node:internal/modules/cjs/loader:1943:10
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1533:32)
+2026-07-26 04:51:08 error: uncaughtException: listen EADDRINUSE: address already in use :::5000
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1948:16)
+    at listenInCluster (node:net:2005:12)
+    at Server.listen (node:net:2110:7)
+    at app.listen (D:\Developer Code\js\LM createor\express-upload\node_modules\express\lib\application.js:635:24)
+    at App.listen (D:\Developer Code\js\LM createor\express-upload\src\app.ts:33:14)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\express-upload\src\server.ts:18:5)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)
+    at Module.m._compile (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1618:23)
+    at node:internal/modules/cjs/loader:1943:10
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1621:12)
+2026-07-26 05:38:00 error: uncaughtException: ENOENT: no such file or directory, open 'D:\Developer Code\js\LM createor\swagger.yaml'
+Error: ENOENT: no such file or directory, open 'D:\Developer Code\js\LM createor\swagger.yaml'
+    at Object.readFileSync (node:fs:440:20)
+    at App.initializeSwagger (D:\Developer Code\js\LM createor\express-upload\src\app.ts:70:32)
+    at new App (D:\Developer Code\js\LM createor\express-upload\src\app.ts:29:10)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\express-upload\src\server.ts:9:13)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)
+    at Module.m._compile (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1618:23)
+    at node:internal/modules/cjs/loader:1943:10
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1533:32)
+    at Module._load (node:internal/modules/cjs/loader:1335:12)

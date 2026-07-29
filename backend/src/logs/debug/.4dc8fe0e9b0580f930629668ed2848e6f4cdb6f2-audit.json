@@ -1,0 +1,25 @@
+{
+    "keep": {
+        "days": false,
+        "amount": 30
+    },
+    "auditLog": "D:\\Developer Code\\js\\LM createor\\nextjs_lmfile_backend\\src\\logs\\debug\\.4dc8fe0e9b0580f930629668ed2848e6f4cdb6f2-audit.json",
+    "files": [
+        {
+            "date": 1729819716477,
+            "name": "D:\\Developer Code\\js\\LM createor\\nextjs_lmfile_backend\\src\\logs\\debug\\2024-10-25.log",
+            "hash": "697d3208bcf1505cc4e4d5e53f10428fb425e450611e35af019b9ab6546ce0fa"
+        },
+        {
+            "date": 1729896550300,
+            "name": "D:\\Developer Code\\js\\LM createor\\nextjs_lmfile_backend\\src\\logs\\debug\\2024-10-26.log",
+            "hash": "888d2c4ba283264e989e1c19f905af612583b7de0dd4521ae609f503420a9fb7"
+        },
+        {
+            "date": 1730075536131,
+            "name": "D:\\Developer Code\\js\\LM createor\\nextjs_lmfile_backend\\src\\logs\\debug\\2024-10-28.log",
+            "hash": "d03befa56eccb8b1e40ee77d8048ca35d1222271a999a5da95817cb6807a06a2"
+        }
+    ],
+    "hashType": "sha256"
+}

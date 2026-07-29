@@ -1,0 +1,20 @@
+{
+    "keep": {
+        "days": false,
+        "amount": 30
+    },
+    "auditLog": "D:\\Developer Code\\js\\LM createor\\express-upload\\src\\logs\\error\\.2f48c69b1c526df521f8e88d87e7329833403f02-audit.json",
+    "files": [
+        {
+            "date": 1747584485412,
+            "name": "D:\\Developer Code\\js\\LM createor\\express-upload\\src\\logs\\error\\2025-05-18.log",
+            "hash": "086ff63937d23ac9231ca72c8c0dec05e95be0b04270013768d0174ad82cc77e"
+        },
+        {
+            "date": 1785027611527,
+            "name": "D:\\Developer Code\\js\\LM createor\\express-upload\\src\\logs\\error\\2026-07-26.log",
+            "hash": "5e61d72445cea7e29a927faa6b15a33696d60f3e5b2c9ee5ef9f2249e4f4d1b7"
+        }
+    ],
+    "hashType": "sha256"
+}

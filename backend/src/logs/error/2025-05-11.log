@@ -1,0 +1,1037 @@
+2025-05-11 18:14:25 error: [PUT] /Apartment/681ecf9de5e334cca48c22a6 >> StatusCode:: 409, Message:: no tenant
+2025-05-11 18:14:28 error: [PUT] /Apartment/681ecf9de5e334cca48c22a6 >> StatusCode:: 409, Message:: no tenant
+2025-05-11 18:16:15 error: [GET] /Building/primo >> StatusCode:: 500, Message:: Cast to ObjectId failed for value "primo" (type string) at path "_id" for model "Building"
+2025-05-11 19:43:10 error: [GET] /dashboard >> StatusCode:: 500, Message:: jwt must be provided
+2025-05-11 19:43:43 error: [GET] /Building >> StatusCode:: 500, Message:: Cannot read properties of undefined (reading 'split')
+2025-05-11 19:43:48 error: [GET] /Building >> StatusCode:: 500, Message:: Cannot read properties of undefined (reading 'split')
+2025-05-11 19:44:30 error: [POST] /auth/login >> StatusCode:: 409, Message:: This email saydan02@gmail.com was not found
+2025-05-11 19:44:41 error: [POST] /auth/login >> StatusCode:: 409, Message:: This email kikopere@gmail.com was not found
+2025-05-11 20:12:24 error: [POST] /building >> StatusCode:: 500, Message:: Building validation failed: state: Path `state` (`MANAMA`) is longer than the maximum allowed length (2).
+2025-05-11 20:30:47 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m161[0m:[93m18[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m161[0m     historyModel.
+[7m   [0m [91m                 [0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m161[0m:[93m18[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m161[0m     historyModel.
+[7m   [0m [91m                 [0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 20:30:50 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m161[0m:[93m18[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m161[0m     historyModel.
+[7m   [0m [91m                 [0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m161[0m:[93m18[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m161[0m     historyModel.
+[7m   [0m [91m                 [0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 20:31:05 error: uncaughtException: Identifier 'createUserData' has already been declared
+D:\Developer Code\js\LM createor\RentEase\backend\src\services\tenant.service.ts:142
+        const createUserData = await tenant_model_1.TenantModel.create(tenantnew);
+              ^
+
+SyntaxError: Identifier 'createUserData' has already been declared
+    at wrapSafe (node:internal/modules/cjs/loader:1378:20)
+    at Module._compile (node:internal/modules/cjs/loader:1428:41)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at require (node:internal/modules/helpers:179:18)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\RentEase\backend\src\controllers\tenant.controller.ts:4:1)
+2025-05-11 20:34:05 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m165[0m:[93m23[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m165[0m       description: `${} moved into Apartment 301 with 1-year lease agreement`,
+[7m   [0m [91m                      ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m165[0m:[93m23[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m165[0m       description: `${} moved into Apartment 301 with 1-year lease agreement`,
+[7m   [0m [91m                      ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 20:34:43 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m165[0m:[93m77[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m165[0m       description: `${TenantData.fullName} moved into Apartment ${Apartment.} with 1-year lease agreement`,
+[7m   [0m [91m                                                                            ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m165[0m:[93m77[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m165[0m       description: `${TenantData.fullName} moved into Apartment ${Apartment.} with 1-year lease agreement`,
+[7m   [0m [91m                                                                            ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 20:36:43 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m175[0m:[93m37[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m175[0m       relatedApartmentId: Apartment.,
+[7m   [0m [91m                                    ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m175[0m:[93m37[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m175[0m       relatedApartmentId: Apartment.,
+[7m   [0m [91m                                    ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 20:47:16 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m162[0m:[93m17[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m162[0m     const await UserModel.findById(createdBy)
+[7m   [0m [91m                ~~~~~~~~~[0m
+[96msrc/services/tenant.service.ts[0m:[93m162[0m:[93m26[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m162[0m     const await UserModel.findById(createdBy)
+[7m   [0m [91m                         ~[0m
+[96msrc/services/tenant.service.ts[0m:[93m162[0m:[93m35[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m162[0m     const await UserModel.findById(createdBy)
+[7m   [0m [91m                                  ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m162[0m:[93m17[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m162[0m     const await UserModel.findById(createdBy)
+[7m   [0m [91m                ~~~~~~~~~[0m
+[96msrc/services/tenant.service.ts[0m:[93m162[0m:[93m26[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m162[0m     const await UserModel.findById(createdBy)
+[7m   [0m [91m                         ~[0m
+[96msrc/services/tenant.service.ts[0m:[93m162[0m:[93m35[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m162[0m     const await UserModel.findById(createdBy)
+[7m   [0m [91m                                  ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 20:47:26 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m170[0m:[93m20[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m170[0m         name: user.,
+[7m   [0m [91m                   ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m170[0m:[93m20[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m170[0m         name: user.,
+[7m   [0m [91m                   ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 20:55:08 error: [POST] /tenant >> StatusCode:: 500, Message:: leaseEnd.getFullYear is not a function
+2025-05-11 20:57:36 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m170[0m:[93m9[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m170[0m       ).} lease agreement`,
+[7m   [0m [91m        ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m170[0m:[93m9[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m170[0m       ).} lease agreement`,
+[7m   [0m [91m        ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 20:57:41 error: [POST] /tenant >> StatusCode:: 500, Message:: E11000 duplicate key error collection: RentEase.tenants index: email_1 dup key: { email: "mohamed.ali.hassan@gmail.com" }
+2025-05-11 20:57:58 error: [POST] /tenant >> StatusCode:: 500, Message:: leaseEnd.getFullYear is not a function
+2025-05-11 20:58:19 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/function/index.ts[0m:[93m10[0m:[93m36[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m10[0m     if (isNaN(startDate.getTime()) throw new Error("Invalid leaseStart date");
+[7m  [0m [91m                                   ~~~~~[0m
+
+  [96msrc/function/index.ts[0m:[93m10[0m:[93m8[0m
+    [7m10[0m     if (isNaN(startDate.getTime()) throw new Error("Invalid leaseStart date");
+    [7m  [0m [96m       ~[0m
+    The parser expected to find a ')' to match the '(' token here.
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/function/index.ts[0m:[93m10[0m:[93m36[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m10[0m     if (isNaN(startDate.getTime()) throw new Error("Invalid leaseStart date");
+[7m  [0m [91m                                   ~~~~~[0m
+
+  [96msrc/function/index.ts[0m:[93m10[0m:[93m8[0m
+    [7m10[0m     if (isNaN(startDate.getTime()) throw new Error("Invalid leaseStart date");
+    [7m  [0m [96m       ~[0m
+    The parser expected to find a ')' to match the '(' token here.
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 20:58:52 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/function/index.ts[0m:[93m1[0m:[93m1[0m - [91merror[0m[90m TS1435: [0mUnknown keyword or identifier. Did you mean 'export'?
+
+[7m1[0m expor function getLeaseDuration(leaseStart: Date | string, leaseEnd: Date | string): {
+[7m [0m [91m~~~~~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/function/index.ts[0m:[93m1[0m:[93m1[0m - [91merror[0m[90m TS1435: [0mUnknown keyword or identifier. Did you mean 'export'?
+
+[7m1[0m expor function getLeaseDuration(leaseStart: Date | string, leaseEnd: Date | string): {
+[7m [0m [91m~~~~~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 20:58:59 error: [POST] /tenant >> StatusCode:: 500, Message:: E11000 duplicate key error collection: RentEase.tenants index: email_1 dup key: { email: "mohamed.ali.hassan@gmail.com" }
+2025-05-11 21:14:09 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m201[0m:[93m84[0m - [91merror[0m[90m TS1005: [0m':' expected.
+
+[7m201[0m     const deleteUserById: Tenant = await TenantModel.findByIdAndUpdate(userId,{this.state.first});
+[7m   [0m [91m                                                                                   ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m201[0m:[93m84[0m - [91merror[0m[90m TS1005: [0m':' expected.
+
+[7m201[0m     const deleteUserById: Tenant = await TenantModel.findByIdAndUpdate(userId,{this.state.first});
+[7m   [0m [91m                                                                                   ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:14:14 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m201[0m:[93m84[0m - [91merror[0m[90m TS1005: [0m':' expected.
+
+[7m201[0m     const deleteUserById: Tenant = await TenantModel.findByIdAndUpdate(userId,{this.state});
+[7m   [0m [91m                                                                                   ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m201[0m:[93m84[0m - [91merror[0m[90m TS1005: [0m':' expected.
+
+[7m201[0m     const deleteUserById: Tenant = await TenantModel.findByIdAndUpdate(userId,{this.state});
+[7m   [0m [91m                                                                                   ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:14:19 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m201[0m:[93m86[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m201[0m     const deleteUserById: Tenant = await TenantModel.findByIdAndUpdate(userId,{state:});
+[7m   [0m [91m                                                                                     ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m201[0m:[93m86[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m201[0m     const deleteUserById: Tenant = await TenantModel.findByIdAndUpdate(userId,{state:});
+[7m   [0m [91m                                                                                     ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:15:26 error: uncaughtException: Unexpected token ';'
+D:\Developer Code\js\LM createor\RentEase\backend\src\services\tenant.service.ts:179
+        const ;
+              ^
+
+SyntaxError: Unexpected token ';'
+    at wrapSafe (node:internal/modules/cjs/loader:1378:20)
+    at Module._compile (node:internal/modules/cjs/loader:1428:41)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at require (node:internal/modules/helpers:179:18)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\RentEase\backend\src\controllers\tenant.controller.ts:4:1)
+2025-05-11 21:15:28 error: uncaughtException: Missing initializer in const declaration
+D:\Developer Code\js\LM createor\RentEase\backend\src\services\tenant.service.ts:179
+        const ap;
+              ^^
+
+SyntaxError: Missing initializer in const declaration
+    at wrapSafe (node:internal/modules/cjs/loader:1378:20)
+    at Module._compile (node:internal/modules/cjs/loader:1428:41)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at require (node:internal/modules/helpers:179:18)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\RentEase\backend\src\controllers\tenant.controller.ts:4:1)
+2025-05-11 21:15:29 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m203[0m:[93m5[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m203[0m     if (!deleteUserById) throw new HttpException(409, "Tenant doesn't exist");
+[7m   [0m [91m    ~~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m203[0m:[93m5[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m203[0m     if (!deleteUserById) throw new HttpException(409, "Tenant doesn't exist");
+[7m   [0m [91m    ~~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:15:35 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m203[0m:[93m5[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m203[0m     if (!deleteUserById) throw new HttpException(409, "Tenant doesn't exist");
+[7m   [0m [91m    ~~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m203[0m:[93m5[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m203[0m     if (!deleteUserById) throw new HttpException(409, "Tenant doesn't exist");
+[7m   [0m [91m    ~~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:15:51 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m202[0m:[93m62[0m - [91merror[0m[90m TS1135: [0mArgument expression expected.
+
+[7m202[0m     const apartment = await ApartmentModel.findByIdAndUpdate(,)
+[7m   [0m [91m                                                             ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m202[0m:[93m62[0m - [91merror[0m[90m TS1135: [0mArgument expression expected.
+
+[7m202[0m     const apartment = await ApartmentModel.findByIdAndUpdate(,)
+[7m   [0m [91m                                                             ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:16:00 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m202[0m:[93m77[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m202[0m     const apartment = await ApartmentModel.findByIdAndUpdate(deleteUserById.,)
+[7m   [0m [91m                                                                            ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m202[0m:[93m77[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m202[0m     const apartment = await ApartmentModel.findByIdAndUpdate(deleteUserById.,)
+[7m   [0m [91m                                                                            ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:18:56 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/models/tenant.model.ts[0m:[93m62[0m:[93m34[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m62[0m     createdBy:{type: String, ref:}
+[7m  [0m [91m                                 ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/models/tenant.model.ts[0m:[93m62[0m:[93m34[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m62[0m     createdBy:{type: String, ref:}
+[7m  [0m [91m                                 ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:24:02 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m214[0m:[93m30[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m214[0m       description: `Tenant ${} officially moved out of Apartment 302 after lease completion`,
+[7m   [0m [91m                             ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m214[0m:[93m30[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m214[0m       description: `Tenant ${} officially moved out of Apartment 302 after lease completion`,
+[7m   [0m [91m                             ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:24:10 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m214[0m:[93m41[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m214[0m       description: `Tenant ${TenantData.} officially moved out of Apartment 302 after lease completion`,
+[7m   [0m [91m                                        ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m214[0m:[93m41[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m214[0m       description: `Tenant ${TenantData.} officially moved out of Apartment 302 after lease completion`,
+[7m   [0m [91m                                        ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:24:28 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m214[0m:[93m87[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m214[0m       description: `Tenant ${TenantData.fullName} officially moved out of Apartment ${} after lease completion`,
+[7m   [0m [91m                                                                                      ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m214[0m:[93m87[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m214[0m       description: `Tenant ${TenantData.fullName} officially moved out of Apartment ${} after lease completion`,
+[7m   [0m [91m                                                                                      ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:24:41 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m214[0m:[93m98[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m214[0m       description: `Tenant ${TenantData.fullName} officially moved out of Apartment ${TenantData.} after lease completion`,
+[7m   [0m [91m                                                                                                 ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m214[0m:[93m98[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m214[0m       description: `Tenant ${TenantData.fullName} officially moved out of Apartment ${TenantData.} after lease completion`,
+[7m   [0m [91m                                                                                                 ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:24:48 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m214[0m:[93m109[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m214[0m       description: `Tenant ${TenantData.fullName} officially moved out of Apartment ${TenantData.propertyId.} after lease completion`,
+[7m   [0m [91m                                                                                                            ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m214[0m:[93m109[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m214[0m       description: `Tenant ${TenantData.fullName} officially moved out of Apartment ${TenantData.propertyId.} after lease completion`,
+[7m   [0m [91m                                                                                                            ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:24:52 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m214[0m:[93m109[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m214[0m       description: `Tenant ${TenantData.fullName} officially moved out of Apartment ${TenantData.propertyId.} after lease completion`,
+[7m   [0m [91m                                                                                                            ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m214[0m:[93m109[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m214[0m       description: `Tenant ${TenantData.fullName} officially moved out of Apartment ${TenantData.propertyId.} after lease completion`,
+[7m   [0m [91m                                                                                                            ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:25:25 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m214[0m:[93m97[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m214[0m       description: `Tenant ${TenantData.fullName} officially moved out of Apartment ${Apartment.} after lease completion`,
+[7m   [0m [91m                                                                                                ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m214[0m:[93m97[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m214[0m       description: `Tenant ${TenantData.fullName} officially moved out of Apartment ${Apartment.} after lease completion`,
+[7m   [0m [91m                                                                                                ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:26:10 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m216[0m:[93m26[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m216[0m         name: TenantData.,
+[7m   [0m [91m                         ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m216[0m:[93m26[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m216[0m         name: TenantData.,
+[7m   [0m [91m                         ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:28:45 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m224[0m:[93m38[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m224[0m       relatedApartmentId: TenantData., // Sample ObjectId
+[7m   [0m [91m                                     ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m224[0m:[93m38[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m224[0m       relatedApartmentId: TenantData., // Sample ObjectId
+[7m   [0m [91m                                     ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:33:11 error: uncaughtException: Identifier 'history' has already been declared
+D:\Developer Code\js\LM createor\RentEase\backend\src\services\tenant.service.ts:204
+        const history = await history_model_1.default.create({
+              ^
+
+SyntaxError: Identifier 'history' has already been declared
+    at wrapSafe (node:internal/modules/cjs/loader:1378:20)
+    at Module._compile (node:internal/modules/cjs/loader:1428:41)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at require (node:internal/modules/helpers:179:18)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\RentEase\backend\src\controllers\tenant.controller.ts:4:1)
+2025-05-11 21:40:46 error: uncaughtException: ex is not defined
+ReferenceError: ex is not defined
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\RentEase\backend\src\function\index.ts:25:3)
+    at Module._compile (node:internal/modules/cjs/loader:1469:14)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at require (node:internal/modules/helpers:179:18)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\RentEase\backend\src\services\tenant.service.ts:8:1)
+2025-05-11 21:40:57 error: uncaughtException: Cannot find module 'date-fns'
+Require stack:
+- D:\Developer Code\js\LM createor\RentEase\backend\src\function\index.ts
+- D:\Developer Code\js\LM createor\RentEase\backend\src\services\tenant.service.ts
+- D:\Developer Code\js\LM createor\RentEase\backend\src\controllers\tenant.controller.ts
+- D:\Developer Code\js\LM createor\RentEase\backend\src\routes\tenant.route.ts
+- D:\Developer Code\js\LM createor\RentEase\backend\src\server.ts
+Error: Cannot find module 'date-fns'
+Require stack:
+- D:\Developer Code\js\LM createor\RentEase\backend\src\function\index.ts
+- D:\Developer Code\js\LM createor\RentEase\backend\src\services\tenant.service.ts
+- D:\Developer Code\js\LM createor\RentEase\backend\src\controllers\tenant.controller.ts
+- D:\Developer Code\js\LM createor\RentEase\backend\src\routes\tenant.route.ts
+- D:\Developer Code\js\LM createor\RentEase\backend\src\server.ts
+    at Function.Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+    at Function.Module._resolveFilename.sharedData.moduleResolveFilenameHook.installedValue (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\@cspotcode\source-map-support\source-map-support.js:811:30)
+    at Function.Module._resolveFilename (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\tsconfig-paths\src\register.ts:115:36)
+    at Function.Module._load (node:internal/modules/cjs/loader:1051:27)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at require (node:internal/modules/helpers:179:18)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\RentEase\backend\src\function\index.ts:1:1)
+    at Module._compile (node:internal/modules/cjs/loader:1469:14)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+2025-05-11 21:43:08 error: uncaughtException: Unexpected token ';'
+D:\Developer Code\js\LM createor\RentEase\backend\src\services\tenant.service.ts:187
+        const ;
+              ^
+
+SyntaxError: Unexpected token ';'
+    at wrapSafe (node:internal/modules/cjs/loader:1378:20)
+    at Module._compile (node:internal/modules/cjs/loader:1428:41)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at require (node:internal/modules/helpers:179:18)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\RentEase\backend\src\controllers\tenant.controller.ts:4:1)
+2025-05-11 21:43:17 error: uncaughtException: Missing initializer in const declaration
+D:\Developer Code\js\LM createor\RentEase\backend\src\services\tenant.service.ts:187
+        const Termination;
+              ^^^^^^^^^^^
+
+SyntaxError: Missing initializer in const declaration
+    at wrapSafe (node:internal/modules/cjs/loader:1378:20)
+    at Module._compile (node:internal/modules/cjs/loader:1428:41)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at require (node:internal/modules/helpers:179:18)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\RentEase\backend\src\controllers\tenant.controller.ts:4:1)
+2025-05-11 21:43:20 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m212[0m:[93m5[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m212[0m     const history: HistoryEvent = await historyModel.create({
+[7m   [0m [91m    ~~~~~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m212[0m:[93m5[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m212[0m     const history: HistoryEvent = await historyModel.create({
+[7m   [0m [91m    ~~~~~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:43:51 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m210[0m:[93m74[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m210[0m     const Termination = calculateTerminationFee(Apartment.rent,Apartment.)
+[7m   [0m [91m                                                                         ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m210[0m:[93m74[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m210[0m     const Termination = calculateTerminationFee(Apartment.rent,Apartment.)
+[7m   [0m [91m                                                                         ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:44:00 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m210[0m:[93m74[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m210[0m     const Termination = calculateTerminationFee(Apartment.rent,Apartment.)
+[7m   [0m [91m                                                                         ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m210[0m:[93m74[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m210[0m     const Termination = calculateTerminationFee(Apartment.rent,Apartment.)
+[7m   [0m [91m                                                                         ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:44:04 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m210[0m:[93m74[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m210[0m     const Termination = calculateTerminationFee(apartment.rent,Apartment.)
+[7m   [0m [91m                                                                         ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m210[0m:[93m74[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m210[0m     const Termination = calculateTerminationFee(apartment.rent,Apartment.)
+[7m   [0m [91m                                                                         ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:44:05 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m210[0m:[93m74[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m210[0m     const Termination = calculateTerminationFee(apartment.rent,Apartment.)
+[7m   [0m [91m                                                                         ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m210[0m:[93m74[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m210[0m     const Termination = calculateTerminationFee(apartment.rent,Apartment.)
+[7m   [0m [91m                                                                         ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:44:09 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m210[0m:[93m74[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m210[0m     const Termination = calculateTerminationFee(apartment.rent,Apartment.)
+[7m   [0m [91m                                                                         ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m210[0m:[93m74[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m210[0m     const Termination = calculateTerminationFee(apartment.rent,Apartment.)
+[7m   [0m [91m                                                                         ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:44:15 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m210[0m:[93m74[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m210[0m     const Termination = calculateTerminationFee(apartment.rent,apartment.)
+[7m   [0m [91m                                                                         ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m210[0m:[93m74[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m210[0m     const Termination = calculateTerminationFee(apartment.rent,apartment.)
+[7m   [0m [91m                                                                         ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:44:18 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m210[0m:[93m74[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m210[0m     const Termination = calculateTerminationFee(apartment.rent,apartment.)
+[7m   [0m [91m                                                                         ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m210[0m:[93m74[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m210[0m     const Termination = calculateTerminationFee(apartment.rent,apartment.)
+[7m   [0m [91m                                                                         ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:44:30 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m210[0m:[93m95[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m210[0m     const Termination = calculateTerminationFee(apartment.rent,apartment.leaseStart,apartment.)
+[7m   [0m [91m                                                                                              ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m210[0m:[93m95[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m210[0m     const Termination = calculateTerminationFee(apartment.rent,apartment.leaseStart,apartment.)
+[7m   [0m [91m                                                                                              ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:44:31 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m210[0m:[93m95[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m210[0m     const Termination = calculateTerminationFee(apartment.rent,apartment.leaseStart,apartment.)
+[7m   [0m [91m                                                                                              ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/tenant.service.ts[0m:[93m210[0m:[93m95[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m210[0m     const Termination = calculateTerminationFee(apartment.rent,apartment.leaseStart,apartment.)
+[7m   [0m [91m                                                                                              ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:45:48 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/function/index.ts[0m:[93m62[0m:[93m17[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m62[0m     return {Math.max(flatPenalty, proratedPenalty);}
+[7m  [0m [91m                ~[0m
+[96msrc/function/index.ts[0m:[93m62[0m:[93m51[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m62[0m     return {Math.max(flatPenalty, proratedPenalty);}
+[7m  [0m [91m                                                  ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/function/index.ts[0m:[93m62[0m:[93m17[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m62[0m     return {Math.max(flatPenalty, proratedPenalty);}
+[7m  [0m [91m                ~[0m
+[96msrc/function/index.ts[0m:[93m62[0m:[93m51[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m62[0m     return {Math.max(flatPenalty, proratedPenalty);}
+[7m  [0m [91m                                                  ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-05-11 21:45:52 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/function/index.ts[0m:[93m62[0m:[93m17[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m62[0m     return {Math.max(flatPenalty, proratedPenalty)}
+[7m  [0m [91m                ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/function/index.ts[0m:[93m62[0m:[93m17[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m62[0m     return {Math.max(flatPenalty, proratedPenalty)}
+[7m  [0m [91m                ~[0m
+
+    at createTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:863:19)
+    at D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Developer Code\js\LM createor\RentEase\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)

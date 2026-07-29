@@ -1,0 +1,16 @@
+2025-05-18 19:08:05 error: uncaughtException: Cannot find module '@routes/auth.route'
+Require stack:
+- D:\Developer Code\js\LM createor\express-upload\src\server.ts
+Error: Cannot find module '@routes/auth.route'
+Require stack:
+- D:\Developer Code\js\LM createor\express-upload\src\server.ts
+    at Function.Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+    at Function.Module._resolveFilename.sharedData.moduleResolveFilenameHook.installedValue (D:\Developer Code\js\LM createor\express-upload\node_modules\@cspotcode\source-map-support\source-map-support.js:811:30)
+    at Function.Module._resolveFilename (D:\Developer Code\js\LM createor\express-upload\node_modules\tsconfig-paths\src\register.ts:115:36)
+    at Function.Module._load (node:internal/modules/cjs/loader:1051:27)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at require (node:internal/modules/helpers:179:18)
+    at Object.<anonymous> (D:\Developer Code\js\LM createor\express-upload\src\server.ts:2:1)
+    at Module._compile (node:internal/modules/cjs/loader:1469:14)
+    at Module.m._compile (D:\Developer Code\js\LM createor\express-upload\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
