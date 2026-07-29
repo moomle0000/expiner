@@ -24,7 +24,7 @@ export async function seedBootstrapUsers(): Promise<void> {
   if (BOOTSTRAP_ADMIN_EMAIL && BOOTSTRAP_ADMIN_PASSWORD) {
     targets.push({
       label: 'admin',
-      email: BOOTSTRAP_ADMIN_EMAIL,
+      email: BOOTSTRAP_ADMIN_EMAIL.toLowerCase().trim(),
       password: BOOTSTRAP_ADMIN_PASSWORD,
       name: BOOTSTRAP_ADMIN_NAME,
       role: 'admin',
@@ -34,7 +34,7 @@ export async function seedBootstrapUsers(): Promise<void> {
   if (BOOTSTRAP_USER_EMAIL && BOOTSTRAP_USER_PASSWORD) {
     targets.push({
       label: 'user',
-      email: BOOTSTRAP_USER_EMAIL,
+      email: BOOTSTRAP_USER_EMAIL.toLowerCase().trim(),
       password: BOOTSTRAP_USER_PASSWORD,
       name: BOOTSTRAP_USER_NAME,
       role: 'user',

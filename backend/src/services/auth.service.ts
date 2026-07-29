@@ -109,21 +109,26 @@ export class AuthService {
     if (!userData || !userData.email || !userData.password) {
       throw new HttpException(400, 'email and password are required');
     }
-    const email = String(userData.email).toLowerCase().trim();
-    const password = String(userData.password);
 
-    const findUser = await UserModel.findOne({ email });
-    if (!findUser) throw new HttpException(401, 'Invalid credentials');
+    try {
+      const email = String(userData.email).toLowerCase().trim();
+      const password = String(userData.password);
 
-    const isPasswordMatching = await compare(password, findUser.password);
-    if (!isPasswordMatching) throw new HttpException(401, 'Invalid credentials');
+      const findUser = await UserModel.findOne({ email });
+      if (!findUser) throw new HttpException(401, 'Invalid credentials');
 
-    findUser.lastLoginAt = new Date();
-    await findUser.save();
+      const isPasswordMatching = await compare(password, findUser.password);
+      if (!isPasswordMatching) throw new HttpException(401, 'Invalid credentials');
 
-    const tokenData = createToken(findUser);
-    const cookie = createCookie(tokenData);
-    return { cookie, findUser: sanitize(findUser), tokenData };
+      findUser.lastLoginAt = new Date();
+      await findUser.save();
+
+      const tokenData = createToken(findUser);
+      const cookie = createCookie(tokenData);
+      return { cookie, findUser: sanitize(findUser), tokenData };
+    } catch (err) {
+      throw new HttpException(401, 'Invalid credentials');
+    }
   }
 
   public async verify(token: string | undefined): Promise<User | string | null> {

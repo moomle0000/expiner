@@ -14,6 +14,7 @@
 - Route: `src/routes/auth.route.ts` — `AuthRoute` (path `/auth`)
 - Route: `src/routes/userSelf.route.ts` — `UserSelfRoute` (path `/`, mounted from `src/server.ts`; provides `/api/auth/me` and `/api/auth/me/password`)
 - Middleware: `src/middlewares/auth.middleware.ts` — `authMiddleware` (Bearer JWT), `requireAdmin`, `requireSelfOrAdmin`
+- Global error handler: `src/middlewares/error.middleware.ts` — logs `error` level for 5xx, `warn` level for 4xx (so user-input failures like `Invalid credentials` don't show up as server errors)
 - Helper: `src/utils/Authorization.ts` — extract Bearer token from a `Cookie` header
 - Bootstrap seed: `src/utils/seedBootstrap.ts` — `seedBootstrapUsers()` called from `src/server.ts` after the App constructor; reads `BOOTSTRAP_ADMIN_*` / `BOOTSTRAP_USER_*` from `@config` and idempotently creates the users via `UserService.ensureUser`
 
