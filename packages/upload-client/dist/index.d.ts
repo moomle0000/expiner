@@ -1,11 +1,11 @@
 /**
- * @lmstream/upload-client
+ * @moomle/upload-client
  *
  * Tiny browser/Node client for the express-upload file API.
  * Uploads with progress + cancel. Zero runtime dependencies.
  *
  * ```ts
- * import { createUploader } from '@lmstream/upload-client';
+ * import { createUploader } from '@moomle/upload-client';
  *
  * const uploader = createUploader({
  *   baseUrl: 'https://api.example.com',

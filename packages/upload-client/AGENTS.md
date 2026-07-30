@@ -1,6 +1,6 @@
 # upload-client
 
-Tiny browser/Node client for the `express-upload` file API. Ships as `@lmstream/upload-client`.
+Tiny browser/Node client for the `express-upload` file API. Ships as `@moomle/upload-client`.
 
 ## Backend paths
 - Source: `packages/upload-client/src/index.ts` (re-exports the public API)
@@ -36,7 +36,7 @@ UploadError                         → Error subclass with .status, .body
 
 ## How to consume from a Next.js app
 ```bash
-npm install @lmstream/upload-client
+npm install @moomle/upload-client
 ```
 ```env
 NEXT_PUBLIC_UPLOAD_BASE_URL=https://api.example.com
@@ -44,7 +44,7 @@ NEXT_PUBLIC_UPLOAD_KEY=lm_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 ```tsx
 'use client';
-import { createUploader } from '@lmstream/upload-client';
+import { createUploader } from '@moomle/upload-client';
 const uploader = createUploader({
   baseUrl: process.env.NEXT_PUBLIC_UPLOAD_BASE_URL!,
   apiKey: process.env.NEXT_PUBLIC_UPLOAD_KEY!,

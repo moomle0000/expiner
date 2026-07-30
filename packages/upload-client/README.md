@@ -1,4 +1,4 @@
-# @lmstream/upload-client
+# @moomle/upload-client
 
 Tiny browser/Node client for the `express-upload` file API. Uploads with progress + cancel. **Zero runtime dependencies.** TypeScript-first, ESM, works in Next.js App Router out of the box.
 
@@ -6,10 +6,8 @@ Targets the unified file endpoint: `POST /api/files/upload` (field name `file`).
 
 ## Install
 
-From inside this monorepo (after the backend is published to a registry, or via a workspace setup):
-
 ```bash
-npm install @lmstream/upload-client
+npm install @moomle/upload-client
 ```
 
 In a Next.js project, the recommended pattern is exposing the API key via `NEXT_PUBLIC_*`:
@@ -25,7 +23,7 @@ NEXT_PUBLIC_UPLOAD_KEY=lm_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 'use client';
 
 import { useState } from 'react';
-import { createUploader, UploadError } from '@lmstream/upload-client';
+import { createUploader, UploadError } from '@moomle/upload-client';
 
 const uploader = createUploader({
   baseUrl: process.env.NEXT_PUBLIC_UPLOAD_BASE_URL!,
@@ -80,6 +78,7 @@ interface UploaderConfig {
   apiKey?: string;            // sent as `X-API-Key` (server-to-server)
   token?: string;             // sent as `Authorization: Bearer <jwt>` (browser session)
   endpoint?: string;          // default '/api/files/upload'
+  fetch?: typeof fetch;       // optional, for testing
 }
 ```
 
@@ -101,7 +100,7 @@ interface UploadHandle {
 | Field | Type | Notes |
 |---|---|---|
 | `folder` | `string` | Logical sub-folder. Sanitized server-side (no `..`, no slashes). |
-| `onProgress` | `({ loaded, total, percent }) => void` | Bytes + percent (0-100). `total` may be 0 if the server omits Content-Length. |
+| `onProgress` | `({ loaded, total, percent }) => void` | Bytes + percent (0-100). `total` may be `0` if the server omits Content-Length. |
 | `fieldName` | `string` | Defaults to `'file'`. |
 | `signal` | `AbortSignal` | Alternative to `.cancel()`. |
 | `headers` | `Record<string,string>` | Extra headers. Auth + `X-Folder` are managed by the client and override any values you set with the same name. |
@@ -113,7 +112,7 @@ interface UploadHandle {
 Builds the absolute public view URL for a previously uploaded file. Equivalent to:
 
 ```ts
-import { buildPublicUrl } from '@lmstream/upload-client';
+import { buildPublicUrl } from '@moomle/upload-client';
 buildPublicUrl(baseUrl, shortUrl); // => 'https://api.example.com/f/abc123.png'
 ```
 
@@ -135,8 +134,8 @@ class UploadError extends Error {
 You have three flows, all supported by this client:
 
 1. **API key (server-to-server, recommended for Next.js):** create a key via `POST /api/auth/keys` on the server, expose it as `NEXT_PUBLIC_*`, pass it as `apiKey`. The server resolves it to a `User` and stores the file under that user's `folderSlug`.
-2. **JWT (user session):** the user logs in via `POST /auth/login`, which returns a `Set-Cookie: Authorization=<jwt>; HttpOnly=false; ...`. Two ways to forward it to the API:
-   - let the browser send the cookie automatically (requires `credentials: 'include'` on `fetch` — but this client uses XHR, so the cookie is sent automatically for same-origin or when `Access-Control-Allow-Credentials: true` is set on the server. The express-upload server already does this.).
+2. **JWT (user session):** the user logs in via `POST /auth/login`, which returns the JWT in the response body (and optionally in the `Authorization` cookie). Two ways to forward it to the API:
+   - let the browser send the cookie automatically (requires `credentials: 'include'` on `fetch` — but this client uses XHR, so the cookie is sent automatically for same-origin or when `Access-Control-Allow-Credentials: true` is set on the server, which express-upload already does).
    - pass the JWT explicitly as `token` and the client adds `Authorization: Bearer <jwt>`.
 3. **Hybrid:** `apiKey` takes precedence over `token`.
 

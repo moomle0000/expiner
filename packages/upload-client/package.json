@@ -1,6 +1,6 @@
 {
   "name": "@moomle/upload-client",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Tiny browser/Node client for the express-upload file API. Uploads with progress + cancel.",
   "type": "module",
   "main": "./dist/index.js",

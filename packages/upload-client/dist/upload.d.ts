@@ -3,7 +3,7 @@ import type { UploadHandle, UploadOptions, UploaderConfig } from './types.js';
  * Create an uploader bound to a specific server + credentials.
  *
  * ```ts
- * import { createUploader } from '@lmstream/upload-client';
+ * import { createUploader } from '@moomle/upload-client';
  *
  * const upload = createUploader({
  *   baseUrl: 'https://api.example.com',
