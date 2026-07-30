@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard · express-upload</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --accent: #6366f1; --accent-light: #818cf8; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 100% -200px, rgba(99,102,241,0.10), transparent 60%),
+        radial-gradient(800px 400px at -100px 100%, rgba(236,72,153,0.06), transparent 60%),
+        #fafafa;
+      color: #0f172a;
+      min-height: 100vh;
+    }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    .tab-btn { transition: color 0.15s, background 0.15s, border-color 0.15s; }
+    .tab-btn.active {
+      color: var(--accent);
+      background: white;
+      border-color: #e2e8f0;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+    .data-row { transition: background 0.12s, transform 0.12s; }
+    .data-row:hover { background: #f1f5f9; }
+    @keyframes shimmer {
+      0% { background-position: -200px 0; }
+      100% { background-position: calc(200px + 100%) 0; }
+    }
+    .skeleton {
+      background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+      background-size: 200px 100%;
+      animation: shimmer 1.4s ease-in-out infinite;
+      border-radius: 6px;
+    }
+    .badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 9999px; font-size: 11px; font-weight: 500; letter-spacing: 0.02em; border: 1px solid; }
+    .badge-image { background: #ecfeff; color: #0e7490; border-color: #a5f3fc; }
+    .badge-document { background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; }
+    .badge-video { background: #faf5ff; color: #7e22ce; border-color: #e9d5ff; }
+    .badge-audio { background: #f0fdf4; color: #15803d; border-color: #bbf7d0; }
+    .badge-archive { background: #fffbeb; color: #b45309; border-color: #fde68a; }
+    .badge-executable { background: #fef2f2; color: #b91c1c; border-color: #fecaca; }
+    .badge-other { background: #f1f5f9; color: #475569; border-color: #e2e8f0; }
+    .input { transition: border-color 0.15s, box-shadow 0.15s; }
+    .input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(99,102,241,0.12); outline: none; }
+    .btn-primary { background: var(--accent); color: white; transition: background 0.15s, transform 0.05s; }
+    .btn-primary:hover { background: #4f46e5; }
+    .btn-primary:active { transform: scale(0.98); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-ghost { transition: background 0.15s, color 0.15s; }
+    .btn-ghost:hover { background: #f1f5f9; }
+    .modal-overlay { background: rgba(15,23,42,0.5); backdrop-filter: blur(4px); }
+    .dropzone { transition: border-color 0.15s, background 0.15s; }
+    .dropzone.drag-over { border-color: var(--accent); background: rgba(99,102,241,0.04); }
+    @keyframes slideIn { from { transform: translateY(8px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .toast-show { animation: slideIn 0.2s ease-out forwards; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+  </style>
+</head>
+<body class="antialiased">
+  <header class="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+          <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-slate-800 leading-none">My Dashboard</p>
+          <p class="text-[10px] text-slate-400 mt-0.5 font-mono" id="userTag">express-upload</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="/" class="text-xs text-slate-500 hover:text-slate-800 transition-colors px-2 py-1 rounded">Upload</a>
+        <a href="/admin.html" class="text-xs text-slate-500 hover:text-slate-800 transition-colors px-2 py-1 rounded">Admin</a>
+        <button id="signOutBtn" class="text-xs text-slate-500 hover:text-slate-800 transition-colors px-3 py-1.5 rounded-md border border-slate-200 hover:border-slate-300">Sign out</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div id="signedOutBanner" class="hidden mb-6 bg-amber-50 border border-amber-200 rounded-xl p-5 flex items-start gap-3">
+      <svg class="w-5 h-5 text-amber-600 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
+      <div class="flex-1">
+        <p class="text-sm font-medium text-amber-800">Not signed in</p>
+        <p class="text-xs text-amber-700 mt-1">You need to be signed in to manage your files. Create an account or sign in to continue.</p>
+        <a href="/auth.html" class="inline-block mt-3 text-xs font-medium text-amber-900 underline">Go to sign in →</a>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-2 mb-6">
+      <button class="tab-btn active flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-500 border border-transparent rounded-lg" data-tab="files">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" /></svg>
+        Files
+        <span id="filesCount" class="text-[10px] bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded-full font-mono">0</span>
+      </button>
+      <button class="tab-btn flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-500 border border-transparent rounded-lg" data-tab="keys">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" /></svg>
+        API Keys
+        <span id="keysCount" class="text-[10px] bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded-full font-mono">0</span>
+      </button>
+      <button class="tab-btn flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-500 border border-transparent rounded-lg" data-tab="profile">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
+        Profile
+      </button>
+    </div>
+
+    <section id="tab-files" class="space-y-6">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="bg-white rounded-xl border border-slate-200 p-4">
+          <p class="text-[10px] text-slate-400 uppercase tracking-wider">Files</p>
+          <p id="statFiles" class="text-2xl font-semibold text-slate-800 mt-1 font-mono">—</p>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-4">
+          <p class="text-[10px] text-slate-400 uppercase tracking-wider">Images</p>
+          <p id="statImages" class="text-2xl font-semibold text-slate-800 mt-1 font-mono">—</p>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-4">
+          <p class="text-[10px] text-slate-400 uppercase tracking-wider">Downloads</p>
+          <p id="statDownloads" class="text-2xl font-semibold text-slate-800 mt-1 font-mono">—</p>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-4">
+          <p class="text-[10px] text-slate-400 uppercase tracking-wider">Views</p>
+          <p id="statViews" class="text-2xl font-semibold text-slate-800 mt-1 font-mono">—</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl border border-slate-200 p-4 flex flex-col md:flex-row gap-4 items-start">
+        <div id="dropzone" class="dropzone flex-1 border-2 border-dashed border-slate-200 rounded-lg p-4 text-center cursor-pointer hover:border-slate-300">
+          <input id="fileInput" type="file" class="hidden" multiple>
+          <p class="text-sm text-slate-600"><span class="font-medium text-indigo-600">Click to upload</span> or drag and drop</p>
+          <p class="text-[10px] text-slate-400 mt-0.5">Any file type · max 500 MB per file</p>
+        </div>
+        <div class="flex flex-col gap-2 w-full md:w-auto md:min-w-[260px]">
+          <input id="searchInput" type="text" placeholder="Search your files…" class="input w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-800 placeholder:text-slate-400">
+          <div class="flex gap-1.5 text-xs" id="filterBar">
+            <button class="filter-btn active flex-1 px-2 py-1.5 rounded-md bg-slate-100 text-slate-700" data-filter="all">All</button>
+            <button class="filter-btn flex-1 px-2 py-1.5 rounded-md text-slate-500 hover:bg-slate-50" data-filter="image">Images</button>
+            <button class="filter-btn flex-1 px-2 py-1.5 rounded-md text-slate-500 hover:bg-slate-50" data-filter="document">Docs</button>
+            <button class="filter-btn flex-1 px-2 py-1.5 rounded-md text-slate-500 hover:bg-slate-50" data-filter="video">Video</button>
+            <button class="filter-btn flex-1 px-2 py-1.5 rounded-md text-slate-500 hover:bg-slate-50" data-filter="audio">Audio</button>
+            <button class="filter-btn flex-1 px-2 py-1.5 rounded-md text-slate-500 hover:bg-slate-50" data-filter="archive">Zip</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+        <div class="hidden md:grid grid-cols-12 gap-3 px-5 py-2.5 text-[10px] uppercase tracking-wider text-slate-400 border-b border-slate-100 bg-slate-50/50">
+          <div class="col-span-5">Name</div>
+          <div class="col-span-2">Type</div>
+          <div class="col-span-2">Size</div>
+          <div class="col-span-1 text-right">DL</div>
+          <div class="col-span-1 text-right">Views</div>
+          <div class="col-span-1 text-right">Action</div>
+        </div>
+        <div id="filesTable" class="divide-y divide-slate-100">
+          <div class="px-5 py-3"><div class="skeleton h-4 w-3/4"></div></div>
+          <div class="px-5 py-3"><div class="skeleton h-4 w-1/2"></div></div>
+          <div class="px-5 py-3"><div class="skeleton h-4 w-2/3"></div></div>
+        </div>
+        <div id="filesFooter" class="px-5 py-2.5 text-[11px] text-slate-400 border-t border-slate-100 bg-slate-50/50 flex justify-between">
+          <span>Loading…</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-keys" class="space-y-6 hidden">
+      <div class="bg-white rounded-xl border border-slate-200 p-5">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
+          <div>
+            <h2 class="text-sm font-semibold text-slate-800">API Keys</h2>
+            <p class="text-xs text-slate-500 mt-0.5">Use these keys to upload and manage files via the REST API. Send as the <code class="text-[10px] bg-slate-100 px-1.5 py-0.5 rounded font-mono">X-API-Key</code> header.</p>
+          </div>
+          <button id="createKeyBtn" class="btn-primary px-4 py-2 text-sm font-medium rounded-lg">+ New key</button>
+        </div>
+        <div id="keysList" class="space-y-2">
+          <div class="skeleton h-12 w-full rounded-lg"></div>
+          <div class="skeleton h-12 w-full rounded-lg"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-profile" class="space-y-6 hidden">
+      <div class="bg-white rounded-xl border border-slate-200 p-5">
+        <h2 class="text-sm font-semibold text-slate-800 mb-1">Profile</h2>
+        <p class="text-xs text-slate-500 mb-5">Update your display name and email address.</p>
+        <form id="profileForm" class="space-y-4 max-w-md">
+          <div>
+            <label class="block text-xs font-medium text-slate-600 mb-1.5">Email</label>
+            <input id="profileEmail" type="email" required class="input w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-800">
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-600 mb-1.5">Display name</label>
+            <input id="profileName" type="text" minlength="2" maxlength="64" class="input w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-800">
+          </div>
+          <div class="flex items-center gap-3">
+            <button type="submit" id="profileSaveBtn" class="btn-primary px-4 py-2 text-sm font-medium rounded-lg">Save changes</button>
+            <span id="profileSaveStatus" class="text-xs text-slate-400"></span>
+          </div>
+        </form>
+      </div>
+
+      <div class="bg-white rounded-xl border border-slate-200 p-5">
+        <h2 class="text-sm font-semibold text-slate-800 mb-1">Change password</h2>
+        <p class="text-xs text-slate-500 mb-5">Pick something at least 8 characters long. You'll stay signed in on this device.</p>
+        <form id="passwordForm" class="space-y-4 max-w-md">
+          <div>
+            <label class="block text-xs font-medium text-slate-600 mb-1.5">Current password</label>
+            <input id="currentPassword" type="password" autocomplete="current-password" required class="input w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-800">
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-600 mb-1.5">New password</label>
+            <input id="newPassword" type="password" autocomplete="new-password" required minlength="8" class="input w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-800">
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-600 mb-1.5">Confirm new password</label>
+            <input id="confirmPassword" type="password" autocomplete="new-password" required minlength="8" class="input w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-800">
+          </div>
+          <div class="flex items-center gap-3">
+            <button type="submit" id="passwordSaveBtn" class="btn-primary px-4 py-2 text-sm font-medium rounded-lg">Update password</button>
+            <span id="passwordSaveStatus" class="text-xs text-slate-400"></span>
+          </div>
+        </form>
+      </div>
+
+      <div class="bg-white rounded-xl border border-red-200 p-5">
+        <h2 class="text-sm font-semibold text-red-700 mb-1">Sign out</h2>
+        <p class="text-xs text-slate-500 mb-4">Clears the session cookie on this device. Your files and account stay intact.</p>
+        <button id="signOutEverywhereBtn" class="px-4 py-2 text-sm font-medium text-red-700 border border-red-200 hover:bg-red-50 rounded-lg transition-colors">Sign out</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="deleteModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay opacity-0 pointer-events-none transition-opacity duration-200">
+    <div class="bg-white rounded-xl w-full max-w-sm p-6 shadow-2xl">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-9 h-9 rounded-full bg-red-100 flex items-center justify-center shrink-0">
+          <svg class="w-4 h-4 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" /></svg>
+        </div>
+        <div><p class="text-sm font-medium text-slate-800">Delete file</p><p class="text-xs text-slate-500 mt-0.5">This action cannot be undone.</p></div>
+      </div>
+      <p class="text-sm text-slate-600 mb-6 break-all" id="deleteItemName">—</p>
+      <div class="flex gap-3 justify-end">
+        <button id="cancelDelete" class="px-4 py-2 text-sm text-slate-600 hover:text-slate-800 transition-colors rounded-lg btn-ghost">Cancel</button>
+        <button id="confirmDelete" class="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="newKeyModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay opacity-0 pointer-events-none transition-opacity duration-200">
+    <div class="bg-white rounded-xl w-full max-w-md p-6 shadow-2xl">
+      <h3 class="text-sm font-semibold text-slate-800">Create API key</h3>
+      <p class="text-xs text-slate-500 mt-1 mb-4">Give this key a label so you can recognize it later.</p>
+      <input id="newKeyName" type="text" placeholder="e.g. my-server" maxlength="64" class="input w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-800">
+      <p class="text-[10px] text-slate-400 mt-1">The key is shown <b>once</b> after creation — copy it then.</p>
+      <div class="flex gap-3 justify-end mt-5">
+        <button id="cancelNewKey" class="px-4 py-2 text-sm text-slate-600 hover:text-slate-800 transition-colors rounded-lg btn-ghost">Cancel</button>
+        <button id="confirmNewKey" class="btn-primary px-4 py-2 text-sm font-medium rounded-lg">Create</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="revealKeyModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay opacity-0 pointer-events-none transition-opacity duration-200">
+    <div class="bg-white rounded-xl w-full max-w-md p-6 shadow-2xl">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-9 h-9 rounded-full bg-green-100 flex items-center justify-center shrink-0">
+          <svg class="w-4 h-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+        </div>
+        <div><p class="text-sm font-medium text-slate-800">API key created</p><p class="text-xs text-slate-500 mt-0.5">Copy it now — you won't see it again.</p></div>
+      </div>
+      <div class="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-lg p-2">
+        <input id="revealKeyInput" readonly class="flex-1 text-xs font-mono bg-transparent outline-none text-slate-700 break-all">
+        <button id="revealKeyCopy" class="text-xs font-medium text-indigo-600 hover:text-indigo-700 shrink-0">Copy</button>
+      </div>
+      <p id="revealKeyName" class="text-[11px] text-slate-400 mt-2 text-center font-mono"></p>
+      <div class="flex justify-end mt-5">
+        <button id="revealKeyDone" class="btn-primary px-4 py-2 text-sm font-medium rounded-lg">I've saved it</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="fixed bottom-6 right-6 z-50 px-4 py-2.5 rounded-lg shadow-lg text-sm font-medium bg-slate-800 text-white translate-y-2 opacity-0 transition-all duration-200 pointer-events-none"></div>
+
+  <script>
+    const $ = id => document.getElementById(id);
+    const API = '';
+    const SESSION_KEY = 'express-upload:user';
+
+    const readCookie = (name) => {
+      const target = name + '=';
+      const parts = document.cookie ? document.cookie.split('; ') : [];
+      for (const p of parts) if (p.startsWith(target)) return p.slice(target.length);
+      return '';
+    };
+
+    const getStoredUser = () => {
+      try { return JSON.parse(localStorage.getItem(SESSION_KEY) || 'null'); } catch { return null; }
+    };
+    const setStoredUser = (u) => {
+      if (u) localStorage.setItem(SESSION_KEY, JSON.stringify(u));
+      else localStorage.removeItem(SESSION_KEY);
+    };
+
+    async function fetchMe() {
+      try {
+        const res = await fetch(API + '/api/auth/me', { credentials: 'same-origin' });
+        if (!res.ok) return null;
+        const body = await res.json();
+        return body && body.data ? body.data : null;
+      } catch { return null; }
+    }
+
+    let toastTimer;
+    const toast = $('toast');
+    function showToast(msg, type) {
+      clearTimeout(toastTimer);
+      toast.textContent = msg;
+      toast.className = 'fixed bottom-6 right-6 z-50 px-4 py-2.5 rounded-lg shadow-lg text-sm font-medium text-white translate-y-0 opacity-100 transition-all duration-200 pointer-events-auto toast-show';
+      toast.style.background = type === 'error' ? '#dc2626' : type === 'success' ? '#16a34a' : '#1e293b';
+      toastTimer = setTimeout(() => {
+        toast.classList.add('translate-y-2', 'opacity-0', 'pointer-events-none');
+        toast.classList.remove('toast-show');
+      }, 3500);
+    }
+
+    function fmtSize(b) {
+      if (!b || b === 0) return '0 B';
+      const u = ['B','KB','MB','GB']; let i = 0, s = b;
+      while (s >= 1024 && i < u.length - 1) { s /= 1024; i++; }
+      return s.toFixed(i > 0 ? 1 : 0) + ' ' + u[i];
+    }
+    function timeAgo(s) {
+      if (!s) return '';
+      const d = Date.now() - new Date(s).getTime();
+      const m = Math.floor(d / 60000);
+      if (m < 1) return 'just now';
+      if (m < 60) return m + 'm ago';
+      const h = Math.floor(m / 60);
+      if (h < 24) return h + 'h ago';
+      const days = Math.floor(h / 24);
+      if (days < 30) return days + 'd ago';
+      return new Date(s).toLocaleDateString();
+    }
+    function extFromItem(item) {
+      if (item.extension && item.extension.startsWith('.')) return item.extension;
+      if (item.extension) return '.' + item.extension;
+      if (item.filename) {
+        const m = item.filename.match(/\.[a-z0-9]+$/i);
+        if (m) return m[0];
+      }
+      return '';
+    }
+
+    let currentUser = null;
+    let apiKey = '';
+    let allItems = [];
+    let currentFilter = 'all';
+    let searchQuery = '';
+    let deleteTarget = null;
+
+    const authedFetch = async (url, options = {}) => {
+      const headers = Object.assign({}, options.headers || {}, apiKey ? { 'X-API-Key': apiKey } : {});
+      const res = await fetch(API + url, Object.assign({}, options, { headers, credentials: 'same-origin' }));
+      return res;
+    };
+    const ensureApiKey = async () => {
+      const res = await authedFetch('/api/auth/keys', { method: 'GET' });
+      if (!res.ok) throw new Error('Failed to load keys (' + res.status + ')');
+      const createRes = await authedFetch('/api/auth/keys', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: 'dashboard' }),
+      });
+      if (!createRes.ok) {
+        const err = await createRes.json().catch(() => ({}));
+        throw new Error(err.message || 'Could not create API key (' + createRes.status + ')');
+      }
+      const cBody = await createRes.json();
+      apiKey = cBody.data.key;
+      localStorage.setItem('express-upload:api-key', apiKey);
+      return cBody.data;
+    };
+
+    const switchTab = (which) => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === which));
+      ['files','keys','profile'].forEach(t => $('tab-' + t).classList.toggle('hidden', t !== which));
+      if (which === 'keys' && currentUser) loadKeys();
+    };
+    document.querySelectorAll('.tab-btn').forEach(b => b.addEventListener('click', () => switchTab(b.dataset.tab)));
+
+    const renderFiles = () => {
+      const q = searchQuery.trim().toLowerCase();
+      let filtered = allItems.filter(item => {
+        if (currentFilter !== 'all' && (item.fileType || 'image') !== currentFilter) return false;
+        if (!q) return true;
+        return (item.originalName || '').toLowerCase().includes(q)
+          || (item.mimetype || '').toLowerCase().includes(q)
+          || (item.fileType || '').toLowerCase().includes(q);
+      });
+      filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+      $('statFiles').textContent = allItems.filter(i => !!i.fileType).length;
+      $('statImages').textContent = allItems.filter(i => !i.fileType).length;
+      $('statDownloads').textContent = allItems.reduce((s, i) => s + (i.downloads || 0), 0);
+      $('statViews').textContent = allItems.reduce((s, i) => s + (i.views || 0), 0);
+      $('filesCount').textContent = allItems.length;
+      $('filesFooter').innerHTML = `<span>${filtered.length} of ${allItems.length} item${allItems.length === 1 ? '' : 's'}</span><span class="font-mono">${q ? 'filtered' : ''}</span>`;
+
+      if (filtered.length === 0) {
+        $('filesTable').innerHTML = `
+          <div class="px-5 py-16 text-center">
+            <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-slate-50 flex items-center justify-center">
+              <svg class="w-6 h-6 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.41a2.25 2.25 0 013.182 0l2.909 2.91m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+            </div>
+            <p class="text-sm text-slate-400">${q ? 'No files match your search.' : 'No files yet — drag one in to get started.'}</p>
+          </div>`;
+        return;
+      }
+
+      $('filesTable').innerHTML = filtered.map(item => {
+        const id = item._id;
+        const name = item.originalName || item.filename || '—';
+        const fileType = item.fileType || 'image';
+        const ext = extFromItem(item);
+        const viewUrl = (item.fileType ? `/api/files/${id}` : `/api/images/${id}`) + ext;
+        const dl = item.downloads || 0;
+        const views = item.views || 0;
+        return `
+        <div class="data-row grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-3 px-5 py-3 items-center">
+          <div class="col-span-5 flex items-center gap-3 min-w-0">
+            <div class="w-7 h-7 rounded-lg shrink-0 flex items-center justify-center text-[10px] font-mono font-semibold
+              ${item.fileType ? 'bg-indigo-50 text-indigo-600' : 'bg-pink-50 text-pink-600'}">
+              ${ext ? ext.slice(1, 4).toUpperCase() : (item.fileType ? 'F' : 'IMG')}
+            </div>
+            <div class="min-w-0">
+              <a href="${viewUrl}" target="_blank" class="text-sm font-medium text-slate-800 hover:text-indigo-600 truncate block">${name}</a>
+              <p class="text-[10px] text-slate-400 mt-0.5 font-mono">${item.mimetype || '—'}</p>
+            </div>
+          </div>
+          <div class="col-span-2"><span class="badge badge-${fileType}">${fileType}</span></div>
+          <div class="col-span-2 text-sm text-slate-500 font-mono">${fmtSize(item.size)}</div>
+          <div class="col-span-1 text-right text-sm text-slate-600 font-mono">${dl}</div>
+          <div class="col-span-1 text-right text-sm text-slate-600 font-mono">${views}</div>
+          <div class="col-span-1 flex justify-end gap-1">
+            <a href="${viewUrl}" target="_blank" class="p-1.5 rounded-md text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 transition-all" title="Open">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+            </a>
+            <button data-delete='${JSON.stringify({ id, name, url: item.fileType ? `/api/files/${id}` : `/api/images/${id}` })}' class="delete-btn p-1.5 rounded-md text-slate-400 hover:text-red-600 hover:bg-red-50 transition-all" title="Delete">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" /></svg>
+            </button>
+          </div>
+          <div class="col-span-12 md:hidden text-[10px] text-slate-400 mt-1">
+            ${fmtSize(item.size)} · ${dl} dl · ${views} views · ${timeAgo(item.createdAt)}
+          </div>
+        </div>`;
+      }).join('');
+
+      document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          try {
+            deleteTarget = JSON.parse(btn.dataset.delete);
+            $('deleteItemName').textContent = deleteTarget.name;
+            $('deleteModal').classList.remove('opacity-0', 'pointer-events-none');
+          } catch {}
+        });
+      });
+    };
+
+    async function fetchAll() {
+      $('filesTable').innerHTML = Array(3).fill(0).map(() =>
+        '<div class="px-5 py-3"><div class="skeleton h-4 w-' + ['3/4','1/2','2/3'][Math.floor(Math.random()*3)] + '"></div></div>'
+      ).join('');
+      $('filesFooter').innerHTML = '<span>Loading…</span>';
+
+      try {
+        const [filesRes, imagesRes] = await Promise.all([
+          authedFetch('/api/files').then(r => r.ok ? r.json() : { data: [] }),
+          authedFetch('/api/images').then(r => r.ok ? r.json() : { data: [] }),
+        ]);
+        const files = (filesRes.data || []).map(f => ({ ...f, _isFile: true }));
+        const images = (imagesRes.data || []).map(i => ({ ...i, _isFile: false }));
+        allItems = [...files, ...images];
+        renderFiles();
+      } catch (err) {
+        console.error(err);
+        $('filesTable').innerHTML = `<div class="px-5 py-12 text-center text-sm text-slate-500">Failed to load files. <button onclick="fetchAll()" class="text-indigo-600 hover:text-indigo-700 ml-2">Retry</button></div>`;
+      }
+    }
+
+    let searchDebounce;
+    $('searchInput').addEventListener('input', () => {
+      clearTimeout(searchDebounce);
+      searchDebounce = setTimeout(() => { searchQuery = $('searchInput').value; renderFiles(); }, 200);
+    });
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => {
+          b.classList.remove('active', 'bg-slate-100', 'text-slate-700');
+          b.classList.add('text-slate-500');
+        });
+        btn.classList.add('active', 'bg-slate-100', 'text-slate-700');
+        btn.classList.remove('text-slate-500');
+        currentFilter = btn.dataset.filter;
+        renderFiles();
+      });
+    });
+
+    $('dropzone').addEventListener('click', () => $('fileInput').click());
+    $('fileInput').addEventListener('change', e => uploadFiles(e.target.files));
+    $('dropzone').addEventListener('dragover', e => { e.preventDefault(); $('dropzone').classList.add('drag-over'); });
+    $('dropzone').addEventListener('dragleave', () => $('dropzone').classList.remove('drag-over'));
+    $('dropzone').addEventListener('drop', e => {
+      e.preventDefault();
+      $('dropzone').classList.remove('drag-over');
+      if (e.dataTransfer.files.length) uploadFiles(e.dataTransfer.files);
+    });
+    async function uploadFiles(files) {
+      if (!files || !files.length) return;
+      let success = 0, fail = 0;
+      for (const f of files) {
+        const fd = new FormData();
+        fd.append('file', f);
+        const res = await authedFetch('/api/files/upload', { method: 'POST', body: fd });
+        if (res.ok) success++;
+        else fail++;
+      }
+      if (success) { showToast(`${success} file${success === 1 ? '' : 's'} uploaded`, 'success'); fetchAll(); }
+      if (fail) showToast(`${fail} upload${fail === 1 ? '' : 's'} failed`, 'error');
+    }
+
+    $('cancelDelete').addEventListener('click', () => { $('deleteModal').classList.add('opacity-0','pointer-events-none'); deleteTarget = null; });
+    $('deleteModal').addEventListener('click', e => {
+      if (e.target === $('deleteModal')) { $('deleteModal').classList.add('opacity-0','pointer-events-none'); deleteTarget = null; }
+    });
+    $('confirmDelete').addEventListener('click', async () => {
+      if (!deleteTarget) return;
+      const { url, name, id } = deleteTarget;
+      const btn = $('confirmDelete');
+      btn.disabled = true; btn.textContent = 'Deleting…';
+      try {
+        const res = await authedFetch(url, { method: 'DELETE' });
+        if (res.ok) {
+          showToast('Deleted "' + name + '"', 'success');
+          allItems = allItems.filter(i => i._id !== id);
+          renderFiles();
+        } else {
+          const err = await res.json().catch(() => ({}));
+          showToast(err.message || 'Delete failed', 'error');
+        }
+      } catch { showToast('Network error', 'error'); }
+      btn.disabled = false; btn.textContent = 'Delete';
+      $('deleteModal').classList.add('opacity-0','pointer-events-none');
+      deleteTarget = null;
+    });
+
+    async function loadKeys() {
+      $('keysList').innerHTML = '<div class="skeleton h-12 w-full rounded-lg"></div><div class="skeleton h-12 w-full rounded-lg"></div>';
+      try {
+        const res = await authedFetch('/api/auth/keys');
+        if (!res.ok) throw new Error('status ' + res.status);
+        const body = await res.json();
+        const keys = body.data || [];
+        $('keysCount').textContent = keys.length;
+        if (keys.length === 0) {
+          $('keysList').innerHTML = `<div class="text-center py-8 text-sm text-slate-500">No API keys yet. Create one to start uploading.</div>`;
+          return;
+        }
+        $('keysList').innerHTML = keys.map(k => `
+          <div class="flex items-center gap-3 p-3 border border-slate-200 rounded-lg">
+            <div class="w-9 h-9 rounded-lg ${k.active ? 'bg-indigo-50 text-indigo-600' : 'bg-slate-100 text-slate-400'} flex items-center justify-center shrink-0">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" /></svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-slate-800">${k.name}</p>
+              <p class="text-[10px] text-slate-400 mt-0.5 font-mono">${k.id} · created ${timeAgo(k.createdAt)} · last used ${k.lastUsedAt ? timeAgo(k.lastUsedAt) : 'never'}</p>
+            </div>
+            <span class="text-[10px] px-2 py-0.5 rounded-full ${k.active ? 'bg-green-50 text-green-700' : 'bg-slate-100 text-slate-500'} font-medium uppercase tracking-wider">${k.active ? 'Active' : 'Revoked'}</span>
+            ${k.active ? `<button data-revoke='${k.id}' class="revoke-btn text-xs text-slate-500 hover:text-red-600 transition-colors px-2 py-1 rounded">Revoke</button>` : ''}
+          </div>
+        `).join('');
+        document.querySelectorAll('.revoke-btn').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            if (!confirm('Revoke this key? Anything using it will stop working.')) return;
+            const id = btn.dataset.revoke;
+            const res = await authedFetch('/api/auth/keys/' + id + '/revoke', { method: 'POST' });
+            if (res.ok) { showToast('Key revoked', 'success'); loadKeys(); }
+            else { const e = await res.json().catch(() => ({})); showToast(e.message || 'Revoke failed', 'error'); }
+          });
+        });
+      } catch (err) {
+        $('keysList').innerHTML = `<div class="text-center py-8 text-sm text-red-600">Failed to load keys.</div>`;
+      }
+    }
+
+    $('createKeyBtn').addEventListener('click', () => {
+      $('newKeyName').value = '';
+      $('newKeyModal').classList.remove('opacity-0', 'pointer-events-none');
+      setTimeout(() => $('newKeyName').focus(), 50);
+    });
+    $('cancelNewKey').addEventListener('click', () => $('newKeyModal').classList.add('opacity-0', 'pointer-events-none'));
+    $('newKeyModal').addEventListener('click', e => {
+      if (e.target === $('newKeyModal')) $('newKeyModal').classList.add('opacity-0', 'pointer-events-none');
+    });
+    $('confirmNewKey').addEventListener('click', async () => {
+      const name = $('newKeyName').value.trim() || 'untitled';
+      const btn = $('confirmNewKey');
+      btn.disabled = true; btn.textContent = 'Creating…';
+      try {
+        const res = await authedFetch('/api/auth/keys', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name }),
+        });
+        if (!res.ok) {
+          const e = await res.json().catch(() => ({}));
+          showToast(e.message || 'Create failed', 'error');
+          return;
+        }
+        const body = await res.json();
+        $('newKeyModal').classList.add('opacity-0', 'pointer-events-none');
+        $('revealKeyInput').value = body.data.key;
+        $('revealKeyName').textContent = name + ' · ' + body.data.id;
+        $('revealKeyModal').classList.remove('opacity-0', 'pointer-events-none');
+        loadKeys();
+      } catch { showToast('Network error', 'error'); }
+      finally { btn.disabled = false; btn.textContent = 'Create'; }
+    });
+    $('revealKeyDone').addEventListener('click', () => $('revealKeyModal').classList.add('opacity-0', 'pointer-events-none'));
+    $('revealKeyCopy').addEventListener('click', async () => {
+      const v = $('revealKeyInput').value;
+      if (!v) return;
+      try {
+        await navigator.clipboard.writeText(v);
+        const btn = $('revealKeyCopy');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 1500);
+      } catch {}
+    });
+
+    function loadProfile() {
+      if (!currentUser) return;
+      $('profileEmail').value = currentUser.email || '';
+      $('profileName').value = currentUser.name || currentUser.username || '';
+    }
+    $('profileForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const btn = $('profileSaveBtn');
+      const status = $('profileSaveStatus');
+      btn.disabled = true; btn.textContent = 'Saving…'; status.textContent = '';
+      try {
+        const res = await fetch(API + '/api/auth/me', {
+          method: 'PATCH',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: $('profileEmail').value.trim(),
+            name: $('profileName').value.trim(),
+          }),
+        });
+        const body = await res.json().catch(() => ({}));
+        if (!res.ok) { showToast(body.message || 'Save failed', 'error'); return; }
+        currentUser = body.data;
+        setStoredUser(currentUser);
+        $('userTag').textContent = currentUser.email || currentUser.username || 'express-upload';
+        showToast('Profile updated', 'success');
+        status.textContent = 'Saved.';
+      } catch { showToast('Network error', 'error'); }
+      finally { btn.disabled = false; btn.textContent = 'Save changes'; }
+    });
+    $('passwordForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const btn = $('passwordSaveBtn');
+      const status = $('passwordSaveStatus');
+      const np = $('newPassword').value;
+      const cp = $('confirmPassword').value;
+      if (np !== cp) { showToast("Passwords don't match", 'error'); return; }
+      btn.disabled = true; btn.textContent = 'Updating…'; status.textContent = '';
+      try {
+        const res = await fetch(API + '/api/auth/me/password', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            currentPassword: $('currentPassword').value,
+            newPassword: np,
+          }),
+        });
+        const body = await res.json().catch(() => ({}));
+        if (!res.ok) { showToast(body.message || 'Update failed', 'error'); return; }
+        showToast('Password changed', 'success');
+        status.textContent = 'Updated.';
+        $('currentPassword').value = '';
+        $('newPassword').value = '';
+        $('confirmPassword').value = '';
+      } catch { showToast('Network error', 'error'); }
+      finally { btn.disabled = false; btn.textContent = 'Update password'; }
+    });
+
+    $('signOutBtn').addEventListener('click', signOut);
+    $('signOutEverywhereBtn').addEventListener('click', signOut);
+    async function signOut() {
+      try { await fetch(API + '/auth/logout', { method: 'POST', credentials: 'same-origin' }); } catch {}
+      setStoredUser(null);
+      localStorage.removeItem('express-upload:api-key');
+      window.location.href = '/auth.html';
+    }
+
+    (async function init() {
+      currentUser = await fetchMe();
+      if (!currentUser) {
+        $('signedOutBanner').classList.remove('hidden');
+        $('filesTable').innerHTML = `<div class="px-5 py-12 text-center text-sm text-slate-500">Sign in to see your files.</div>`;
+        $('filesFooter').textContent = '';
+        return;
+      }
+      setStoredUser(currentUser);
+      $('userTag').textContent = currentUser.email || currentUser.username || 'express-upload';
+      loadProfile();
+
+      apiKey = (localStorage.getItem('express-upload:api-key') || '').trim();
+      if (!apiKey) {
+        try { await ensureApiKey(); }
+        catch (err) { console.error(err); showToast('Could not auto-create API key', 'error'); }
+      }
+
+      fetchAll();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1033 @@
+openapi: 3.0.3
+info:
+  title: express-upload API
+  version: 1.0.0
+  description: |
+    REST API for the express-upload file server.
+
+    ## Authentication
+    Two authentication methods are supported on most `/api/*` and `/info/*` routes:
+
+    | Method | Header | When to use |
+    | --- | --- | --- |
+    | API key | `X-API-Key: <48-char hex>` | Server-to-server (curl, scripts, integrations) |
+    | Bearer token | `Authorization: Bearer <jwt>` or `Authorization: <jwt>` | Browser session (dashboard). The token is also auto-sent via the `Authorization` cookie on same-origin requests. |
+
+    `X-API-Key` takes precedence when both are present. Public read endpoints
+    (`/f/:shortUrl`, `/i/:shortUrl`) require no auth — anyone with the short URL
+    can stream the file.
+
+    The response envelope is `{ "data": ..., "message": "..." }` for success
+    and `{ "message": "..." }` for errors.
+
+servers:
+  - url: /
+    description: Same origin
+
+tags:
+  - name: Auth
+    description: Sign up, sign in, verify session, sign out.
+  - name: Profile
+    description: Self-service account management (Bearer token required).
+  - name: Files
+    description: Owner-scoped file CRUD. Upload, list, get, download, delete. Both X-API-Key and Bearer token accepted.
+  - name: API Keys
+    description: Mint, list, and revoke per-user API keys.
+  - name: Users (admin)
+    description: Admin-only user management (Bearer token with role=admin required).
+  - name: Locations
+    description: GPS coordinate storage.
+
+paths:
+  # ============================================================
+  # Auth
+  # ============================================================
+  /auth/signup:
+    post:
+      tags: [Auth]
+      summary: Create a new account
+      description: >
+        Public. Returns the new user (without the password hash). The user is
+        created with `role: user`. Sign-in is automatic on the client after
+        this call.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignupRequest'
+            examples:
+              minimal:
+                value: { name: "Jane Doe", username: "jane_doe", email: "jane@example.com", password: "ChangeMe123!" }
+      responses:
+        '201':
+          description: User created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/UserEnvelope' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '409': { $ref: '#/components/responses/Conflict' }
+
+  /auth/login:
+    post:
+      tags: [Auth]
+      summary: Sign in
+      description: |
+        Public. On success, sets the `Authorization` cookie (HttpOnly disabled, `Path=/`, `SameSite=Lax`, `Max-Age=2592000` = 30 days) and returns the JWT in the response body.
+
+        Send `credentials: 'same-origin'` on subsequent requests so the browser auto-attaches the cookie.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:    { type: string, format: email }
+                password: { type: string, minLength: 8 }
+      responses:
+        '200':
+          description: Signed in
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/LoginEnvelope' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /auth/verify:
+    get:
+      tags: [Auth]
+      summary: Verify the current session
+      description: |
+        Reads the token from `Authorization: Bearer <jwt>` header, or falls back to the `Authorization` cookie. Returns the user record or a 401.
+      security:
+        - bearerAuth: []
+        - sessionCookie: []
+      responses:
+        '200':
+          description: Session is valid
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/UserEnvelope' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+    post:
+      tags: [Auth]
+      summary: Verify the current session (POST)
+      description: Same as `GET /auth/verify`, exposed for clients that prefer POST.
+      security:
+        - bearerAuth: []
+        - sessionCookie: []
+      responses:
+        '200':
+          description: Session is valid
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/UserEnvelope' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /auth/profile:
+    get:
+      tags: [Auth]
+      summary: Profile (alias of /auth/verify)
+      security:
+        - bearerAuth: []
+        - sessionCookie: []
+      responses:
+        '200':
+          description: Session is valid
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/UserEnvelope' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /auth/logout:
+    post:
+      tags: [Auth]
+      summary: Sign out
+      description: Clears the `Authorization` cookie. Server-side nothing else to do (JWT is stateless).
+      responses:
+        '200':
+          description: Signed out
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/MessageEnvelope' }
+
+  /auth/admin/reset-password:
+    post:
+      tags: [Auth]
+      summary: Admin resets another user's password
+      description: Pre-existing endpoint. The handler reads a Bearer token from the request and assumes the caller is an admin.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [userId, newPassword]
+              properties:
+                userId:      { type: string }
+                newPassword: { type: string, minLength: 8 }
+      responses:
+        '200':
+          description: Password reset
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/MessageEnvelope' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  # ============================================================
+  # Profile (self-service)
+  # ============================================================
+  /api/auth/me:
+    get:
+      tags: [Profile]
+      summary: Get the current user
+      security:
+        - bearerAuth: []
+        - sessionCookie: []
+      responses:
+        '200':
+          description: Current user
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/UserEnvelope' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+    patch:
+      tags: [Profile]
+      summary: Update name and/or email
+      security:
+        - bearerAuth: []
+        - sessionCookie: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:  { type: string, minLength: 2, maxLength: 64 }
+                email: { type: string, format: email }
+              minProperties: 1
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/UserEnvelope' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '409': { $ref: '#/components/responses/Conflict' }
+
+  /api/auth/me/password:
+    post:
+      tags: [Profile]
+      summary: Change the current user's password
+      security:
+        - bearerAuth: []
+        - sessionCookie: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [currentPassword, newPassword]
+              properties:
+                currentPassword: { type: string }
+                newPassword:     { type: string, minLength: 8, maxLength: 128 }
+      responses:
+        '200':
+          description: Password changed
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/MessageEnvelope' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  # ============================================================
+  # Files
+  # ============================================================
+  /api/files:
+    get:
+      tags: [Files]
+      summary: List the caller's files (newest first)
+      security:
+        - apiKeyAuth: []
+        - bearerAuth: []
+        - sessionCookie: []
+      responses:
+        '200':
+          description: Files owned by the caller
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/FileListEnvelope' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /api/files/type/{type}:
+    get:
+      tags: [Files]
+      summary: List files by category
+      security:
+        - apiKeyAuth: []
+        - bearerAuth: []
+        - sessionCookie: []
+      parameters:
+        - in: path
+          name: type
+          required: true
+          schema:
+            type: string
+            enum: [image, document, video, audio, archive, executable, other]
+      responses:
+        '200':
+          description: Files in the requested category
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/FileListEnvelope' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /api/files/{id}:
+    delete:
+      tags: [Files]
+      summary: Delete a file by id
+      description: Removes the file from disk (best-effort) and the DB record.
+      security:
+        - apiKeyAuth: []
+        - bearerAuth: []
+        - sessionCookie: []
+      parameters:
+        - $ref: '#/components/parameters/FileId'
+      responses:
+        '200':
+          description: Deleted
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/FileEnvelope' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /api/files/{id}.{ext}:
+    get:
+      tags: [Files]
+      summary: Stream a file by id (extension is informational)
+      description: |
+        Streams the file from disk with the right `Content-Type`. Uses
+        `isInlineSafe(mime)` to set `Content-Disposition: inline` for
+        safe types (jpg/png/webp/gif/pdf); SVG and HTML are never served
+        inline. The `.ext` segment is optional and ignored server-side
+        — the file's real extension on disk is what's sent.
+      security:
+        - apiKeyAuth: []
+        - bearerAuth: []
+        - sessionCookie: []
+      parameters:
+        - $ref: '#/components/parameters/FileId'
+        - in: path
+          name: ext
+          required: false
+          schema: { type: string }
+      responses:
+        '200':
+          description: The file bytes
+          content:
+            application/octet-stream:
+              schema: { type: string, format: binary }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404':
+          description: File not found
+          content:
+            text/plain:
+              schema: { type: string, example: File not found }
+
+  /api/files/{id}/download:
+    get:
+      tags: [Files]
+      summary: Download a file (increments the download counter)
+      security:
+        - apiKeyAuth: []
+        - bearerAuth: []
+        - sessionCookie: []
+      parameters:
+        - $ref: '#/components/parameters/FileId'
+      responses:
+        '200':
+          description: 'The file bytes (Content-Disposition: attachment)'
+          content:
+            application/octet-stream:
+              schema: { type: string, format: binary }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /api/files/upload:
+    post:
+      tags: [Files]
+      summary: Upload a file
+      description: |
+        Multipart form upload. Form field name is `file` (or `image` for legacy image-route compatibility, but `file` is canonical).
+
+        Files land in `uploads/<user.folderSlug>/<X-Folder header, sanitized>/<random8hex>.<ext>`.
+        Storage is per-user. The byte signature is sniffed via `file-type` if the package is installed
+        (graceful fallback to client-declared mimetype otherwise). The `category` field is one of
+        `image | document | video | audio | archive | executable | other`.
+      security:
+        - apiKeyAuth: []
+        - bearerAuth: []
+        - sessionCookie: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file]
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The file to upload
+      responses:
+        '201':
+          description: Uploaded
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/FileEnvelope' }
+        '400':
+          description: No file in the request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/MessageEnvelope' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /f/{shortUrl}.{ext}:
+    get:
+      tags: [Files]
+      summary: Public read by short URL (no auth, Cloudinary-style)
+      description: |
+        Anyone with the short URL can stream the file. Increments the `views` counter.
+        Same `isInlineSafe` Content-Disposition logic as the auth'd variant.
+      parameters:
+        - in: path
+          name: shortUrl
+          required: true
+          schema: { type: string }
+        - in: path
+          name: ext
+          required: false
+          schema: { type: string }
+      responses:
+        '200':
+          description: The file bytes
+          content:
+            application/octet-stream:
+              schema: { type: string, format: binary }
+        '404':
+          description: Not found
+          content:
+            text/plain:
+              schema: { type: string }
+
+  /info/{shortUrl}:
+    get:
+      tags: [Files]
+      summary: JSON metadata for a file by short URL (owner-scoped)
+      security:
+        - apiKeyAuth: []
+        - bearerAuth: []
+        - sessionCookie: []
+      parameters:
+        - in: path
+          name: shortUrl
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: File metadata
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/FileEnvelope' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  # ============================================================
+  # API Keys
+  # ============================================================
+  /api/auth/keys:
+    get:
+      tags: [API Keys]
+      summary: List the caller's API keys
+      description: The `keyHash` is never returned.
+      security:
+        - bearerAuth: []
+        - sessionCookie: []
+      responses:
+        '200':
+          description: The caller's keys
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiKeyListEnvelope' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+    post:
+      tags: [API Keys]
+      summary: Mint a new API key
+      description: |
+        Returns the **raw** key in the response. The key is 48 lowercase hex
+        characters (24 random bytes hex-encoded). It is shown **once** — the
+        server only stores the SHA-256 hash, so it cannot be retrieved later.
+        If the user already has keys, this endpoint always mints a new one.
+      security:
+        - bearerAuth: []
+        - sessionCookie: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name: { type: string, minLength: 2, maxLength: 64, example: "my-server" }
+      responses:
+        '201':
+          description: Key created (raw key returned once)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiKeyCreatedEnvelope' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /api/auth/keys/{id}/revoke:
+    post:
+      tags: [API Keys]
+      summary: Revoke an API key
+      description: |
+        Soft-revoke (sets `active: false`). The caller can revoke their own keys;
+        admins can revoke any key.
+      security:
+        - bearerAuth: []
+        - sessionCookie: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Revoked
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiKeyEnvelope' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /api/admin/keys:
+    get:
+      tags: [API Keys]
+      summary: List every API key (admin only)
+      security:
+        - bearerAuth: []
+        - sessionCookie: []
+      responses:
+        '200':
+          description: All keys across all users
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiKeyListEnvelope' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+
+  # ============================================================
+  # Users (admin)
+  # ============================================================
+  /users:
+    get:
+      tags: [Users (admin)]
+      summary: List users (admin only — handlers check role)
+      security:
+        - bearerAuth: []
+        - sessionCookie: []
+      responses:
+        '200':
+          description: Users visible to the caller (admins see all, others see an empty array — see service note)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/UserListEnvelope' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+    post:
+      tags: [Users (admin)]
+      summary: Create a user (admin)
+      security:
+        - bearerAuth: []
+        - sessionCookie: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/UserInput' }
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/UserEnvelope' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '409': { $ref: '#/components/responses/Conflict' }
+
+  /users/admin:
+    get:
+      tags: [Users (admin)]
+      summary: List users with role 'landlord' (legacy — see UsersService.findAllUserAdmin)
+      security:
+        - bearerAuth: []
+        - sessionCookie: []
+      responses:
+        '200':
+          description: List of users matching the legacy role query
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/UserListEnvelope' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /users/{id}:
+    get:
+      tags: [Users (admin)]
+      summary: Get a user by id
+      security:
+        - bearerAuth: []
+        - sessionCookie: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: User
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/UserEnvelope' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    put:
+      tags: [Users (admin)]
+      summary: Update a user (admin)
+      security:
+        - bearerAuth: []
+        - sessionCookie: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/UserInput' }
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/UserEnvelope' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '409': { $ref: '#/components/responses/Conflict' }
+    patch:
+      tags: [Users (admin)]
+      summary: Patch a user (admin) — same handler as PUT
+      security:
+        - bearerAuth: []
+        - sessionCookie: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/UserInput' }
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/UserEnvelope' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '409': { $ref: '#/components/responses/Conflict' }
+    delete:
+      tags: [Users (admin)]
+      summary: Delete a user (admin)
+      security:
+        - bearerAuth: []
+        - sessionCookie: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Deleted
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/UserEnvelope' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  # ============================================================
+  # Locations
+  # ============================================================
+  /api/locations:
+    get:
+      tags: [Locations]
+      summary: List all stored GPS coordinates
+      description: "Public — no auth required by the route. Note: the service `createLocations` doesn't actually persist (no `.save()` call)."
+      responses:
+        '200':
+          description: All locations
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/LocationListEnvelope' }
+
+  /api/locations/upload:
+    post:
+      tags: [Locations]
+      summary: Store a GPS coordinate
+      description: |
+        Reads the coordinate from `req.body`. The service creates a new
+        `Location` document but does not call `.save()`, so the document is
+        **not persisted** — the response contains a non-saved Mongoose
+        document. This endpoint is effectively a stub.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/LocationInput' }
+      responses:
+        '200':
+          description: The location object (in-memory only)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/LocationEnvelope' }
+
+components:
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: |
+        48-character lowercase hex string. Server-to-server. Or pass as
+        `?api_key=<key>` query parameter. (Pre-existing `apiKeyAuth` middleware.)
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |
+        `Authorization: Bearer <jwt>`. Browser-based session; the same JWT
+        is also auto-sent via the `Authorization` cookie set by `/auth/login`.
+    sessionCookie:
+      type: apiKey
+      in: cookie
+      name: Authorization
+      description: |
+        Cookie set by `/auth/login`. Not HttpOnly — readable via
+        `document.cookie`. The browser auto-attaches it on same-origin
+        requests. Same value as the bearer JWT.
+
+  parameters:
+    FileId:
+      in: path
+      name: id
+      required: true
+      schema: { type: string }
+      description: MongoDB ObjectId of the file (24 hex characters)
+
+  responses:
+    BadRequest:
+      description: Bad request (missing/invalid field)
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/MessageEnvelope' }
+    Unauthorized:
+      description: Missing or invalid credentials
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/MessageEnvelope' }
+          example: { message: "Invalid API key — the value sent (64 chars) looks like a SHA-256 hash, not a raw API key. Raw API keys are 48 hex characters." }
+    Forbidden:
+      description: Authenticated, but not allowed
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/MessageEnvelope' }
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/MessageEnvelope' }
+    Conflict:
+      description: Conflict (e.g. email already registered)
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/MessageEnvelope' }
+
+  schemas:
+    MessageEnvelope:
+      type: object
+      properties:
+        message: { type: string, example: "ok" }
+
+    User:
+      type: object
+      description: |
+        Note: the password hash is **never** included in any response.
+        Object fields are returned as Mongoose stores them — `_id` is
+        an ObjectId, `email` is lowercase, timestamps are ISO strings.
+      properties:
+        _id:
+          type: string
+          description: MongoDB ObjectId
+        email:
+          type: string
+          format: email
+        username:
+          type: string
+        name:
+          type: string
+        role:
+          type: string
+          enum: [admin, user, landlord]
+          description: '`landlord` is a legacy role used by the existing admin user-list endpoint.'
+        status:
+          type: boolean
+        active:
+          type: boolean
+        createdby:
+          type: string
+          description: 'Legacy field — ref: `Tenant` (model does not exist).'
+        folderSlug:
+          type: string
+          description: Per-user storage namespace.
+        lastLogin:
+          type: string
+          format: date-time
+        lastLoginAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    UserInput:
+      type: object
+      description: |
+        Body shape for admin user create/update. The handler accepts any
+        object the controller's `createUser` / `updateUser` consume —
+        at minimum `email` and `password` are required to create. `password`
+        is bcrypt-hashed server-side.
+      properties:
+        email:    { type: string, format: email }
+        password: { type: string, minLength: 8 }
+        username: { type: string }
+        name:     { type: string }
+        role:     { type: string, enum: [admin, user] }
+
+    SignupRequest:
+      type: object
+      required: [email, password, name]
+      properties:
+        name:     { type: string, minLength: 2, maxLength: 64 }
+        username: { type: string, minLength: 2, maxLength: 64 }
+        email:    { type: string, format: email }
+        password: { type: string, minLength: 8, maxLength: 128 }
+
+    UserEnvelope:
+      type: object
+      properties:
+        data: { $ref: '#/components/schemas/User' }
+        message: { type: string, example: "me" }
+
+    UserListEnvelope:
+      type: object
+      properties:
+        data:
+          type: array
+          items: { $ref: '#/components/schemas/User' }
+        message: { type: string, example: "findAll" }
+
+    LoginEnvelope:
+      type: object
+      properties:
+        data: { $ref: '#/components/schemas/User' }
+        message: { type: string, example: "login" }
+        token:
+          type: string
+          description: JWT (also set as `Authorization` cookie by the response)
+
+    File:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: MongoDB ObjectId
+        filename:
+          type: string
+          description: Random hex filename on disk (no extension collisions)
+        originalName:
+          type: string
+          description: The filename the caller uploaded
+        path:
+          type: string
+          description: Absolute path on disk (legacy — controllers read it directly)
+        size:
+          type: integer
+          format: int64
+          description: File size in bytes
+        mimetype:
+          type: string
+          description: Detected/sanitized MIME type
+        shortUrl:
+          type: string
+          description: 12-character hex code for public reads via `/f/:shortUrl`
+        downloads:
+          type: integer
+          default: 0
+        views:
+          type: integer
+          default: 0
+        fileType:
+          type: string
+          enum: [image, document, video, audio, archive, executable, other]
+          description: |
+            Only present on records from `/api/files/*`. Image-only routes
+            return records without this field.
+        extension:
+          type: string
+          description: File extension including the leading dot (e.g. `.webp`). Only on `/api/files/*` records.
+        category:
+          type: string
+          enum: [image, document, video, audio, archive, executable, other]
+          description: Image-route variant — same enum as `fileType`.
+        detectedMime:
+          type: string
+          description: Result of `file-type` byte-sniffing (if installed)
+        detectedExt:
+          type: string
+          description: Result of `file-type` byte-sniffing (if installed)
+        createdBy:
+          type: string
+          description: '`User._id` of the owner (set on records created post-auth-refactor).'
+        folder:
+          type: string
+          description: Caller-supplied sub-folder (X-Folder header, sanitized)
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    FileEnvelope:
+      type: object
+      properties:
+        data: { $ref: '#/components/schemas/File' }
+        message: { type: string, example: "uploaded" }
+
+    FileListEnvelope:
+      type: object
+      properties:
+        data:
+          type: array
+          items: { $ref: '#/components/schemas/File' }
+        message: { type: string, example: "findAll" }
+
+    ApiKeyPublic:
+      type: object
+      description: |
+        The `keyHash` is **never** returned. Raw keys are 48 lowercase hex
+        characters and are shown only once at creation.
+      properties:
+        id:          { type: string }
+        name:        { type: string }
+        createdBy:   { type: string, description: User._id of the owner }
+        active:      { type: boolean }
+        lastUsedAt:  { type: string, format: date-time, nullable: true }
+        createdAt:   { type: string, format: date-time }
+
+    ApiKeyEnvelope:
+      type: object
+      properties:
+        data: { $ref: '#/components/schemas/ApiKeyPublic' }
+        message: { type: string, example: "list" }
+
+    ApiKeyListEnvelope:
+      type: object
+      properties:
+        data:
+          type: array
+          items: { $ref: '#/components/schemas/ApiKeyPublic' }
+        message: { type: string, example: "list" }
+
+    ApiKeyCreated:
+      type: object
+      properties:
+        id:        { type: string }
+        name:      { type: string }
+        createdBy: { type: string }
+        key:
+          type: string
+          description: |
+            The raw 48-character hex key. **Shown once** — copy it now.
+            Server only stores the SHA-256 hash, so this value cannot be
+            retrieved later.
+        createdAt: { type: string, format: date-time }
+
+    ApiKeyCreatedEnvelope:
+      type: object
+      properties:
+        data: { $ref: '#/components/schemas/ApiKeyCreated' }
+        message: { type: string, example: "created — store the key now, it will not be shown again" }
+
+    Location:
+      type: object
+      properties:
+        latitude:  { type: string, example: "37.7749" }
+        longitude: { type: string, example: "-122.4194" }
+        accuracy:  { type: string, example: "10" }
+
+    LocationInput:
+      type: object
+      properties:
+        latitude:  { type: string }
+        longitude: { type: string }
+        accuracy:  { type: string }
+
+    LocationEnvelope:
+      type: object
+      properties:
+        data: { $ref: '#/components/schemas/Location' }
+        message: { type: string, example: "findAll" }
+
+    LocationListEnvelope:
+      type: object
+      properties:
+        data:
+          type: array
+          items: { $ref: '#/components/schemas/Location' }
+        message: { type: string, example: "findAll" }

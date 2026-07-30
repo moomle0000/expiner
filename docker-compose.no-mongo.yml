@@ -1,0 +1,68 @@
+# docker-compose.yml — production stack for express-upload (no in-cluster MongoDB).
+#
+# Brings up: backend (Express API) and frontend (Next.js standalone).
+# MongoDB is NOT in this stack — the backend connects to an external
+# MongoDB instance via the MONGODB_URI defined in the root .env.
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: express-upload-backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 5601
+      # MONGODB_URI must be set in the root .env and must point at a
+      # reachable MongoDB instance (host:port/database). Set this to
+      # e.g. `mongodb://user:pass@host:27017/image` or your cluster URL.
+      MONGODB_URI: ${MONGODB_URI:?MONGODB_URI must be set in the root .env}
+      LOG_DIR: /app/logs
+      UPLOAD_ROOT: /var/express-uploads
+      SECRET_KEY: ${SECRET_KEY:-replace-me-with-a-long-random-string}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-7d}
+      # Bootstrap users seeded at startup (if set). Safe to re-run: existing
+      # users with the same email are left untouched.
+      BOOTSTRAP_ADMIN_EMAIL: ${BOOTSTRAP_ADMIN_EMAIL:-}
+      BOOTSTRAP_ADMIN_PASSWORD: ${BOOTSTRAP_ADMIN_PASSWORD:-}
+      BOOTSTRAP_ADMIN_NAME: ${BOOTSTRAP_ADMIN_NAME:-Admin}
+      BOOTSTRAP_USER_EMAIL: ${BOOTSTRAP_USER_EMAIL:-}
+      BOOTSTRAP_USER_PASSWORD: ${BOOTSTRAP_USER_PASSWORD:-}
+      BOOTSTRAP_USER_NAME: ${BOOTSTRAP_USER_NAME:-User}
+      # `app.ts` reads `process.env.FRONTEND_ORIGIN` and adds it to the
+      # CORS allowlist on top of the hardcoded entries.
+      FRONTEND_ORIGIN: ${FRONTEND_ORIGIN:-http://localhost:3055}
+    ports:
+      - "${BACKEND_PORT:-5601}:5601"
+    volumes:
+      # Persist uploads across container restarts and expose them on the host.
+      - express-uploads:/var/express-uploads
+      - backend-logs:/app/logs
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        # Build-time fallback. The value baked here is used by the SSR
+        # pass and as the URL the very first client paint sees, before
+        # `_app.tsx`'s effect finishes its /api/_config fetch.
+        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:5601}
+    container_name: express-upload-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    environment:
+      NODE_ENV: production
+      PORT: 3055
+      # Runtime value — picked up by `pages/api/_config.ts` on every
+      # request. Overriding this env var and `docker compose up -d`
+      # (no rebuild) takes effect on the next browser reload.
+      NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:5601}
+    ports:
+      - "${FRONTEND_PORT:-3055}:3055"
+
+volumes:
+  express-uploads:
+  backend-logs:

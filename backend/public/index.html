@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Uploader</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .upload-area {
+      transition: all 0.3s ease;
+    }
+    .upload-area.drag-over {
+      border-color: #3b82f6;
+      background-color: #f0f9ff;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
+  <div class="w-full max-w-md bg-white rounded-xl shadow-md overflow-hidden p-6">
+    <div class="flex items-center justify-between mb-6">
+      <h1 class="text-2xl font-bold text-gray-800">Image Uploader</h1>
+      <a href="/auth.html" class="text-xs text-blue-600 hover:text-blue-700 font-medium">Sign in</a>
+    </div>
+
+    <!-- API Key -->
+    <div class="mb-4">
+      <label class="block text-xs font-medium text-gray-600 mb-1">API key</label>
+      <input id="apiKeyInput" type="password" placeholder="paste your X-API-Key" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 font-mono" autocomplete="off">
+      <p class="text-[10px] text-gray-400 mt-1">Stored in your browser. Get one from the admin panel.</p>
+    </div>
+
+    <!-- Upload Form -->
+    <form id="uploadForm" class="mb-6" enctype="multipart/form-data">
+      <div 
+        id="uploadArea" 
+        class="upload-area border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer mb-4"
+        onclick="document.getElementById('fileInput').click()"
+      >
+        <div id="uploadContent" class="flex flex-col items-center justify-center space-y-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+          </svg>
+          <p class="text-sm text-gray-600">
+            <span class="font-semibold text-blue-500">Click to upload</span> or drag and drop
+          </p>
+          <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+        </div>
+        <input id="fileInput" name="file" type="file" class="hidden" required>
+        <div id="imagePreview" class="hidden mt-4">
+          <img id="previewImage" src="#" alt="Preview" class="max-h-48 mx-auto rounded">
+        </div>
+      </div>
+      
+      <button 
+        type="submit" 
+        id="uploadButton"
+        class="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        disabled
+      >
+        Upload Image
+      </button>
+    </form>
+    
+    <!-- Upload Result -->
+    <div id="resultContainer" class="hidden bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+      <h3 class="font-medium text-blue-800 mb-2">Upload Successful!</h3>
+      <p class="text-sm text-blue-700 mb-2">Your image URL:</p>
+      <div class="flex items-center bg-white rounded border border-blue-200 p-2">
+        <input 
+          id="imageUrl" 
+          type="text" 
+          class="flex-1 text-sm text-blue-600 bg-transparent outline-none" 
+          readonly
+        >
+        <button 
+          onclick="copyToClipboard()" 
+          class="ml-2 text-blue-600 hover:text-blue-800 text-sm font-medium"
+        >
+          Copy
+        </button>
+      </div>
+      <div class="mt-3 flex justify-center">
+        <a id="viewLink" href="#" target="_blank" class="text-sm text-blue-600 hover:text-blue-800 font-medium">
+          View Image
+        </a>
+      </div>
+    </div>
+    
+    <!-- Status Message -->
+    <div id="statusMessage" class="hidden p-3 rounded-lg text-sm mb-4"></div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const fileInput = document.getElementById('fileInput');
+      const uploadForm = document.getElementById('uploadForm');
+      const uploadArea = document.getElementById('uploadArea');
+      const uploadContent = document.getElementById('uploadContent');
+      const imagePreview = document.getElementById('imagePreview');
+      const previewImage = document.getElementById('previewImage');
+      const uploadButton = document.getElementById('uploadButton');
+      const resultContainer = document.getElementById('resultContainer');
+      const imageUrl = document.getElementById('imageUrl');
+      const viewLink = document.getElementById('viewLink');
+      const statusMessage = document.getElementById('statusMessage');
+      const apiKeyInput = document.getElementById('apiKeyInput');
+
+      // restore saved key
+      const savedKey = localStorage.getItem('express-upload:api-key');
+      if (savedKey) apiKeyInput.value = savedKey;
+      apiKeyInput.addEventListener('change', () => {
+        const v = apiKeyInput.value.trim();
+        if (v) localStorage.setItem('express-upload:api-key', v);
+        else localStorage.removeItem('express-upload:api-key');
+      });
+      
+      // Handle file selection
+      fileInput.addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+          const file = this.files[0];
+          
+       
+          
+          // Show preview
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            previewImage.src = e.target.result;
+            uploadContent.classList.add('hidden');
+            imagePreview.classList.remove('hidden');
+            uploadButton.disabled = false;
+          }
+          reader.readAsDataURL(file);
+        }
+      });
+      
+      // Drag and drop functionality
+      ['dragenter', 'dragover'].forEach(event => {
+        uploadArea.addEventListener(event, function(e) {
+          e.preventDefault();
+          uploadArea.classList.add('drag-over');
+        });
+      });
+      
+      ['dragleave', 'drop'].forEach(event => {
+        uploadArea.addEventListener(event, function(e) {
+          e.preventDefault();
+          uploadArea.classList.remove('drag-over');
+        });
+      });
+      
+      uploadArea.addEventListener('drop', function(e) {
+        const files = e.dataTransfer.files;
+        if (files.length) {
+          fileInput.files = files;
+          fileInput.dispatchEvent(new Event('change'));
+        }
+      });
+      
+      // Form submission
+      uploadForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+
+        try {
+          uploadButton.disabled = true;
+          uploadButton.textContent = 'Uploading...';
+
+          const apiKey = (document.getElementById('apiKeyInput').value || '').trim();
+          const response = await fetch('/api/files/upload', {
+            method: 'POST',
+            headers: apiKey ? { 'X-API-Key': apiKey } : {},
+            body: formData
+          });
+          
+          const result = await response.json();
+
+          if (response.ok) {
+            // response shape: { data: { _id, extension, ... }, message: 'uploaded' }
+            const file = result && result.data ? result.data : result;
+            if (!file || !file._id) {
+              showStatus('error', 'Upload succeeded but the server response was missing the file id.');
+              return;
+            }
+            // extension is stored like ".webp" (with leading dot); keep the dot, drop empty
+            const ext = (file.extension && file.extension.startsWith('.')) ? file.extension : (file.extension ? '.' + file.extension : '');
+            const imagePath = `/api/files/${file._id}${ext}`;
+            imageUrl.value = `${window.location.origin}${imagePath}`;
+            viewLink.href = imagePath;
+            resultContainer.classList.remove('hidden');
+            showStatus('success', 'File uploaded successfully!');
+          } else {
+            showStatus('error', (result && result.message) || 'Upload failed');
+          }
+        } catch (error) {
+          showStatus('error', 'Network error. Please try again.');
+          console.error('Upload error:', error);
+        } finally {
+          uploadButton.disabled = false;
+          uploadButton.textContent = 'Upload Image';
+        }
+      });
+      
+      // Reset upload form
+      function resetUpload() {
+        fileInput.value = '';
+        uploadContent.classList.remove('hidden');
+        imagePreview.classList.add('hidden');
+        uploadButton.disabled = true;
+      }
+      
+      // Show status message
+      function showStatus(type, message) {
+        statusMessage.textContent = message;
+        statusMessage.className = `p-3 rounded-lg mb-4 text-sm ${
+          type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+        }`;
+        statusMessage.classList.remove('hidden');
+        
+        setTimeout(() => {
+          statusMessage.classList.add('hidden');
+        }, 5000);
+      }
+      
+      // Copy URL to clipboard
+      window.copyToClipboard = function() {
+        imageUrl.select();
+        document.execCommand('copy');
+        showStatus('success', 'URL copied to clipboard!');
+      };
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{
+  "name": "@moomle/upload-client",
+  "version": "0.1.2",
+  "description": "Tiny browser/Node client for the express-upload file API. Uploads with progress + cancel.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepare": "npm run build",
+    "lint": "tsc --noEmit -p tsconfig.json"
+  },
+  "keywords": [
+    "upload",
+    "express-upload",
+    "browser",
+    "xhr",
+    "progress",
+    "nextjs"
+  ],
+  "license": "ISC",
+  "engines": {
+    "node": ">=18"
+  },
+  "sideEffects": false
+}

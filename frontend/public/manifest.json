@@ -1,0 +1,22 @@
+{
+  "name": "RentEase — Real Estate Management",
+  "short_name": "RentEase",
+  "description": "All-in-one real estate management platform for landlords and property managers",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1B254B",
+  "theme_color": "#3B82F6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

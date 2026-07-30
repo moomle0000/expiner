@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin · Upload Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --accent: #06b6d4; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #0a0a0f;
+      color: #e2e8f0;
+    }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #1a1a2e; }
+    ::-webkit-scrollbar-thumb { background: #2d2d4a; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3d3d5a; }
+
+    /* glow pulse */
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(6,182,212,0.15); }
+      50% { box-shadow: 0 0 0 6px rgba(6,182,212,0.05); }
+    }
+    .stat-card { animation: pulse-glow 3s ease-in-out infinite; }
+
+    /* skeleton */
+    @keyframes shimmer {
+      0% { background-position: -200px 0; }
+      100% { background-position: calc(200px + 100%) 0; }
+    }
+    .skeleton {
+      background: linear-gradient(90deg, #1e1e36 25%, #2a2a48 50%, #1e1e36 75%);
+      background-size: 200px 100%;
+      animation: shimmer 1.5s ease-in-out infinite;
+      border-radius: 6px;
+    }
+
+    /* row hover */
+    .data-row {
+      transition: background 0.15s, transform 0.15s;
+    }
+    .data-row:hover {
+      background: rgba(6,182,212,0.04);
+      transform: translateX(2px);
+    }
+
+    /* badge */
+    .badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 2px 8px; border-radius: 9999px;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.02em;
+    }
+
+    /* modal backdrop */
+    .modal-overlay {
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+    }
+
+    /* tab active indicator */
+    .tab-btn.active {
+      color: #06b6d4;
+      border-bottom-color: #06b6d4;
+    }
+    .tab-btn.active .tab-count {
+      background: rgba(6,182,212,0.15);
+      color: #06b6d4;
+    }
+
+    /* empty state illustration pulse */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .empty-icon { animation: float 3s ease-in-out infinite; }
+
+    /* stat icon bg */
+    .stat-icon-wrap {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+  </style>
+</head>
+<body class="antialiased">
+  <div class="min-h-screen flex flex-col">
+    <!-- header -->
+    <header class="border-b border-white/5 bg-[#0a0a0f]/80 backdrop-blur-md sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <svg class="w-6 h-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+          </svg>
+          <span class="font-semibold text-sm tracking-tight">Dashboard</span>
+          <span class="hidden sm:inline text-[11px] text-white/30 font-mono">· express-upload</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <button id="refreshBtn" class="text-white/40 hover:text-cyan-400 transition-colors p-1.5 rounded-lg hover:bg-white/5" title="Refresh">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+          </button>
+          <a href="/" class="text-[11px] text-white/30 hover:text-white/60 transition-colors">Upload</a>
+          <button id="logoutBtn" class="text-[11px] text-white/30 hover:text-white/60 transition-colors" title="Sign out">Sign out</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+      <!-- stats row -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8" id="statsGrid">
+        <div class="stat-card rounded-xl border border-white/5 bg-[#12121e] p-4 flex items-center gap-4">
+          <div class="stat-icon-wrap bg-cyan-500/10 shrink-0"><svg class="w-5 h-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" /></svg></div>
+          <div><p class="text-[11px] text-white/40 uppercase tracking-wider">Files</p><p id="statFiles" class="text-xl font-semibold text-white mt-0.5 font-mono">—</p></div>
+        </div>
+        <div class="stat-card rounded-xl border border-white/5 bg-[#12121e] p-4 flex items-center gap-4">
+          <div class="stat-icon-wrap bg-purple-500/10 shrink-0"><svg class="w-5 h-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.41a2.25 2.25 0 013.182 0l2.909 2.91m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg></div>
+          <div><p class="text-[11px] text-white/40 uppercase tracking-wider">Images</p><p id="statImages" class="text-xl font-semibold text-white mt-0.5 font-mono">—</p></div>
+        </div>
+        <div class="stat-card rounded-xl border border-white/5 bg-[#12121e] p-4 flex items-center gap-4">
+          <div class="stat-icon-wrap bg-green-500/10 shrink-0"><svg class="w-5 h-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg></div>
+          <div><p class="text-[11px] text-white/40 uppercase tracking-wider">Downloads</p><p id="statDownloads" class="text-xl font-semibold text-white mt-0.5 font-mono">—</p></div>
+        </div>
+        <div class="stat-card rounded-xl border border-white/5 bg-[#12121e] p-4 flex items-center gap-4">
+          <div class="stat-icon-wrap bg-amber-500/10 shrink-0"><svg class="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg></div>
+          <div><p class="text-[11px] text-white/40 uppercase tracking-wider">Views</p><p id="statViews" class="text-xl font-semibold text-white mt-0.5 font-mono">—</p></div>
+        </div>
+      </div>
+
+      <!-- tabs + search -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
+        <div class="flex gap-0 border-b border-white/5" id="tabBar">
+          <button class="tab-btn active flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-white/50 border-b-2 border-transparent transition-all" data-filter="all">
+            All
+            <span class="tab-count text-[11px] bg-white/5 text-white/30 px-1.5 py-0.5 rounded-full font-mono">0</span>
+          </button>
+          <button class="tab-btn flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-white/50 border-b-2 border-transparent transition-all" data-filter="file">
+            Files
+            <span class="tab-count text-[11px] bg-white/5 text-white/30 px-1.5 py-0.5 rounded-full font-mono">0</span>
+          </button>
+          <button class="tab-btn flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-white/50 border-b-2 border-transparent transition-all" data-filter="image">
+            Images
+            <span class="tab-count text-[11px] bg-white/5 text-white/30 px-1.5 py-0.5 rounded-full font-mono">0</span>
+          </button>
+        </div>
+        <div class="relative">
+          <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-white/20 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
+          <input id="searchInput" type="text" placeholder="Search by name, type, mime…" class="w-full sm:w-64 pl-9 pr-3 py-2 text-sm bg-[#12121e] border border-white/5 rounded-lg text-white/80 placeholder:text-white/20 focus:outline-none focus:border-cyan-500/30 transition-colors">
+        </div>
+      </div>
+
+      <!-- table -->
+      <div class="rounded-xl border border-white/5 bg-[#12121e] overflow-hidden">
+        <!-- column headers -->
+        <div class="hidden md:grid grid-cols-12 gap-3 px-5 py-3 text-[11px] uppercase tracking-wider text-white/30 border-b border-white/5 bg-white/[0.02]">
+          <div class="col-span-4 flex items-center gap-2 cursor-pointer select-none hover:text-white/50 transition-colors" data-sort="name">
+            Name <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" /></svg>
+          </div>
+          <div class="col-span-2">Type</div>
+          <div class="col-span-2">Size</div>
+          <div class="col-span-1 text-right">DL</div>
+          <div class="col-span-1 text-right">Views</div>
+          <div class="col-span-2 text-right">Actions</div>
+        </div>
+        <!-- body -->
+        <div id="tableBody" class="divide-y divide-white/5">
+          <!-- skeleton rows -->
+          <div class="px-5 py-4"><div class="skeleton h-4 w-3/4"></div></div>
+          <div class="px-5 py-4"><div class="skeleton h-4 w-1/2"></div></div>
+          <div class="px-5 py-4"><div class="skeleton h-4 w-2/3"></div></div>
+          <div class="px-5 py-4"><div class="skeleton h-4 w-3/5"></div></div>
+        </div>
+      </div>
+
+      <!-- footer info -->
+      <div class="mt-4 flex items-center justify-between text-[11px] text-white/20">
+        <span id="footerInfo">Loading data…</span>
+        <span class="font-mono" id="footerCount"></span>
+      </div>
+    </main>
+  </div>
+
+  <!-- login modal -->
+  <div id="loginModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
+    <div class="bg-[#1a1a2e] border border-white/5 rounded-xl w-full max-w-md p-6 shadow-2xl">
+      <div class="flex items-center gap-3 mb-5">
+        <div class="w-9 h-9 rounded-full bg-cyan-500/10 flex items-center justify-center shrink-0">
+          <svg class="w-4 h-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" /></svg>
+        </div>
+        <div><p class="text-sm font-medium text-white">Authenticate</p><p class="text-xs text-white/40 mt-0.5">Enter your API key to manage your uploads.</p></div>
+      </div>
+      <input id="apiKeyInput" type="password" placeholder="Paste your X-API-Key here" class="w-full px-3 py-2.5 text-sm bg-black/30 border border-white/10 rounded-lg text-white/80 placeholder:text-white/20 focus:outline-none focus:border-cyan-500/40 transition-colors font-mono">
+      <p id="loginError" class="text-xs text-red-400 mt-2 hidden"></p>
+      <div class="flex items-center gap-3 mt-5">
+        <button id="loginSubmit" class="flex-1 px-4 py-2.5 text-sm font-medium text-white bg-cyan-500/80 hover:bg-cyan-500 rounded-lg transition-colors">Sign in</button>
+        <a href="/auth.html" class="px-3 py-2.5 text-xs text-white/40 hover:text-white/70 transition-colors">Create account</a>
+        <a href="/" class="px-3 py-2.5 text-xs text-white/40 hover:text-white/70 transition-colors">Upload</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- delete confirmation modal -->
+  <div id="deleteModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay opacity-0 pointer-events-none transition-opacity duration-200">
+    <div class="bg-[#1a1a2e] border border-white/5 rounded-xl w-full max-w-sm p-6 shadow-2xl">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-9 h-9 rounded-full bg-red-500/10 flex items-center justify-center shrink-0">
+          <svg class="w-4 h-4 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
+        </div>
+        <div><p class="text-sm font-medium text-white">Delete item</p><p class="text-xs text-white/40 mt-0.5">This action cannot be undone.</p></div>
+      </div>
+      <p class="text-sm text-white/60 mb-6 break-all" id="deleteItemName">—</p>
+      <div class="flex gap-3 justify-end">
+        <button id="cancelDelete" class="px-4 py-2 text-sm text-white/50 hover:text-white/80 transition-colors rounded-lg hover:bg-white/5">Cancel</button>
+        <button id="confirmDelete" class="px-4 py-2 text-sm font-medium text-white bg-red-500/80 hover:bg-red-500 rounded-lg transition-colors">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- toast -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 px-4 py-3 rounded-xl border shadow-lg text-sm font-medium backdrop-blur-md transition-all duration-300 translate-y-4 opacity-0 pointer-events-none" style="background:rgba(18,18,30,0.95);border-color:rgba(255,255,255,0.05);color:#e2e8f0"></div>
+
+  <script>
+    const apiBase = '';
+    let allItems = [];
+    let currentFilter = 'all';
+    let searchQuery = '';
+    let deleteTarget = null;
+    let sortKey = null;
+    let sortDir = 1;
+    let apiKey = '';
+
+    const $ = id => document.getElementById(id);
+    const toast = $('toast');
+
+    // ===== auth =====
+    const KEY_STORAGE = 'express-upload:api-key';
+
+    const getKey = () => (localStorage.getItem(KEY_STORAGE) || '').trim();
+    const setKey = (k) => {
+      apiKey = (k || '').trim();
+      if (apiKey) localStorage.setItem(KEY_STORAGE, apiKey);
+      else localStorage.removeItem(KEY_STORAGE);
+    };
+
+    const showLogin = (msg) => {
+      setKey('');
+      $('loginModal').classList.remove('hidden');
+      $('apiKeyInput').value = '';
+      const err = $('loginError');
+      if (msg) { err.textContent = msg; err.classList.remove('hidden'); }
+      else { err.classList.add('hidden'); }
+      setTimeout(() => $('apiKeyInput').focus(), 50);
+    };
+
+    const hideLogin = () => {
+      $('loginModal').classList.add('hidden');
+    };
+
+    const authFetch = async (url, options = {}) => {
+      const headers = Object.assign({}, options.headers || {}, { 'X-API-Key': getKey() });
+      const res = await fetch(apiBase + url, Object.assign({}, options, { headers }));
+      if (res.status === 401) {
+        showLogin('Invalid or missing API key. Please sign in again.');
+        throw new Error('Unauthorized');
+      }
+      return res;
+    };
+    // ===== end auth =====
+    let toastTimer;
+
+    function showToast(msg, type = 'info') {
+      clearTimeout(toastTimer);
+      toast.textContent = msg;
+      toast.className = 'fixed bottom-6 right-6 z-50 px-4 py-3 rounded-xl border shadow-lg text-sm font-medium backdrop-blur-md transition-all duration-300 translate-y-0 opacity-100 pointer-events-auto';
+      if (type === 'error') toast.style.borderColor = 'rgba(239,68,68,0.3)';
+      else if (type === 'success') toast.style.borderColor = 'rgba(34,197,94,0.3)';
+      else toast.style.borderColor = 'rgba(255,255,255,0.05)';
+      toastTimer = setTimeout(() => {
+        toast.classList.add('translate-y-4', 'opacity-0', 'pointer-events-none');
+      }, 3500);
+    }
+
+    function fmtSize(bytes) {
+      if (!bytes || bytes === 0) return '0 B';
+      const units = ['B','KB','MB','GB'];
+      let i = 0; let s = bytes;
+      while (s >= 1024 && i < units.length - 1) { s /= 1024; i++; }
+      return s.toFixed(i > 0 ? 1 : 0) + ' ' + units[i];
+    }
+
+    function fmtDate(str) {
+      if (!str) return '—';
+      const d = new Date(str);
+      return d.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' });
+    }
+
+    function timeAgo(str) {
+      if (!str) return '';
+      const diff = Date.now() - new Date(str).getTime();
+      const mins = Math.floor(diff / 60000);
+      if (mins < 1) return 'just now';
+      if (mins < 60) return mins + 'm ago';
+      const hrs = Math.floor(mins / 60);
+      if (hrs < 24) return hrs + 'h ago';
+      const days = Math.floor(hrs / 24);
+      return days + 'd ago';
+    }
+
+    const fileTypeColors = {
+      image: 'bg-cyan-500/10 text-cyan-300 border-cyan-500/20',
+      document: 'bg-blue-500/10 text-blue-300 border-blue-500/20',
+      video: 'bg-purple-500/10 text-purple-300 border-purple-500/20',
+      audio: 'bg-green-500/10 text-green-300 border-green-500/20',
+      archive: 'bg-amber-500/10 text-amber-300 border-amber-500/20',
+      executable: 'bg-red-500/10 text-red-300 border-red-500/20',
+      other: 'bg-white/5 text-white/40 border-white/10',
+    };
+
+    function badge(type) {
+      const c = fileTypeColors[type] || fileTypeColors.other;
+      return `<span class="badge border ${c}">${type}</span>`;
+    }
+
+    function shortUrlLink(item) {
+      if (item.shortUrl) {
+        const prefix = item.fileType ? 'f' : 'i';
+        return `<a href="/${prefix}/${item.shortUrl}" target="_blank" class="text-cyan-400/60 hover:text-cyan-400 font-mono text-[11px] transition-colors">/${prefix}/${item.shortUrl}</a>`;
+      }
+      return '';
+    }
+
+    function buildRow(item) {
+      const isFile = !!item.fileType;
+      const name = item.originalName || item.filename || '—';
+      const type = item.fileType || 'image';
+      const id = item._id;
+      const dl = item.downloads ?? 0;
+      const views = item.views ?? 0;
+      const fileExt = item.extension || (item.filename ? '.' + item.filename.split('.').pop() : '');
+      const viewUrl = (isFile ? `/api/files/${id}` : `/api/images/${id}`) + fileExt;
+      return {
+        id, name, type, size: item.size || 0, dl, views, createdAt: item.createdAt, viewUrl,
+        _raw: item, isFile,
+        match(q) {
+          if (!q) return true;
+          const lq = q.toLowerCase();
+          return name.toLowerCase().includes(lq) || type.toLowerCase().includes(lq) ||
+            (item.mimetype && item.mimetype.toLowerCase().includes(lq)) ||
+            (item.extension && item.extension.toLowerCase().includes(lq));
+        }
+      };
+    }
+
+    async function fetchAll() {
+      $('tableBody').innerHTML = Array(4).fill(0).map(() =>
+        '<div class="px-5 py-4"><div class="skeleton h-4 w-' + ['3/4','1/2','2/3','3/5'][Math.floor(Math.random()*4)] + '"></div></div>'
+      ).join('');
+      $('footerInfo').textContent = 'Loading…';
+
+      try {
+        const [filesRes, imagesRes] = await Promise.all([
+          authFetch('/api/files').then(r => r.ok ? r.json() : { data: [] }),
+          authFetch('/api/images').then(r => r.ok ? r.json() : { data: [] }),
+        ]);
+        const files = (filesRes.data || []).map(f => ({ ...f, _domain: 'file', _isFile: true }));
+        const images = (imagesRes.data || []).map(i => ({ ...i, _domain: 'image', _isFile: false }));
+        allItems = [...files, ...images].map(item => buildRow(item));
+        render();
+      } catch (err) {
+        console.error(err);
+        $('tableBody').innerHTML = `
+          <div class="px-5 py-16 text-center">
+            <div class="empty-icon w-12 h-12 mx-auto mb-4 rounded-xl bg-red-500/10 flex items-center justify-center">
+              <svg class="w-6 h-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" /></svg>
+            </div>
+            <p class="text-sm text-white/40">Failed to connect to server</p>
+            <button onclick="fetchAll()" class="mt-4 text-xs text-cyan-400 hover:text-cyan-300 transition-colors">Retry</button>
+          </div>`;
+        $('footerInfo').textContent = 'Connection error';
+        $('footerCount').textContent = '';
+      }
+    }
+
+    function render() {
+      const q = searchQuery.trim().toLowerCase();
+      let filtered = allItems.filter(r => r.match(q));
+      if (currentFilter === 'file') filtered = filtered.filter(r => r.isFile);
+      else if (currentFilter === 'image') filtered = filtered.filter(r => !r.isFile);
+
+      // sort
+      if (sortKey) {
+        filtered.sort((a, b) => {
+          let va = a[sortKey], vb = b[sortKey];
+          if (typeof va === 'string') va = va.toLowerCase();
+          if (typeof vb === 'string') vb = vb.toLowerCase();
+          if (va < vb) return -1 * sortDir;
+          if (va > vb) return 1 * sortDir;
+          return 0;
+        });
+      } else {
+        filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      }
+
+      // stats
+      const statFiles = allItems.filter(r => r.isFile).length;
+      const statImages = allItems.filter(r => !r.isFile).length;
+      const statDownloads = allItems.reduce((s, r) => s + r.dl, 0);
+      const statViews = allItems.reduce((s, r) => s + r.views, 0);
+      $('statFiles').textContent = statFiles;
+      $('statImages').textContent = statImages;
+      $('statDownloads').textContent = statDownloads;
+      $('statViews').textContent = statViews;
+
+      // tab counts
+      const allCount = allItems.length;
+      const fileCount = statFiles;
+      const imageCount = statImages;
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        const f = btn.dataset.filter;
+        const count = f === 'all' ? allCount : f === 'file' ? fileCount : imageCount;
+        btn.querySelector('.tab-count').textContent = count;
+      });
+
+      // footer
+      $('footerInfo').textContent = filtered.length + ' of ' + allItems.length + ' items';
+      $('footerCount').textContent = q ? 'filtered' : '';
+
+      // body
+      if (filtered.length === 0) {
+        $('tableBody').innerHTML = `
+          <div class="px-5 py-16 text-center">
+            <div class="empty-icon w-12 h-12 mx-auto mb-4 rounded-xl bg-white/5 flex items-center justify-center">
+              <svg class="w-6 h-6 text-white/20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m6 4.125l2.25 2.25m0 0l2.25 2.25M12 11.625l2.25-2.25M12 11.625l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" /></svg>
+            </div>
+            <p class="text-sm text-white/30">${q ? 'No results for "' + searchQuery + '"' : 'No items yet'}</p>
+          </div>`;
+        return;
+      }
+
+      $('tableBody').innerHTML = filtered.map(r => {
+        const item = r._raw;
+        const id = item._id;
+        const metaUrl = item.shortUrl ? `/info/${item.shortUrl}` : '';
+        const deleteUrl = r.isFile ? `/api/files/${id}` : `/api/images/${id}`;
+        const displayName = item.originalName || item.filename || '—';
+        const ext = (item.extension || '').toUpperCase();
+        return `
+        <div class="data-row grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-3 px-5 py-3.5 items-center">
+          <div class="col-span-4 flex items-center gap-3 min-w-0">
+            <div class="w-7 h-7 rounded-lg shrink-0 flex items-center justify-center text-[10px] font-mono font-semibold
+              ${r.isFile ? 'bg-cyan-500/10 text-cyan-400' : 'bg-purple-500/10 text-purple-400'}">
+              ${ext || (r.isFile ? 'F' : 'IMG')}
+            </div>
+            <div class="min-w-0">
+              <p class="text-sm text-white/80 truncate font-medium">${displayName}</p>
+              <div class="flex items-center gap-2 mt-0.5">
+                <span class="text-[10px] text-white/20 font-mono">${item.mimetype || '—'}</span>
+                ${metaUrl ? `<a href="${metaUrl}" target="_blank" class="text-[10px] text-cyan-400/40 hover:text-cyan-400 transition-colors">info</a>` : ''}
+              </div>
+            </div>
+          </div>
+          <div class="col-span-2 flex md:block items-center gap-2">
+            ${badge(item.fileType || 'image')}
+            <span class="md:hidden text-[10px] text-white/20">${fmtSize(item.size)}</span>
+          </div>
+          <div class="col-span-2 hidden md:block text-sm text-white/40 font-mono">${fmtSize(item.size)}</div>
+          <div class="col-span-1 text-right text-sm text-white/60 font-mono">${r.dl}</div>
+          <div class="col-span-1 text-right text-sm text-white/60 font-mono">${r.views}</div>
+          <div class="col-span-2 flex items-center justify-end gap-1.5">
+            <a href="${r.viewUrl}" target="_blank" class="p-1.5 rounded-lg text-white/20 hover:text-cyan-400 hover:bg-white/5 transition-all" title="View"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg></a>
+            <button data-delete='${JSON.stringify({ id, name: displayName, url: deleteUrl })}' class="delete-btn p-1.5 rounded-lg text-white/20 hover:text-red-400 hover:bg-red-500/10 transition-all" title="Delete"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" /></svg></button>
+          </div>
+          <!-- mobile meta row -->
+          <div class="col-span-12 md:hidden flex items-center gap-3 text-[11px] text-white/30 mt-1 pb-1 border-b border-white/5">
+            <span>${fmtSize(item.size)}</span>
+            <span>${r.dl} dl · ${r.views} views</span>
+            <span class="ml-auto font-mono">${timeAgo(item.createdAt)}</span>
+          </div>
+        </div>`;
+      }).join('');
+
+      // wire delete buttons
+      document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          try {
+            const data = JSON.parse(btn.dataset.delete);
+            deleteTarget = data;
+            $('deleteItemName').textContent = data.name;
+            $('deleteModal').classList.remove('opacity-0', 'pointer-events-none');
+          } catch(e) {}
+        });
+      });
+    }
+
+    // delete confirmation
+    $('cancelDelete').addEventListener('click', () => {
+      $('deleteModal').classList.add('opacity-0', 'pointer-events-none');
+      deleteTarget = null;
+    });
+    $('deleteModal').addEventListener('click', e => {
+      if (e.target === $('deleteModal')) {
+        $('deleteModal').classList.add('opacity-0', 'pointer-events-none');
+        deleteTarget = null;
+      }
+    });
+    $('confirmDelete').addEventListener('click', async () => {
+      if (!deleteTarget) return;
+      const { url, name } = deleteTarget;
+      const btn = $('confirmDelete');
+      btn.disabled = true;
+      btn.textContent = 'Deleting…';
+      try {
+        const res = await authFetch(url, { method: 'DELETE' });
+        if (res.ok) {
+          showToast('"' + name + '" deleted', 'success');
+          allItems = allItems.filter(r => r._raw._id !== deleteTarget.id);
+          render();
+        } else {
+          const err = await res.json().catch(() => ({}));
+          showToast(err.message || 'Delete failed', 'error');
+        }
+      } catch (err) {
+        showToast('Network error', 'error');
+      }
+      btn.disabled = false;
+      btn.textContent = 'Delete';
+      $('deleteModal').classList.add('opacity-0', 'pointer-events-none');
+      deleteTarget = null;
+    });
+
+    // tabs
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        render();
+      });
+    });
+
+    // search
+    let searchDebounce;
+    $('searchInput').addEventListener('input', () => {
+      clearTimeout(searchDebounce);
+      searchDebounce = setTimeout(() => {
+        searchQuery = $('searchInput').value;
+        render();
+      }, 250);
+    });
+
+    // refresh
+    $('refreshBtn').addEventListener('click', () => {
+      $('refreshBtn').classList.add('rotate-180');
+      $('refreshBtn').style.transition = 'transform 0.4s';
+      fetchAll();
+      setTimeout(() => {
+        $('refreshBtn').classList.remove('rotate-180');
+      }, 500);
+    });
+
+    // session check — relies on the HttpOnly `Authorization` cookie the backend sets on /auth/login.
+    // JS can't read HttpOnly cookies, so we ask the server who we are. A 200 = logged in.
+    const getSession = async () => {
+      try {
+        const res = await fetch('/auth/verify', { credentials: 'same-origin' });
+        if (!res.ok) return null;
+        const body = await res.json();
+        return body && body.data ? body.data : null;
+      } catch {
+        return null;
+      }
+    };
+
+    // ensureApiKey — used when the user is logged in via cookie. Fetches their existing
+    // active key (or creates one) and stores it in localStorage for the rest of the page.
+    const ensureApiKey = async () => {
+      // try existing keys first
+      try {
+        const res = await fetch('/api/auth/keys', { credentials: 'same-origin' });
+        if (res.ok) {
+          const body = await res.json();
+          const active = (body.data || []).find(k => k.active);
+          if (active) {
+            // we don't have the raw key from the list endpoint (only the hash is stored).
+            // fall through to create a new one — old keys aren't recoverable.
+          }
+        }
+      } catch {}
+
+      // create a new key
+      const name = 'admin-dashboard';
+      const res = await fetch('/api/auth/keys', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name }),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.message || `Failed to create API key (${res.status})`);
+      }
+      const body = await res.json();
+      const rawKey = body && body.data && body.data.key;
+      if (!rawKey) throw new Error('No key returned');
+      setKey(rawKey);
+      apiKey = rawKey;
+      return body.data;
+    };
+
+    // init
+    (function init() {
+      const existing = getKey();
+      if (existing) {
+        // already have an API key in localStorage — go
+        apiKey = existing;
+        hideLogin();
+        fetchAll();
+        return;
+      }
+      // no local key — try the cookie session
+      (async () => {
+        const session = await getSession();
+        if (session) {
+          // logged in: try to provision an X-API-Key silently
+          try {
+            await ensureApiKey();
+            hideLogin();
+            fetchAll();
+          } catch (err) {
+            console.error('ensureApiKey failed', err);
+            // fall back to the API key modal as a manual fallback
+            showLogin('Could not auto-create an API key. Paste one to continue.');
+          }
+        } else {
+          showLogin();
+        }
+      })();
+    })();
+
+    // login
+    $('loginSubmit').addEventListener('click', () => {
+      const k = $('apiKeyInput').value.trim();
+      if (!k) {
+        const err = $('loginError');
+        err.textContent = 'Please paste your API key';
+        err.classList.remove('hidden');
+        return;
+      }
+      setKey(k);
+      hideLogin();
+      fetchAll();
+    });
+    $('apiKeyInput').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') $('loginSubmit').click();
+    });
+
+    // logout
+    $('logoutBtn').addEventListener('click', () => {
+      setKey('');
+      allItems = [];
+      showLogin();
+    });
+  </script>
+</body>
+</html>

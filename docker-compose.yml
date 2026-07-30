@@ -1,0 +1,12 @@
+# docker-compose.yml — production stack for express-upload.
+#
+# By default this file delegates to docker-compose.no-mongo.yml (external
+# MongoDB, MONGODB_URI must be set in the root .env). For an all-in-one
+# stack with a compose-managed MongoDB, use:
+#
+#   docker compose -f docker-compose.mongo.yml up -d
+#
+# Or copy the contents of that file into this one.
+
+include:
+  - docker-compose.no-mongo.yml

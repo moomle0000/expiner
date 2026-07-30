@@ -1,0 +1,29 @@
+# Dependencies
+/node_modules
+
+# Build output
+/dist
+/.swc
+
+# Logs (contain real user IPs / emails — NEVER commit)
+/logs
+/utils/log
+/src/logs
+/src/utils/log
+
+# Uploaded files (user content — never commit)
+/uploads
+
+# Env files
+.env
+.env.*
+!.env.example
+!.env.docker
+
+# IDE
+.vscode
+.idea
+
+# OS
+.DS_Store
+Thumbs.db
