@@ -97,7 +97,11 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
           </svg>
           <span class="font-semibold text-sm tracking-tight">Dashboard</span>
+<<<<<<< HEAD
+          <span class="hidden sm:inline text-[11px] text-white/30 font-mono">· expiner</span>
+=======
           <span class="hidden sm:inline text-[11px] text-white/30 font-mono">· express-upload</span>
+>>>>>>> origin/main
         </div>
         <div class="flex items-center gap-3">
           <button id="refreshBtn" class="text-white/40 hover:text-cyan-400 transition-colors p-1.5 rounded-lg hover:bg-white/5" title="Refresh">
@@ -238,7 +242,11 @@
     const toast = $('toast');
 
     // ===== auth =====
+<<<<<<< HEAD
+    const KEY_STORAGE = 'expiner:api-key';
+=======
     const KEY_STORAGE = 'express-upload:api-key';
+>>>>>>> origin/main
 
     const getKey = () => (localStorage.getItem(KEY_STORAGE) || '').trim();
     const setKey = (k) => {

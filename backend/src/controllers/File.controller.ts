@@ -55,7 +55,13 @@ export class FileController {
   public getFiles = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
       const userId = userIdOf(req);
+<<<<<<< HEAD
+      const category: string | undefined =
+        typeof req.query.category === 'string' ? req.query.category : undefined;
+      const data: File[] = await this.fileService.findAllFiles(userId, category);
+=======
       const data: File[] = await this.fileService.findAllFiles(userId);
+>>>>>>> origin/main
       res.status(200).json({ data, message: 'findAll' });
     } catch (error) {
       next(error);

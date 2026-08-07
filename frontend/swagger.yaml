@@ -1,9 +1,16 @@
 openapi: 3.0.3
 info:
+<<<<<<< HEAD
+  title: expiner API
+  version: 1.0.0
+  description: |
+    REST API for the expiner file server.
+=======
   title: express-upload API
   version: 1.0.0
   description: |
     REST API for the express-upload file server.
+>>>>>>> origin/main
 
     ## Authentication
     Two authentication methods are supported on most `/api/*` and `/info/*` routes:
@@ -58,7 +65,11 @@ paths:
               $ref: '#/components/schemas/SignupRequest'
             examples:
               minimal:
+<<<<<<< HEAD
+                value: { name: "Jane Doe", username: "jane_doe", email: "jane@example.com", password: "ChangeMe123!" }
+=======
                 value: { name: "moomle", username: "moomle", email: "moomle@gmail.com", password: "11223344NNmm" }
+>>>>>>> origin/main
       responses:
         '201':
           description: User created

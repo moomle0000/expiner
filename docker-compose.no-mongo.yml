@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+# docker-compose.yml — production stack for expiner (no in-cluster MongoDB).
+=======
 # docker-compose.yml — production stack for express-upload (no in-cluster MongoDB).
+>>>>>>> origin/main
 #
 # Brings up: backend (Express API) and frontend (Next.js standalone).
 # MongoDB is NOT in this stack — the backend connects to an external
@@ -9,7 +13,11 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+<<<<<<< HEAD
+    container_name: expiner-backend
+=======
     container_name: express-upload-backend
+>>>>>>> origin/main
     restart: unless-stopped
     environment:
       NODE_ENV: production
@@ -19,8 +27,13 @@ services:
       # e.g. `mongodb://user:pass@host:27017/image` or your cluster URL.
       MONGODB_URI: ${MONGODB_URI:?MONGODB_URI must be set in the root .env}
       LOG_DIR: /app/logs
+<<<<<<< HEAD
+      UPLOAD_ROOT: /var/expiners
+      SECRET_KEY: ${SECRET_KEY:-replace-me-with-a-long-random-string}
+=======
       UPLOAD_ROOT: /var/express-uploads
       SECRET_KEY: ${SECRET_KEY:-change-me-in-real-deployments}
+>>>>>>> origin/main
       JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-7d}
       # Bootstrap users seeded at startup (if set). Safe to re-run: existing
       # users with the same email are left untouched.
@@ -37,7 +50,11 @@ services:
       - "${BACKEND_PORT:-5601}:5601"
     volumes:
       # Persist uploads across container restarts and expose them on the host.
+<<<<<<< HEAD
+      - expiners:/var/expiners
+=======
       - express-uploads:/var/express-uploads
+>>>>>>> origin/main
       - backend-logs:/app/logs
 
   frontend:
@@ -49,7 +66,11 @@ services:
         # pass and as the URL the very first client paint sees, before
         # `_app.tsx`'s effect finishes its /api/_config fetch.
         NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:5601}
+<<<<<<< HEAD
+    container_name: expiner-frontend
+=======
     container_name: express-upload-frontend
+>>>>>>> origin/main
     restart: unless-stopped
     depends_on:
       - backend
@@ -64,5 +85,9 @@ services:
       - "${FRONTEND_PORT:-3055}:3055"
 
 volumes:
+<<<<<<< HEAD
+  expiners:
+=======
   express-uploads:
+>>>>>>> origin/main
   backend-logs:

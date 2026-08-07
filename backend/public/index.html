@@ -106,12 +106,21 @@
       const apiKeyInput = document.getElementById('apiKeyInput');
 
       // restore saved key
+<<<<<<< HEAD
+      const savedKey = localStorage.getItem('expiner:api-key');
+      if (savedKey) apiKeyInput.value = savedKey;
+      apiKeyInput.addEventListener('change', () => {
+        const v = apiKeyInput.value.trim();
+        if (v) localStorage.setItem('expiner:api-key', v);
+        else localStorage.removeItem('expiner:api-key');
+=======
       const savedKey = localStorage.getItem('express-upload:api-key');
       if (savedKey) apiKeyInput.value = savedKey;
       apiKeyInput.addEventListener('change', () => {
         const v = apiKeyInput.value.trim();
         if (v) localStorage.setItem('express-upload:api-key', v);
         else localStorage.removeItem('express-upload:api-key');
+>>>>>>> origin/main
       });
       
       // Handle file selection

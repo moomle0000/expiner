@@ -1,16 +1,26 @@
 # files
 
 ## Backend paths
+<<<<<<< HEAD
+- Interface: `src/interfaces/files.interface.ts` — `File { _id?, filename, originalName, path, size, mimetype, shortUrl, downloads, views, fileType, extension, createdAt?, updatedAt?, createdBy?, folder?, detectedMime?, detectedExt?, category? }`
+- DTO: `src/dtos/files.ts` — `CreateFileDto` (class-validator, includes `fileType` enum + `extension` + optional `category`), `UpdateFileDto` (partial)
+- Model: `src/models/files.model.ts` — `FileModel` (collection `files`, `fileType` enum: image/document/video/audio/archive/executable/other, optional free-text `category` (indexed), `shortUrl` unique; compound unique on `createdBy`+`folder`+`filename` for new rows; **`toJSON` transform strips `path` + `__v` so responses never leak the server filesystem path**)
+=======
 - Interface: `src/interfaces/files.interface.ts` — `File { _id?, filename, originalName, path, size, mimetype, shortUrl, downloads, views, fileType, extension, createdAt?, updatedAt?, createdBy?, folder?, detectedMime?, detectedExt? }`
 - DTO: `src/dtos/files.ts` — `CreateFileDto` (class-validator, includes `fileType` enum + `extension`), `UpdateFileDto` (partial)
 - Model: `src/models/files.model.ts` — `FileModel` (collection `files`, `fileType` enum: image/document/video/audio/archive/executable/other, `shortUrl` unique; compound unique on `createdBy`+`folder`+`filename` for new rows)
+>>>>>>> origin/main
 - Service: `src/services/file.service.ts` — `FileService` (typedi `@Service()`)
 - Controller: `src/controllers/File.controller.ts` — `FileController` (typedi DI)
 - Route: `src/routes/file.route.ts` — `FileRoute` (path `/`)
 
 ## Route map
 ```
+<<<<<<< HEAD
+GET    /api/files[?category=]       -> getFiles           (apiKeyAuth, owner-scoped; optional category query filter)
+=======
 GET    /api/files                  -> getFiles           (apiKeyAuth, owner-scoped)
+>>>>>>> origin/main
 GET    /api/files/type/:type       -> getFilesByType     (apiKeyAuth, owner-scoped, validates enum)
 GET    /api/files/:id.:ext?        -> getFileById        (apiKeyAuth, owner-scoped, streams file)
 POST   /api/files/upload           -> uploadFile         (apiKeyAuth, multer field 'file')
@@ -29,6 +39,12 @@ GET    /                            -> serves public/index.html
 - **View safety:** `viewFile` uses `isInlineSafe(mime)` to choose `inline` vs `attachment` Content-Disposition. SVG/HTML never inline.
 - **Legacy `getFileType` helper:** removed from controller — the service now sets `fileType` from the sniffed/categorized result. Old clients uploading without `X-Folder` still work.
 - **Stats:** `getFileStats(userId)` returns totalFiles/totalDownloads/totalViews + filesByType map, all filtered by `createdBy`.
+<<<<<<< HEAD
+- **Category:** optional user-assigned free-text label, read from `req.body.category` (multipart text field) on upload, trimmed; blank → stored as `null`. `GET /api/files?category=<label>` filters owner-scoped results by exact category match. Category is set on upload only — no edit endpoint.
+- **Folder ownership check on upload:** a non-`anonymous` `X-Folder` must belong to the uploader's `FolderModel` (see `agents/workspace/AGENTS.md`), else `400`. `anonymous` is the always-allowed no-user fallback.
+- **Path is hidden from responses:** `FileModel` `toJSON` transform deletes `path` (and `__v`). Controllers still read the document's `path` internally for `sendFile`/`download`/`unlink` — only serialized JSON omits it. Same transform applied to `ImageModel` (`src/models/image.model.ts`).
+=======
+>>>>>>> origin/main
 - **Disk delete:** controller `tryUnlink` swallows errors; best-effort cleanup. The DB record is removed even if the disk delete fails.
 
 ## Shared / reused pieces this domain depends on

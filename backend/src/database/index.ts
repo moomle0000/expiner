@@ -3,12 +3,22 @@ import mongoose from 'mongoose';
 
 const MONGODB_URI =
   process.env.MONGODB_URI ??
+<<<<<<< HEAD
+  // Local dev fallback so `npm run dev` outside Docker still works.
+  // Override MONGODB_URI in the root .env for any non-local environment.
+  'mongodb://localhost:27017/expiner';
+
+if (!MONGODB_URI) {
+  throw new Error(
+    'MONGODB_URI is not set. Copy .env.example to .env and set it there.'
+=======
   // Local dev fallback so `npm run dev` outside Docker still works
   'mongodb://192.168.100.112:27017/image-upload';
 
 if (!MONGODB_URI) {
   throw new Error(
     'Please define the MONGODB_URI environment variable inside .env.local'
+>>>>>>> origin/main
   );
 }
 

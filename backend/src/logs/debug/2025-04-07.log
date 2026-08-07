@@ -1,8 +1,0 @@
-2025-04-07 00:03:26 info: =================================
-2025-04-07 00:03:26 info: ======= ENV: development =======
-2025-04-07 00:03:26 info: 🚀 App listening on the port 5601
-2025-04-07 00:03:26 info: =================================
-2025-04-07 00:06:00 error: [GET] /dashboard >> StatusCode:: 500, Message:: jwt must be provided
-2025-04-07 00:06:07 error: [POST] /auth/login >> StatusCode:: 409, Message:: This email kikopere00@gmail.com was not found
-2025-04-07 00:06:09 error: [POST] /auth/login >> StatusCode:: 409, Message:: This email kikopere00@gmail.com was not found
-2025-04-07 00:27:10 error: [GET] /Apartment/67f2ef3d7c2a4e8a62fdbf96 >> StatusCode:: 409, Message:: Apartment doesn't exist

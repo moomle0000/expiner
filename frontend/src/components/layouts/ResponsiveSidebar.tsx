@@ -1,6 +1,10 @@
 import { Box, HStack, Text, VStack } from "@chakra-ui/react";
 import Link from "next/link";
+<<<<<<< HEAD
+import { FiHexagon, FiHome, FiUsers, FiFileText, FiKey, FiUser, FiFolder } from "react-icons/fi";
+=======
 import { FiHexagon, FiHome, FiUsers, FiFileText, FiKey, FiUser } from "react-icons/fi";
+>>>>>>> origin/main
 import { NavItem } from "./NavItem";
 import { MobileDrawer } from "./MobileDrawer";
 import type { IconType } from "react-icons";
@@ -34,6 +38,10 @@ export function getSidebarSections({ role }: SidebarSectionsProps): SidebarSecti
     {
       title: "Workspace",
       items: [
+<<<<<<< HEAD
+        { href: "/dashboard/workspace", label: "Workspace", icon: FiFolder },
+=======
+>>>>>>> origin/main
         { href: "/dashboard/files", label: "My Files", icon: FiFileText },
         { href: "/dashboard/api-keys", label: "API Keys", icon: FiKey },
       ],

@@ -1,0 +1,16 @@
+# Local env
+.env
+!.env.example
+
+# Docker
+mongo_data/
+*.tgz
+*.bak
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
