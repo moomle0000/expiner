@@ -24,6 +24,7 @@ export function getSidebarSections({ role }: SidebarSectionsProps): SidebarSecti
           { href: "/admin/users", label: "Users", icon: FiUsers },
           { href: "/admin/files", label: "Files", icon: FiFileText },
           { href: "/admin/keys", label: "API Keys", icon: FiKey },
+          { href: "/admin/workspace", label: "Workspace", icon: FiFolder },
         ],
       },
       { title: "Account", items: [{ href: "/admin/profile", label: "Profile", icon: FiUser }] },
