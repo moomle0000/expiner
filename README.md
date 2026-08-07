@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # expiner
 
 > **The self-hostable alternative to Cloudinary — but for *every* file type.**
@@ -6,15 +5,6 @@
 expiner is an open-source, Docker-ready file storage and
 management service you can run on your own infrastructure. Where
 Cloudinary is laser-focused on images and videos, expiner
-=======
-# express-upload
-
-> **The self-hostable alternative to Cloudinary — but for *every* file type.**
-
-express-upload is an open-source, Docker-ready file storage and
-management service you can run on your own infrastructure. Where
-Cloudinary is laser-focused on images and videos, express-upload
->>>>>>> origin/main
 happily accepts **anything**: PDFs, ZIP archives, design files, 3D
 models, raw data dumps, executables, anything your users throw at it.
 
