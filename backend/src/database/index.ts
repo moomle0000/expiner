@@ -1,6 +1,8 @@
 
 import mongoose from 'mongoose';
 
+mongoose.set('strictQuery', true);
+
 const MONGODB_URI =
   process.env.MONGODB_URI ??
   // Local dev fallback so `npm run dev` outside Docker still works.

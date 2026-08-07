@@ -1,5 +1,6 @@
 import { App } from '@/app';
 import { UPLOAD_ROOT, IMAGE_STORAGE_PATH } from '@config';
+import { dbConnection } from '@database';
 import fs from 'fs';
 import path from 'path';
 import { LocationRoute } from './routes/location.route';
@@ -45,6 +46,9 @@ const app = new App([
 ]);
 
 (async () => {
+  // Seed only after the DB connection is fully established — seeding queries
+  // with bufferCommands=false fail (and were swallowed) before this.
+  await dbConnection();
   await seedBootstrapUsers();
   app.listen();
 })();
