@@ -1,10 +1,6 @@
 # AGENTS.md
 
-<<<<<<< HEAD
 Root documentation index for the `expiner` monorepo. Two deployable
-=======
-Root documentation index for the `express-upload` monorepo. Two deployable
->>>>>>> origin/main
 trees — `backend/` (Express + Mongoose + TypeScript API on port **5601**)
 and `frontend/` (Next.js Pages-Router SPA on port **3055**) — with five
 cross-tree business domains.
@@ -62,16 +58,11 @@ cross-tree business domains.
   `trailingSlash: true` and `output: 'standalone'`. TypeScript `^5`
   with `baseUrl: "src"` and `paths: { "@/*": ["*"] }`. `bun.lock` and
   `package-lock.json` both present; Bun and npm are interchangeable.
-<<<<<<< HEAD
 - **DB** — MongoDB connection is read from `MONGODB_URI` in the root
   `.env` (`backend/src/database/index.ts` falls back to
   `mongodb://localhost:27017/expiner` for local dev). The
   compose stack uses `mongodb://mongo:27017/expiner` over the
   internal docker network.
-=======
-- **DB** — MongoDB at `mongodb://192.168.100.157:27017/image`
-  (`backend/src/database/index.ts`). `.env` exposes `DB_HOST` /
->>>>>>> origin/main
   `DB_PORT` / `DB_DATABASE=dev`.
 - **Auth (two layers):** JWT bearer (`Authorization: Bearer <token>`,
   also readable from the `Authorization` cookie via `cookieParser()`)
@@ -83,11 +74,7 @@ cross-tree business domains.
 ## Where things live
 
 ```
-<<<<<<< HEAD
 expiner/                       # repo root — this file is the only doc here
-=======
-express-upload/                       # repo root — this file is the only doc here
->>>>>>> origin/main
 ├── AGENTS.md                         # you are here (root index, table of contents only)
 ├── backend/
 │   ├── AGENTS.md                     # backend edit scope, hard rules, data flow
@@ -188,14 +175,8 @@ duplicated per domain.
   the `App` with the route array (Location, File, Auth, User, ApiKey,
   UserSelf) and calls `listen()`.
 - **CORS allowlist** — `http://localhost:3055`, `http://localhost:5173`,
-<<<<<<< HEAD
   `http://localhost:3000`, plus `FRONTEND_ORIGIN` from env.
   `credentials: true`. (Not `*` — the per-tree backend
-=======
-  `https://srv-bs2.lmstream.xyz`, `https://rentease.lmstream.xyz`,
-  `https://srv-expiner.lmstream.xyz`, plus `FRONTEND_ORIGIN` from
-  env. `credentials: true`. (Not `*` — the per-tree backend
->>>>>>> origin/main
   `AGENTS.md` is stale on this point.)
 - **Auth middleware (two flavors):**
   - `backend/src/middlewares/auth.middleware.ts` —
@@ -358,11 +339,7 @@ loads their files"):
 [FileModel — backend/src/models/files.model.ts]
         │  Mongoose ODM
         ▼
-<<<<<<< HEAD
 [MongoDB at mongodb://mongo:27017/expiner]
-=======
-[MongoDB at mongodb://192.168.100.157:27017/image]
->>>>>>> origin/main
         │
         ▼
 [Response envelope: { data: [...], message: "..." }]

@@ -4,21 +4,14 @@ import {
   HStack,
   IconButton,
   Image,
-<<<<<<< HEAD
   Input,
-=======
->>>>>>> origin/main
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
-<<<<<<< HEAD
   Select,
   SimpleGrid,
   Tag,
-=======
-  SimpleGrid,
->>>>>>> origin/main
   Text,
   VStack,
   useToast,
@@ -27,11 +20,8 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import { FiDownload, FiCopy, FiTrash2, FiExternalLink, FiMoreVertical } from "react-icons/fi";
 import { useState } from "react";
 import { useFiles } from "@/hooks/useFiles";
-<<<<<<< HEAD
 import { useFolders } from "@/hooks/useFolders";
 import { useCategories } from "@/hooks/useCategories";
-=======
->>>>>>> origin/main
 import { FileIcon } from "@/components/ui/FileIcon";
 import { CopyButton } from "@/components/ui/CopyButton";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
@@ -52,7 +42,6 @@ const TYPE_LABEL: Record<FileCategory, string> = {
 };
 
 export function MyFilesGrid() {
-<<<<<<< HEAD
   const { files, loading, type, setType, category, setCategory, remove, refresh } = useFiles();
   const { folders } = useFolders();
   const { categories } = useCategories();
@@ -76,12 +65,6 @@ export function MyFilesGrid() {
     if (c !== "all") setType("all");
   }
 
-=======
-  const { files, loading, type, setType, remove, refresh } = useFiles();
-  const [target, setTarget] = useState<AuthFile | null>(null);
-  const toast = useToast();
-
->>>>>>> origin/main
   function publicUrl(f: AuthFile): string {
     return `${API_BASE_URL}/f/${f.shortUrl}${f.extension ?? ""}`;
   }
@@ -100,7 +83,6 @@ export function MyFilesGrid() {
 
   return (
     <VStack align="stretch" spacing={6}>
-<<<<<<< HEAD
       <HStack spacing={2} wrap="wrap">
         <Select
           size="sm"
@@ -171,19 +153,6 @@ export function MyFilesGrid() {
             ))}
           </Select>
         )}
-=======
-      <FileDropzone onUploaded={() => refresh()} />
-
-      <HStack spacing={2} wrap="wrap">
-        <FilterChip active={type === "all"} onClick={() => setType("all")}>
-          All
-        </FilterChip>
-        {(Object.keys(TYPE_LABEL) as FileCategory[]).map((c) => (
-          <FilterChip key={c} active={type === c} onClick={() => setType(c)}>
-            {TYPE_LABEL[c]}
-          </FilterChip>
-        ))}
->>>>>>> origin/main
       </HStack>
 
       {loading ? (
@@ -275,14 +244,11 @@ export function MyFilesGrid() {
                     ↓ {f.downloads} · 👁 {f.views}
                   </Text>
                 </HStack>
-<<<<<<< HEAD
                 {f.category ? (
                   <Tag size="sm" colorScheme="brand" alignSelf="flex-start" mt={0.5}>
                     {f.category}
                   </Tag>
                 ) : null}
-=======
->>>>>>> origin/main
                 <HStack
                   mt={1}
                   bg="ink.900"

@@ -79,7 +79,6 @@ export const ENDPOINTS = {
   myKeys: "/api/auth/keys",
   revokeKey: (id: string) => `/api/auth/keys/${id}/revoke`,
 
-<<<<<<< HEAD
   folders: "/api/folders",
   createFolder: "/api/folders",
   deleteFolder: (id: string) => `/api/folders/${id}`,
@@ -91,10 +90,6 @@ export const ENDPOINTS = {
   files: "/api/files",
   filesByType: (type: string) => `/api/files/type/${type}`,
   filesByCategory: (category: string) => `/api/files?category=${encodeURIComponent(category)}`,
-=======
-  files: "/api/files",
-  filesByType: (type: string) => `/api/files/type/${type}`,
->>>>>>> origin/main
   file: (id: string, ext?: string) =>
     ext ? `/api/files/${id}.${ext}` : `/api/files/${id}`,
   fileDownload: (id: string) => `/api/files/${id}/download`,

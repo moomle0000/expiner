@@ -3,11 +3,7 @@
  *
  * These mirror the shape of the server response from
  * `POST /api/files/upload` and the `FileModel` schema in
-<<<<<<< HEAD
  * `expiner/src/models/files.model.ts`.
-=======
- * `express-upload/src/models/files.model.ts`.
->>>>>>> origin/main
  *
  * Only the fields the client cares about are typed — the server may return
  * more (e.g. `detectedMime`, `detectedExt`, `category`) and they will still
@@ -27,16 +23,12 @@ export interface UploadedFile {
   _id: string;
   filename: string;
   originalName: string;
-<<<<<<< HEAD
   /**
    * Server filesystem path. NOT returned by the server anymore — it is
    * stripped from serialized responses for security. Typed as optional so
    * consumers know it may be absent.
    */
   path?: string;
-=======
-  path: string;
->>>>>>> origin/main
   size: number;
   mimetype: string;
   shortUrl: string;
@@ -50,11 +42,8 @@ export interface UploadedFile {
   folder?: string;
   detectedMime?: string;
   detectedExt?: string;
-<<<<<<< HEAD
   /** User-assigned free-text label, set at upload time. */
   category?: string;
-=======
->>>>>>> origin/main
 
   // Allow extra fields the server may add in the future.
   [key: string]: unknown;
@@ -74,7 +63,6 @@ export interface UploadOptions {
   folder?: string;
 
   /**
-<<<<<<< HEAD
    * Optional free-text category label. Sent as a multipart form field
    * named `category` (the server stores it alongside the file and lets
    * callers filter by it later). Trimmed/dropped if it ends up empty.
@@ -82,8 +70,6 @@ export interface UploadOptions {
   category?: string;
 
   /**
-=======
->>>>>>> origin/main
    * Progress callback. `loaded` and `total` are in bytes. `total` may be
    * `0` if the server did not send a Content-Length header.
    */
@@ -111,11 +97,7 @@ export interface UploadOptions {
 }
 
 export interface UploaderConfig {
-<<<<<<< HEAD
   /** Base URL of the expiner server, no trailing slash. */
-=======
-  /** Base URL of the express-upload server, no trailing slash. */
->>>>>>> origin/main
   baseUrl: string;
 
   /**

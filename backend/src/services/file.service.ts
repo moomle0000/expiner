@@ -6,23 +6,15 @@ import { CreateFileDto } from '@dtos/files';
 import { AuthRequest as AuthenticatedRequest } from '@interfaces/AuthRequest';
 import { sanitizeFolder, categorize, categoryFromMime } from '@utils/fileCategory';
 import { sniffFile } from '@utils/sniff';
-<<<<<<< HEAD
 import { FolderModel } from '@models/folder.model';
-=======
->>>>>>> origin/main
 import crypto from 'crypto';
 
 @Service()
 export class FileService {
-<<<<<<< HEAD
   public async findAllFiles(userId: string, category?: string): Promise<File[]> {
     const filter: any = { createdBy: userId };
     if (category) filter.category = category;
     return FileModel.find(filter).sort({ createdAt: -1 });
-=======
-  public async findAllFiles(userId: string): Promise<File[]> {
-    return FileModel.find({ createdBy: userId }).sort({ createdAt: -1 });
->>>>>>> origin/main
   }
 
   public async findFileById(fileId: string, userId: string): Promise<File> {
@@ -57,7 +49,6 @@ export class FileService {
 
     const userId = req.user._id?.toString() || (req.user as any).id;
     const folder = sanitizeFolder((req.header('X-Folder') || '').trim()) || undefined;
-<<<<<<< HEAD
     const category = (req.body?.category || '').toString().trim() || undefined;
 
     // Per-user folder isolation: a named upload folder must belong to this
@@ -69,8 +60,6 @@ export class FileService {
         throw new HttpException(400, `Folder "${folder}" not found — create it in Workspace first`);
       }
     }
-=======
->>>>>>> origin/main
 
     // generate a unique short URL (collision loop)
     let shortUrl = '';
@@ -100,10 +89,7 @@ export class FileService {
       detectedExt: detected?.ext,
       createdBy: userId as any,
       folder,
-<<<<<<< HEAD
       category,
-=======
->>>>>>> origin/main
     });
     return created;
   }

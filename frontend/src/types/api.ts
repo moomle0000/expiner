@@ -38,12 +38,8 @@ export interface AuthFile {
   views: number;
   fileType?: FileCategory;
   extension?: string;
-<<<<<<< HEAD
   /** User-assigned free-text label (set on upload, used for filtering). */
   category?: string;
-=======
-  category?: FileCategory;
->>>>>>> origin/main
   detectedMime?: string;
   detectedExt?: string;
   createdBy?: string;
@@ -86,7 +82,6 @@ export interface LoginResponse {
   message?: string;
   token: string;
 }
-<<<<<<< HEAD
 
 /** A user's own upload folder (stored as the `folder` name on AuthFile). */
 export interface WorkspaceFolder {
@@ -105,5 +100,3 @@ export interface WorkspaceCategory {
   createdAt?: string;
   updatedAt?: string;
 }
-=======
->>>>>>> origin/main

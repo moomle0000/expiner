@@ -58,10 +58,7 @@ export function createUploader(config: UploaderConfig) {
     upload(file: Blob | File, options: UploadOptions = {}): UploadHandle {
       const {
         folder,
-<<<<<<< HEAD
         category,
-=======
->>>>>>> origin/main
         onProgress,
         fieldName = 'file',
         signal: externalSignal,
@@ -174,11 +171,8 @@ export function createUploader(config: UploaderConfig) {
         // a clipboard paste — `Blob` has no `.name`, `File` does).
         const fileName = (file as File).name ?? 'upload';
         form.append(fieldName, file, fileName);
-<<<<<<< HEAD
         // Optional free-text category label (server reads `req.body.category`).
         if (category) form.append('category', category);
-=======
->>>>>>> origin/main
 
         xhr.send(form);
 

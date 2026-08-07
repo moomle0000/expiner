@@ -60,7 +60,6 @@ const fileSchema: Schema = new Schema(
     // classification (filled by file-type sniffer; overrides mimetype/extension when present)
     detectedMime: { type: String, required: false },
     detectedExt: { type: String, required: false },
-<<<<<<< HEAD
     // user-assigned free-text label (set on upload, used for filtering)
     category: {
       type: String,
@@ -78,11 +77,6 @@ const fileSchema: Schema = new Schema(
         return ret;
       },
     },
-=======
-  },
-  {
-    timestamps: true,
->>>>>>> origin/main
   },
 );
 

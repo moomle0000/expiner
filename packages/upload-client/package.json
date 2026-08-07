@@ -1,11 +1,7 @@
 {
   "name": "@moomle/upload-client",
   "version": "0.1.2",
-<<<<<<< HEAD
   "description": "Tiny browser/Node client for the expiner file API. Uploads with progress + cancel.",
-=======
-  "description": "Tiny browser/Node client for the express-upload file API. Uploads with progress + cancel.",
->>>>>>> origin/main
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -30,11 +26,7 @@
   },
   "keywords": [
     "upload",
-<<<<<<< HEAD
     "expiner",
-=======
-    "express-upload",
->>>>>>> origin/main
     "browser",
     "xhr",
     "progress",

@@ -1,10 +1,6 @@
 # @moomle/upload-client
 
-<<<<<<< HEAD
 Tiny browser/Node client for the `expiner` file API. Uploads with progress + cancel. **Zero runtime dependencies.** TypeScript-first, ESM, works in Next.js App Router out of the box.
-=======
-Tiny browser/Node client for the `express-upload` file API. Uploads with progress + cancel. **Zero runtime dependencies.** TypeScript-first, ESM, works in Next.js App Router out of the box.
->>>>>>> origin/main
 
 Targets the unified file endpoint: `POST /api/files/upload` (field name `file`).
 
@@ -139,11 +135,7 @@ You have three flows, all supported by this client:
 
 1. **API key (server-to-server, recommended for Next.js):** create a key via `POST /api/auth/keys` on the server, expose it as `NEXT_PUBLIC_*`, pass it as `apiKey`. The server resolves it to a `User` and stores the file under that user's `folderSlug`.
 2. **JWT (user session):** the user logs in via `POST /auth/login`, which returns the JWT in the response body (and optionally in the `Authorization` cookie). Two ways to forward it to the API:
-<<<<<<< HEAD
    - let the browser send the cookie automatically (requires `credentials: 'include'` on `fetch` — but this client uses XHR, so the cookie is sent automatically for same-origin or when `Access-Control-Allow-Credentials: true` is set on the server, which expiner already does).
-=======
-   - let the browser send the cookie automatically (requires `credentials: 'include'` on `fetch` — but this client uses XHR, so the cookie is sent automatically for same-origin or when `Access-Control-Allow-Credentials: true` is set on the server, which express-upload already does).
->>>>>>> origin/main
    - pass the JWT explicitly as `token` and the client adds `Authorization: Bearer <jwt>`.
 3. **Hybrid:** `apiKey` takes precedence over `token`.
 

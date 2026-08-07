@@ -8,7 +8,6 @@ export function useFiles(initialType?: FileCategory | "all") {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [type, setType] = useState<FileCategory | "all">(initialType ?? "all");
-<<<<<<< HEAD
   const [category, setCategory] = useState<string | "all">("all");
 
   const fetchAll = useCallback(async (t: FileCategory | "all", c: string | "all") => {
@@ -19,14 +18,6 @@ export function useFiles(initialType?: FileCategory | "all") {
       if (c && c !== "all") url = ENDPOINTS.filesByCategory(c);
       else if (t !== "all") url = ENDPOINTS.filesByType(t);
       else url = ENDPOINTS.files;
-=======
-
-  const fetchAll = useCallback(async (t: FileCategory | "all") => {
-    setLoading(true);
-    setError(null);
-    try {
-      const url = t === "all" ? ENDPOINTS.files : ENDPOINTS.filesByType(t);
->>>>>>> origin/main
       const res = await api.get(url);
       const data = (res.data?.data ?? []) as AuthFile[];
       setFiles(data);
@@ -38,13 +29,8 @@ export function useFiles(initialType?: FileCategory | "all") {
   }, []);
 
   useEffect(() => {
-<<<<<<< HEAD
     void fetchAll(type, category);
   }, [type, category, fetchAll]);
-=======
-    void fetchAll(type);
-  }, [type, fetchAll]);
->>>>>>> origin/main
 
   const remove = useCallback(
     async (id: string) => {
@@ -54,13 +40,7 @@ export function useFiles(initialType?: FileCategory | "all") {
     [],
   );
 
-<<<<<<< HEAD
   const refresh = useCallback(() => fetchAll(type, category), [fetchAll, type, category]);
 
   return { files, loading, error, type, setType, category, setCategory, remove, refresh };
-=======
-  const refresh = useCallback(() => fetchAll(type), [fetchAll, type]);
-
-  return { files, loading, error, type, setType, remove, refresh };
->>>>>>> origin/main
 }

@@ -1,10 +1,6 @@
 # upload-client
 
-<<<<<<< HEAD
 Tiny browser/Node client for the `expiner` file API. Ships as `@moomle/upload-client`.
-=======
-Tiny browser/Node client for the `express-upload` file API. Ships as `@moomle/upload-client`.
->>>>>>> origin/main
 
 ## Backend paths
 - Source: `packages/upload-client/src/index.ts` (re-exports the public API)
@@ -26,11 +22,8 @@ UploadError                         → Error subclass with .status, .body
 - The package has no runtime dependencies. Build is pure `tsc` (no SWC, no bundler) because consumers import the raw `.js` via the package's `exports.import` field.
 
 ## Domain-specific rules
-<<<<<<< HEAD
 - **Category field.** `UploadOptions.category` (optional free-text) is appended to the multipart body as a `category` form field. The server stores it and lets callers filter by it. Blank → not sent.
 - **`path` is gone from responses.** The server's `FileModel` `toJSON` transform strips `path` for security; `UploadedFile.path` is typed `string | undefined` and should not be relied on.
-=======
->>>>>>> origin/main
 - **XHR, not fetch.** Browsers do not expose upload progress through `fetch`; the entire reason this lib exists as a custom thing (vs. just `fetch(formData)`) is progress + cancel. Do not "modernize" to fetch — it would silently regress progress callbacks.
 - **Auth precedence matches the server.** `apiKey` is sent as `X-API-Key` and `token` as `Authorization: Bearer <jwt>`. If both are configured, `apiKey` wins — that mirrors `middlewares/apiKeyAuth.middleware.ts` which checks `X-API-Key` first.
 - **Multer field name.** Server expects `upload.single('file')` (the unified `file.route.ts`), so the default `fieldName` is `'file'`. If you need to point at the legacy `image.route.ts` shape, pass `fieldName: 'image'` — but `image.route.ts` was removed in this repo.

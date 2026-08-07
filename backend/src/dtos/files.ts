@@ -24,13 +24,10 @@ export class CreateFileDto {
 
   @IsString()
   public extension: string;
-<<<<<<< HEAD
 
   @IsString()
   @IsOptional()
   public category?: string;
-=======
->>>>>>> origin/main
 }
 
 export class UpdateFileDto {

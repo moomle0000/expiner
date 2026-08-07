@@ -2,11 +2,7 @@ import axios from "axios";
 import i18next from "i18next";
 
 const axiosprop = axios.create({
-<<<<<<< HEAD
   // baseURL: "https://your-server.example.com",
-=======
-  // baseURL: "https://srv-bs2.lmstream.xyz",
->>>>>>> origin/main
   baseURL: "http://localhost:5601",
   headers: {
     "Content-Type": "application/json",

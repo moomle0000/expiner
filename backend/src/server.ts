@@ -8,11 +8,8 @@ import { AuthRoute } from './routes/auth.route';
 import { UserRoute } from './routes/users.route';
 import { ApiKeyRoute } from './routes/apiKey.route';
 import { UserSelfRoute } from './routes/userSelf.route';
-<<<<<<< HEAD
 import { FolderRoute } from './routes/folder.route';
 import { CategoryRoute } from './routes/category.route';
-=======
->>>>>>> origin/main
 import { seedBootstrapUsers } from '@utils/seedBootstrap';
 
 // Make sure the upload root + every sub-folder used by the upload middleware
@@ -43,11 +40,8 @@ const app = new App([
   new UserRoute(),
   new ApiKeyRoute(),
   new UserSelfRoute(),
-<<<<<<< HEAD
   new FolderRoute(),
   new CategoryRoute(),
-=======
->>>>>>> origin/main
 ]);
 
 (async () => {
