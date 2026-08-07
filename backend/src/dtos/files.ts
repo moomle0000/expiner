@@ -24,6 +24,10 @@ export class CreateFileDto {
 
   @IsString()
   public extension: string;
+
+  @IsString()
+  @IsOptional()
+  public category?: string;
 }
 
 export class UpdateFileDto {

@@ -4,11 +4,14 @@ import {
   HStack,
   IconButton,
   Image,
+  Input,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
+  Select,
   SimpleGrid,
+  Tag,
   Text,
   VStack,
   useToast,
@@ -17,6 +20,8 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import { FiDownload, FiCopy, FiTrash2, FiExternalLink, FiMoreVertical } from "react-icons/fi";
 import { useState } from "react";
 import { useFiles } from "@/hooks/useFiles";
+import { useFolders } from "@/hooks/useFolders";
+import { useCategories } from "@/hooks/useCategories";
 import { FileIcon } from "@/components/ui/FileIcon";
 import { CopyButton } from "@/components/ui/CopyButton";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
@@ -37,9 +42,28 @@ const TYPE_LABEL: Record<FileCategory, string> = {
 };
 
 export function MyFilesGrid() {
-  const { files, loading, type, setType, remove, refresh } = useFiles();
+  const { files, loading, type, setType, category, setCategory, remove, refresh } = useFiles();
+  const { folders } = useFolders();
+  const { categories } = useCategories();
   const [target, setTarget] = useState<AuthFile | null>(null);
+  const [newCategory, setNewCategory] = useState("");
+  const [uploadFolder, setUploadFolder] = useState("");
+  const [uploadCategory, setUploadCategory] = useState("");
   const toast = useToast();
+
+  const fileCategories = Array.from(new Set(files.map((f) => f.category))).filter(
+    (c): c is string => !!c,
+  );
+
+  function selectType(t: FileCategory | "all") {
+    setType(t);
+    if (t !== "all") setCategory("all");
+  }
+
+  function selectCategory(c: string | "all") {
+    setCategory(c);
+    if (c !== "all") setType("all");
+  }
 
   function publicUrl(f: AuthFile): string {
     return `${API_BASE_URL}/f/${f.shortUrl}${f.extension ?? ""}`;
@@ -59,17 +83,76 @@ export function MyFilesGrid() {
 
   return (
     <VStack align="stretch" spacing={6}>
-      <FileDropzone onUploaded={() => refresh()} />
+      <HStack spacing={2} wrap="wrap">
+        <Select
+          size="sm"
+          maxW="xs"
+          value={uploadFolder}
+          onChange={(e) => setUploadFolder(e.target.value)}
+          aria-label="Upload folder"
+        >
+          <option value="">No folder</option>
+          {folders.map((f) => (
+            <option key={f._id} value={f.name}>
+              {f.name}
+            </option>
+          ))}
+        </Select>
+        <Select
+          size="sm"
+          maxW="xs"
+          value={uploadCategory}
+          onChange={(e) => setUploadCategory(e.target.value)}
+          aria-label="Upload category"
+        >
+          <option value="">No category</option>
+          {categories.map((c) => (
+            <option key={c._id} value={c.name}>
+              {c.name}
+            </option>
+          ))}
+        </Select>
+        <Input
+          size="sm"
+          placeholder="New category (optional)"
+          value={newCategory}
+          onChange={(e) => setNewCategory(e.target.value)}
+          flex="1"
+          minW="200px"
+        />
+      </HStack>
+      <FileDropzone
+        onUploaded={() => refresh()}
+        folder={uploadFolder || undefined}
+        category={newCategory.trim() || uploadCategory || undefined}
+      />
 
       <HStack spacing={2} wrap="wrap">
-        <FilterChip active={type === "all"} onClick={() => setType("all")}>
+        <FilterChip active={type === "all" && category === "all"} onClick={() => { selectType("all"); selectCategory("all"); }}>
           All
         </FilterChip>
         {(Object.keys(TYPE_LABEL) as FileCategory[]).map((c) => (
-          <FilterChip key={c} active={type === c} onClick={() => setType(c)}>
+          <FilterChip key={c} active={type === c && category === "all"} onClick={() => selectType(c)}>
             {TYPE_LABEL[c]}
           </FilterChip>
         ))}
+        {fileCategories.length > 0 && (
+          <Select
+            size="sm"
+            value={category}
+            onChange={(e) => selectCategory(e.target.value)}
+            borderRadius="full"
+            w="auto"
+            aria-label="Filter by category"
+          >
+            <option value="all">All categories</option>
+            {fileCategories.map((c) => (
+              <option key={c} value={c}>
+                {c}
+              </option>
+            ))}
+          </Select>
+        )}
       </HStack>
 
       {loading ? (
@@ -161,6 +244,11 @@ export function MyFilesGrid() {
                     ↓ {f.downloads} · 👁 {f.views}
                   </Text>
                 </HStack>
+                {f.category ? (
+                  <Tag size="sm" colorScheme="brand" alignSelf="flex-start" mt={0.5}>
+                    {f.category}
+                  </Tag>
+                ) : null}
                 <HStack
                   mt={1}
                   bg="ink.900"

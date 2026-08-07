@@ -60,9 +60,23 @@ const fileSchema: Schema = new Schema(
     // classification (filled by file-type sniffer; overrides mimetype/extension when present)
     detectedMime: { type: String, required: false },
     detectedExt: { type: String, required: false },
+    // user-assigned free-text label (set on upload, used for filtering)
+    category: {
+      type: String,
+      required: false,
+      default: null,
+      index: true,
+    },
   },
   {
     timestamps: true,
+    toJSON: {
+      transform(_doc, ret) {
+        delete ret.path;
+        delete ret.__v;
+        return ret;
+      },
+    },
   },
 );
 

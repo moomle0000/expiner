@@ -20,4 +20,6 @@ export interface File {
   // classification (filled by file-type sniffer)
   detectedMime?: string;
   detectedExt?: string;
+  // user-assigned free-text label (set on upload, used for filtering)
+  category?: string;
 }

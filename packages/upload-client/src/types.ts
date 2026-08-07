@@ -23,7 +23,12 @@ export interface UploadedFile {
   _id: string;
   filename: string;
   originalName: string;
-  path: string;
+  /**
+   * Server filesystem path. NOT returned by the server anymore — it is
+   * stripped from serialized responses for security. Typed as optional so
+   * consumers know it may be absent.
+   */
+  path?: string;
   size: number;
   mimetype: string;
   shortUrl: string;
@@ -37,6 +42,8 @@ export interface UploadedFile {
   folder?: string;
   detectedMime?: string;
   detectedExt?: string;
+  /** User-assigned free-text label, set at upload time. */
+  category?: string;
 
   // Allow extra fields the server may add in the future.
   [key: string]: unknown;
@@ -54,6 +61,13 @@ export interface UploadOptions {
    * `/`, `\\`, or anything outside `[A-Za-z0-9._-]`.
    */
   folder?: string;
+
+  /**
+   * Optional free-text category label. Sent as a multipart form field
+   * named `category` (the server stores it alongside the file and lets
+   * callers filter by it later). Trimmed/dropped if it ends up empty.
+   */
+  category?: string;
 
   /**
    * Progress callback. `loaded` and `total` are in bytes. `total` may be

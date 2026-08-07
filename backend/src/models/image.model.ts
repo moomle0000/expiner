@@ -59,6 +59,13 @@ const imageSchema: Schema = new Schema(
   },
   {
     timestamps: true,
+    toJSON: {
+      transform(_doc, ret) {
+        delete ret.path;
+        delete ret.__v;
+        return ret;
+      },
+    },
   },
 );
 

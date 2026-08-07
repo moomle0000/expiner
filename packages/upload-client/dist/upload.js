@@ -39,7 +39,7 @@ export function createUploader(config) {
          * `signal` option) to abort an in-flight upload.
          */
         upload(file, options = {}) {
-            const { folder, onProgress, fieldName = 'file', signal: externalSignal, headers: extraHeaders, } = options;
+            const { folder, category, onProgress, fieldName = 'file', signal: externalSignal, headers: extraHeaders, } = options;
             let aborted = false;
             let abortReason;
             const xhr = new XMLHttpRequest();
@@ -143,6 +143,9 @@ export function createUploader(config) {
                 // a clipboard paste — `Blob` has no `.name`, `File` does).
                 const fileName = file.name ?? 'upload';
                 form.append(fieldName, file, fileName);
+                // Optional free-text category label (server reads `req.body.category`).
+                if (category)
+                    form.append('category', category);
                 xhr.send(form);
                 // Bridge internal controller too, in case someone calls .cancel().
                 // (No-op if nobody's listening, but cheap.)
