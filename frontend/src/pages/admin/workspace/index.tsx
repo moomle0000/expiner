@@ -1,11 +1,11 @@
 import Head from "next/head";
-import { DashboardLayout } from "@/components/layouts/DashboardLayout";
+import { AdminLayout } from "@/components/layouts/AdminLayout";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { WorkspacePanel } from "@/components/dashboard/WorkspacePanel";
 
-export default function DashboardWorkspacePage() {
+export default function AdminWorkspacePage() {
   return (
-    <DashboardLayout topbarTitle="DASHBOARD / WORKSPACE">
+    <AdminLayout topbarTitle="ADMIN / WORKSPACE">
       <Head>
         <title>Workspace · express.upload</title>
       </Head>
@@ -15,6 +15,6 @@ export default function DashboardWorkspacePage() {
         description="Create folders to assign uploads to and category labels to tag them. Everything here is scoped to your account only."
       />
       <WorkspacePanel />
-    </DashboardLayout>
+    </AdminLayout>
   );
 }
