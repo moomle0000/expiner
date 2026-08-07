@@ -75,6 +75,7 @@ export const ENDPOINTS = {
 
   me: "/api/auth/me",
   mePassword: "/api/auth/me/password",
+  meAvatar: "/api/auth/me/avatar",
 
   myKeys: "/api/auth/keys",
   revokeKey: (id: string) => `/api/auth/keys/${id}/revoke`,

@@ -15,4 +15,6 @@ export interface User {
   folderSlug?: string;
   lastLogin?: Date;
   lastLoginAt?: Date;
+  /** URL path of the uploaded profile picture (e.g. `/uploads/avatars/<file>`). */
+  avatar?: string;
 }

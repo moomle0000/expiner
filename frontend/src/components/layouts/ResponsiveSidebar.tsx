@@ -35,10 +35,10 @@ export function getSidebarSections({ role }: SidebarSectionsProps): SidebarSecti
     {
       title: "Workspace",
       items: [
-        { href: "/dashboard/workspace", label: "Workspace", icon: FiFolder },
+        { href: "/dashboard/files", label: "My Files", icon: FiFileText },
         { href: "/dashboard/folder", label: "Folders", icon: FiFolder },
         { href: "/dashboard/category", label: "Categories", icon: FiTag },
-        { href: "/dashboard/files", label: "My Files", icon: FiFileText },
+        { href: "/dashboard/workspace", label: "Workspace", icon: FiFolder },
         { href: "/dashboard/api-keys", label: "API Keys", icon: FiKey },
       ],
     },
@@ -144,7 +144,7 @@ function NavBody({
         ))}
       </VStack>
 
-      <Box p={4} borderTopWidth="1px" borderColor="whiteAlpha.100">
+      {/* <Box p={4} borderTopWidth="1px" borderColor="whiteAlpha.100">
         <HStack
           px={3}
           py={2}
@@ -161,10 +161,10 @@ function NavBody({
             boxShadow="0 0 8px var(--chakra-colors-accent-lime)"
           />
           <Text fontSize="xs" fontFamily="mono" color="ink.300">
-            {role === "admin" ? "Admin session" : "User session"}
+            {role === "admin" ? "Admin" : "User"}
           </Text>
         </HStack>
-      </Box>
+      </Box> */}
     </>
   );
 }

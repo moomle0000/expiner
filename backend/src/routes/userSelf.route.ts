@@ -3,6 +3,7 @@ import { Container } from 'typedi';
 import { Routes } from '@interfaces/routes.interface';
 import { UserSelfController } from '@controllers/userSelf.controller';
 import { authMiddleware } from '@middlewares/auth.middleware';
+import { uploadAvatar } from '@utils/multerConfig';
 
 export class UserSelfRoute implements Routes {
   public path = '/';
@@ -17,5 +18,13 @@ export class UserSelfRoute implements Routes {
     this.router.get(`${this.path}api/auth/me`, authMiddleware, this.controller.me);
     this.router.patch(`${this.path}api/auth/me`, authMiddleware, this.controller.updateMe);
     this.router.post(`${this.path}api/auth/me/password`, authMiddleware, this.controller.changeMyPassword);
+    // avatar upload — multer must run AFTER authMiddleware so req.user is set
+    // before the destination directory is computed.
+    this.router.post(
+      `${this.path}api/auth/me/avatar`,
+      authMiddleware,
+      uploadAvatar.single('avatar'),
+      this.controller.uploadAvatar,
+    );
   }
 }

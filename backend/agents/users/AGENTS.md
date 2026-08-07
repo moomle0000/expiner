@@ -1,7 +1,7 @@
 # users
 
 ## Backend paths
-- Interface: `src/interfaces/users.interface.ts` — `User { email, password?, username?, name?, role, status?, active?, createdby?, folderSlug?, lastLogin? }`
+- Interface: `src/interfaces/users.interface.ts` — `User { email, password?, username?, name?, role, status?, active?, createdby?, avatar?, folderSlug?, lastLogin? }`
 - Auth interface: `src/interfaces/auth.interface.ts` — `DataStoredInToken { id }`, `TokenData { token, expiresIn }`, `RequestWithUser extends Request { user: User }`
 - Request helper: `src/interfaces/AuthRequest.ts` — `AuthRequest extends Request { user?: User }`
 - Model: `src/models/users.model.ts` — `UserModel` (collection `users`, `email` unique, `folderSlug` unique+sparse, `role: 'admin'|'user'`)
@@ -9,10 +9,10 @@
 - Service: `src/services/auth.service.ts` — `AuthService` (legacy; signup, login with bcrypt + jwt, verify, logout, adminResetPassword)
 - Controller: `src/controllers/users.controller.ts` — `UserController`
 - Controller: `src/controllers/auth.controller.ts` — `AuthController` (signup, login, verify, logout, adminResetPassword)
-- Controller: `src/controllers/userSelf.controller.ts` — `UserSelfController` (self `me` / `updateMe` / `changeMyPassword`; uses bcrypt 10 rounds; strips `password`, `passwordHash`, `__v` in `sanitize()`)
+- Controller: `src/controllers/userSelf.controller.ts` — `UserSelfController` (self `me` / `updateMe` / `changeMyPassword` / `uploadAvatar`; uses bcrypt 10 rounds; strips `password`, `passwordHash`, `__v` in `sanitize()`)
 - Route: `src/routes/users.route.ts` — `UserRoute` (path `/users`)
 - Route: `src/routes/auth.route.ts` — `AuthRoute` (path `/auth`)
-- Route: `src/routes/userSelf.route.ts` — `UserSelfRoute` (path `/`, mounted from `src/server.ts`; provides `/api/auth/me` and `/api/auth/me/password`)
+- Route: `src/routes/userSelf.route.ts` — `UserSelfRoute` (path `/`, mounted from `src/server.ts`; provides `/api/auth/me`, `/api/auth/me/password`, and `/api/auth/me/avatar` — avatar route runs `authMiddleware` before `uploadAvatar.single('avatar')`)
 - Middleware: `src/middlewares/auth.middleware.ts` — `authMiddleware` (Bearer JWT), `requireAdmin`, `requireSelfOrAdmin`
 - Global error handler: `src/middlewares/error.middleware.ts` — logs `error` level for 5xx, `warn` level for 4xx (so user-input failures like `Invalid credentials` don't show up as server errors)
 - Helper: `src/utils/Authorization.ts` — extract Bearer token from a `Cookie` header
@@ -36,8 +36,9 @@ PATCH  /users/:id            -> updateUser
 DELETE /users/:id            -> deleteUser
 
 GET   /api/auth/me            -> me          (self, Bearer JWT — current user safe view)
-PATCH /api/auth/me            -> updateMe    (self, Bearer JWT — name and/or email; email uniqueness checked)
+PATCH /api/auth/me            -> updateMe    (self, Bearer JWT — name and/or email; email uniqueness checked; also `{ avatar: null }` to clear the profile picture)
 POST  /api/auth/me/password   -> changeMyPassword (self, Bearer JWT — bcrypt compare current + hash new, min 8 chars)
+POST  /api/auth/me/avatar     -> uploadAvatar (self, Bearer JWT — multipart field `avatar`, JPG/PNG/GIF/WebP ≤5MB; stores under `<UPLOAD_ROOT>/avatars/` served at `/uploads/avatars/<file>`, sets `user.avatar`, deletes the previous file)
 ```
 
 ## Domain-specific rules

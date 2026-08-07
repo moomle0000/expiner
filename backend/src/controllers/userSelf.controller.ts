@@ -1,9 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
 import { Service } from 'typedi';
 import { compare, hash } from 'bcrypt';
+import fs from 'fs';
+import path from 'path';
 import { HttpException } from '@exceptions/httpException';
 import { UserModel } from '@models/users.model';
 import { AuthRequest } from '@interfaces/AuthRequest';
+import { MulterRequest } from '@interfaces/Multer';
+import { UPLOAD_ROOT } from '@config';
 
 const BCRYPT_ROUNDS = 10;
 
@@ -28,7 +32,7 @@ export class UserSelfController {
       const user = await UserModel.findById(req.user._id);
       if (!user) throw new HttpException(404, 'User not found');
 
-      const body = (req.body || {}) as { name?: string; email?: string };
+      const body = (req.body || {}) as { name?: string; email?: string; avatar?: string | null };
 
       if (body.name !== undefined) {
         const name = String(body.name).trim();
@@ -46,6 +50,16 @@ export class UserSelfController {
         const taken = await UserModel.findOne({ email, _id: { $ne: user._id } });
         if (taken) throw new HttpException(409, 'Email already in use');
         user.email = email;
+      }
+
+      // avatar can only be replaced via POST /api/auth/me/avatar (multipart).
+      // This PATCH supports clearing it: { "avatar": null }.
+      if (body.avatar !== undefined) {
+        if (body.avatar !== null) {
+          throw new HttpException(400, 'avatar can only be replaced via /api/auth/me/avatar');
+        }
+        this.deleteAvatarFile(user.avatar);
+        user.avatar = null;
       }
 
       await user.save();
@@ -81,6 +95,42 @@ export class UserSelfController {
       next(err);
     }
   };
+
+  // POST /api/auth/me/avatar — upload/replace the current user's profile picture
+  public uploadAvatar = async (req: AuthRequest, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      if (!req.user) throw new HttpException(401, 'Authentication required');
+      const file = (req as MulterRequest).file;
+      if (!file) throw new HttpException(400, 'No image uploaded');
+
+      const user = await UserModel.findById(req.user._id);
+      if (!user) throw new HttpException(404, 'User not found');
+
+      // Delete the previous avatar image from disk, if any.
+      if (user.avatar) {
+        const previous = path.basename(user.avatar);
+        const previousPath = path.join(UPLOAD_ROOT, 'avatars', previous);
+        if (fs.existsSync(previousPath)) fs.unlinkSync(previousPath);
+      }
+
+      // Remove the previous avatar image from disk, if any.
+      this.deleteAvatarFile(user.avatar);
+
+      user.avatar = `/uploads/avatars/${file.filename}`;
+      await user.save();
+      res.status(200).json({ data: this.sanitize(user), message: 'avatar updated' });
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  /** Deletes the on-disk file referenced by an avatar path (e.g. `/uploads/avatars/x.png`). */
+  private deleteAvatarFile(avatar?: string | null): void {
+    if (!avatar) return;
+    const previous = path.basename(avatar);
+    const previousPath = path.join(UPLOAD_ROOT, 'avatars', previous);
+    if (fs.existsSync(previousPath)) fs.unlinkSync(previousPath);
+  }
 
   private sanitize(user: any) {
     if (!user) return user;

@@ -50,3 +50,42 @@ const fileFilter = (_req: any, _file: multer.File, cb: multer.FileFilterCallback
 
 export const upload = multer({ storage, fileFilter });
 export const uploadMultiple = multer({ storage, fileFilter });
+
+// --- Avatar (profile picture) upload ---
+// Stored under <UPLOAD_ROOT>/avatars/ and served at /uploads/avatars/<file>
+// via the `/uploads` static mount in app.ts. Indexed on the user record as
+// `user.avatar = "/uploads/avatars/<file>"` (a URL path, not a filesystem path).
+const AVATAR_DIR = path.join(baseUploadDir, 'avatars');
+ensureDir(AVATAR_DIR);
+
+const avatarStorage = multer.diskStorage({
+  destination: (_req, _file, cb) => cb(null, AVATAR_DIR),
+  filename: (_req, file, cb) => {
+    const unique = crypto.randomBytes(8).toString('hex');
+    const extension = path.extname(file.originalname).toLowerCase();
+    cb(null, `${unique}${extension}`);
+  },
+});
+
+const ALLOWED_AVATAR_MIMES = new Set([
+  'image/jpeg',
+  'image/png',
+  'image/gif',
+  'image/webp',
+]);
+
+const avatarFileFilter = (_req: any, file: multer.File, cb: multer.FileFilterCallback) => {
+  if (ALLOWED_AVATAR_MIMES.has(file.mimetype)) {
+    cb(null, true);
+    return;
+  }
+  const err = new Error('Only JPG, PNG, GIF or WebP images are allowed') as any;
+  err.status = 400;
+  cb(err);
+};
+
+export const uploadAvatar = multer({
+  storage: avatarStorage,
+  fileFilter: avatarFileFilter,
+  limits: { fileSize: 5 * 1024 * 1024 },
+});

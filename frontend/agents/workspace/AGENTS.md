@@ -15,7 +15,7 @@ user's folders/categories.
 ## Feature components
 - `src/components/dashboard/WorkspacePanel.tsx` — two-column card grid: a **Folders** manager and a **Categories** manager. Each card: add-by-name input (+ Enter key), and a per-item delete button. Delete is confirmed via `ConfirmDialog` (files already uploaded are not deleted).
 - `src/components/dashboard/FoldersPanel.tsx` — grid of folder cards (icon, name, file count, total size, created date). Each card links to `/dashboard/folder/[id]`. Empty state links to the Workspace. Counts are computed client-side: `files.filter((f) => f.folder === folder.name)`.
-- `src/components/dashboard/FolderDetail.tsx` — resolves the `WorkspaceFolder` by id, filters `useFiles()` for `f.folder === folder.name`, and renders `StatCard`s (files, size, downloads, views) + the shared `FileCards` grid. Missing folder → `EmptyState` with a back link.
+- `src/components/dashboard/FolderDetail.tsx` — resolves the `WorkspaceFolder` by id, filters `useFiles()` for `f.folder === folder.name`, and renders `StatCard`s (files, size, downloads, views) + the shared `FileCards` grid. The **whole cards area is a hidden drop target**: no visible dropzone is rendered; dragging files over the grid shows a dashed "Drop to upload" overlay and dropping uploads them into the folder (via `useFileUpload({ folder: folder.name })`) then refreshes. Missing folder → `EmptyState` with a back link.
 - `src/components/dashboard/CategoriesPanel.tsx` — same card-grid pattern as `FoldersPanel`, keyed off `f.category === category.name`, linking to `/dashboard/category/[id]`.
 - `src/components/dashboard/CategoryDetail.tsx` — resolves the `WorkspaceCategory` by id; same stat + `FileCards` layout as `FolderDetail`.
 

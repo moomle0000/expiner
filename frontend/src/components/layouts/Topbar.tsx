@@ -15,6 +15,7 @@ import {
 import { ChevronDownIcon, BellIcon } from "@chakra-ui/icons";
 import { useAuth } from "@/hooks/useAuth";
 import { getInitials } from "@/lib/format";
+import { API_BASE_URL } from "@/lib/endpoints";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { HamburgerButton } from "./MobileDrawer";
@@ -78,6 +79,7 @@ export function Topbar({ title, rightSlot, onOpenNav }: TopbarProps) {
               <Avatar
                 size="sm"
                 name={user?.name || user?.email}
+                src={user?.avatar ? `${API_BASE_URL}${user.avatar}` : undefined}
                 bg="accent.lime"
                 color="ink.900"
                 fontWeight="700"

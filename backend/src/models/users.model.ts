@@ -25,6 +25,7 @@ const UserSchema: Schema = new Schema<User>(
       },
     },
     lastLoginAt: { type: Date, default: null },
+    avatar: { type: String, default: null },
   },
   {
     timestamps: true,

@@ -1,8 +1,7 @@
-import { Box, HStack, Text, VStack, useToast } from "@chakra-ui/react";
+import { Box, HStack, Text, VStack } from "@chakra-ui/react";
 import { useCallback, useRef, useState } from "react";
 import { FiUploadCloud } from "react-icons/fi";
-import api, { extractErrorMessage } from "@/lib/api";
-import { ENDPOINTS } from "@/lib/endpoints";
+import { useFileUpload } from "@/hooks/useFileUpload";
 import type { AuthFile } from "@/types/api";
 
 export interface FileDropzoneProps {
@@ -13,41 +12,23 @@ export interface FileDropzoneProps {
   multiple?: boolean;
 }
 
-export function FileDropzone({ onUploaded, folder, category, accept, multiple = true }: FileDropzoneProps) {
+export function FileDropzone({
+  onUploaded,
+  folder,
+  category,
+  accept,
+  multiple = true,
+}: FileDropzoneProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isOver, setIsOver] = useState(false);
-  const [uploading, setUploading] = useState(false);
-  const toast = useToast();
+  const { upload, uploading } = useFileUpload({ folder, category });
 
-  const upload = useCallback(
+  const start = useCallback(
     async (files: FileList | File[]) => {
-      if (!files || files.length === 0) return;
-      setUploading(true);
-      const list = Array.from(files);
-      try {
-        for (const file of list) {
-          const fd = new FormData();
-          fd.append("file", file);
-          if (category) fd.append("category", category);
-          const res = await api.post(ENDPOINTS.fileUpload, fd, {
-            headers: { "Content-Type": "multipart/form-data", "X-Folder": folder ?? "" },
-          });
-          const uploaded = res.data.data as AuthFile;
-          onUploaded?.(uploaded);
-        }
-        toast({
-          status: "success",
-          title: "Upload complete",
-          description: `${list.length} file${list.length > 1 ? "s" : ""} uploaded`,
-          position: "top-right",
-        });
-      } catch (err) {
-        toast({ status: "error", title: "Upload failed", description: extractErrorMessage(err), position: "top-right" });
-      } finally {
-        setUploading(false);
-      }
+      const uploaded = await upload(files);
+      for (const f of uploaded) onUploaded?.(f);
     },
-    [folder, category, onUploaded, toast],
+    [upload, onUploaded],
   );
 
   return (
@@ -61,7 +42,7 @@ export function FileDropzone({ onUploaded, folder, category, accept, multiple = 
       onDrop={(e) => {
         e.preventDefault();
         setIsOver(false);
-        void upload(e.dataTransfer.files);
+        void start(e.dataTransfer.files);
       }}
       cursor="pointer"
       borderWidth="1.5px"
@@ -79,18 +60,21 @@ export function FileDropzone({ onUploaded, folder, category, accept, multiple = 
         hidden
         accept={accept}
         multiple={multiple}
-        onChange={(e) => e.target.files && upload(e.target.files)}
+        onChange={(e) => e.target.files && start(e.target.files)}
       />
       <VStack spacing={3}>
         <Box color={uploading ? "accent.lime" : "ink.300"} fontSize="3xl">
           <FiUploadCloud />
         </Box>
         <HStack>
-          <Text fontWeight="600">{uploading ? "Uploading…" : "Drop files here"}</Text>
+          <Text fontWeight="600">
+            {uploading ? "Uploading…" : "Drop files here"}
+          </Text>
           <Text color="ink.400">or click to browse</Text>
         </HStack>
         <Text fontSize="xs" color="ink.400">
-          Files are stored under your account folder. Max size depends on the server.
+          Files are stored under your account folder. Max size depends on the
+          server.
         </Text>
       </VStack>
     </Box>

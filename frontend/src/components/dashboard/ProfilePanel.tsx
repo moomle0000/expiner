@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Box,
   Button,
   FormControl,
@@ -11,11 +12,11 @@ import {
   VStack,
   useToast,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, type ChangeEvent } from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "@/hooks/useAuth";
 import api, { extractErrorMessage } from "@/lib/api";
-import { ENDPOINTS } from "@/lib/endpoints";
+import { API_BASE_URL, ENDPOINTS } from "@/lib/endpoints";
 import { PasswordInput } from "@/components/ui/PasswordInput";
 import { formatDate } from "@/lib/format";
 
@@ -31,6 +32,41 @@ interface PasswordValues {
 export function ProfilePanel() {
   const { user, setUser } = useAuth();
   const toast = useToast();
+
+  const avatarInputRef = useRef<HTMLInputElement>(null);
+  const [avatarUploading, setAvatarUploading] = useState(false);
+
+  const avatarUrl = user?.avatar ? `${API_BASE_URL}${user.avatar}` : undefined;
+
+  async function handleAvatarChange(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    const formData = new FormData();
+    formData.append("avatar", file);
+    setAvatarUploading(true);
+    try {
+      const res = await api.post(ENDPOINTS.meAvatar, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      setUser(res.data.data);
+      toast({ status: "success", title: "Avatar updated", position: "top-right" });
+    } catch (err) {
+      toast({ status: "error", title: "Upload failed", description: extractErrorMessage(err), position: "top-right" });
+    } finally {
+      setAvatarUploading(false);
+      event.target.value = "";
+    }
+  }
+
+  async function handleRemoveAvatar() {
+    try {
+      const res = await api.patch(ENDPOINTS.me, { avatar: null });
+      setUser(res.data.data);
+      toast({ status: "success", title: "Avatar removed", position: "top-right" });
+    } catch (err) {
+      toast({ status: "error", title: "Remove failed", description: extractErrorMessage(err), position: "top-right" });
+    }
+  }
 
   const profile = useForm<ProfileValues>({
     defaultValues: { name: user?.name ?? "", email: user?.email ?? "" },
@@ -64,6 +100,40 @@ export function ProfilePanel() {
 
   return (
     <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={6}>
+      <Box bg="ink.800" borderWidth="1px" borderColor="whiteAlpha.100" borderRadius="xl" p={6} gridColumn={{ lg: "1 / -1" }}>
+        <Text fontSize="lg" fontWeight={700} mb={1}>
+          Profile picture
+        </Text>
+        <Text fontSize="sm" color="ink.300" mb={6}>
+          JPG, PNG, GIF or WebP — up to 5 MB. Used in the top bar.
+        </Text>
+        <HStack spacing={5} align="center">
+          <Avatar size="2xl" name={user?.name || user?.email} src={avatarUrl} bg="accent.lime" color="ink.900" fontWeight={700} />
+          <VStack align="flex-start" spacing={3}>
+            <HStack>
+              <Button size="sm" isLoading={avatarUploading} onClick={() => avatarInputRef.current?.click()}>
+                Upload new picture
+              </Button>
+              {user?.avatar && (
+                <Button size="sm" variant="ghost" onClick={handleRemoveAvatar}>
+                  Remove
+                </Button>
+              )}
+            </HStack>
+            <input
+              ref={avatarInputRef}
+              type="file"
+              accept="image/jpeg,image/png,image/gif,image/webp"
+              style={{ display: "none" }}
+              onChange={handleAvatarChange}
+            />
+            <Text fontSize="xs" color="ink.400">
+              {user?.avatar ? avatarUrl : "No picture yet — upload one to personalize your account."}
+            </Text>
+          </VStack>
+        </HStack>
+      </Box>
+
       <Box bg="ink.800" borderWidth="1px" borderColor="whiteAlpha.100" borderRadius="xl" p={6}>
         <Text fontSize="lg" fontWeight={700} mb={1}>
           Profile
