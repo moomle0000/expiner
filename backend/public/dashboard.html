@@ -3,7 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
   <title>Dashboard · expiner</title>
+=======
+  <title>Dashboard · express-upload</title>
+>>>>>>> origin/main
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -74,7 +78,11 @@
         </div>
         <div>
           <p class="text-sm font-semibold text-slate-800 leading-none">My Dashboard</p>
+<<<<<<< HEAD
           <p class="text-[10px] text-slate-400 mt-0.5 font-mono" id="userTag">expiner</p>
+=======
+          <p class="text-[10px] text-slate-400 mt-0.5 font-mono" id="userTag">express-upload</p>
+>>>>>>> origin/main
         </div>
       </div>
       <div class="flex items-center gap-2">
@@ -291,7 +299,11 @@
   <script>
     const $ = id => document.getElementById(id);
     const API = '';
+<<<<<<< HEAD
     const SESSION_KEY = 'expiner:user';
+=======
+    const SESSION_KEY = 'express-upload:user';
+>>>>>>> origin/main
 
     const readCookie = (name) => {
       const target = name + '=';
@@ -384,7 +396,11 @@
       }
       const cBody = await createRes.json();
       apiKey = cBody.data.key;
+<<<<<<< HEAD
       localStorage.setItem('expiner:api-key', apiKey);
+=======
+      localStorage.setItem('express-upload:api-key', apiKey);
+>>>>>>> origin/main
       return cBody.data;
     };
 
@@ -668,7 +684,11 @@
         if (!res.ok) { showToast(body.message || 'Save failed', 'error'); return; }
         currentUser = body.data;
         setStoredUser(currentUser);
+<<<<<<< HEAD
         $('userTag').textContent = currentUser.email || currentUser.username || 'expiner';
+=======
+        $('userTag').textContent = currentUser.email || currentUser.username || 'express-upload';
+>>>>>>> origin/main
         showToast('Profile updated', 'success');
         status.textContent = 'Saved.';
       } catch { showToast('Network error', 'error'); }
@@ -708,7 +728,11 @@
     async function signOut() {
       try { await fetch(API + '/auth/logout', { method: 'POST', credentials: 'same-origin' }); } catch {}
       setStoredUser(null);
+<<<<<<< HEAD
       localStorage.removeItem('expiner:api-key');
+=======
+      localStorage.removeItem('express-upload:api-key');
+>>>>>>> origin/main
       window.location.href = '/auth.html';
     }
 
@@ -721,10 +745,17 @@
         return;
       }
       setStoredUser(currentUser);
+<<<<<<< HEAD
       $('userTag').textContent = currentUser.email || currentUser.username || 'expiner';
       loadProfile();
 
       apiKey = (localStorage.getItem('expiner:api-key') || '').trim();
+=======
+      $('userTag').textContent = currentUser.email || currentUser.username || 'express-upload';
+      loadProfile();
+
+      apiKey = (localStorage.getItem('express-upload:api-key') || '').trim();
+>>>>>>> origin/main
       if (!apiKey) {
         try { await ensureApiKey(); }
         catch (err) { console.error(err); showToast('Could not auto-create API key', 'error'); }

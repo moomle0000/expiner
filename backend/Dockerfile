@@ -38,7 +38,11 @@ FROM node:20-bookworm-slim AS runtime
 ENV NODE_ENV=production \
     PORT=5601 \
     LOG_DIR=/app/logs \
+<<<<<<< HEAD
     UPLOAD_ROOT=/var/expiners
+=======
+    UPLOAD_ROOT=/var/express-uploads
+>>>>>>> origin/main
 
 WORKDIR /app
 
@@ -64,8 +68,13 @@ COPY package.json ./
 # (none today, but `dist/` is what we ship). The fat `node_modules`
 # stays owned by root — Node doesn't care.
 RUN groupadd --system app && useradd --system --gid app --home /app app \
+<<<<<<< HEAD
  && mkdir -p /app/logs /var/expiners \
  && chown -R app:app /app/logs /var/expiners /app/dist /app/swagger.yaml /app/package.json
+=======
+ && mkdir -p /app/logs /var/express-uploads \
+ && chown -R app:app /app/logs /var/express-uploads /app/dist /app/swagger.yaml /app/package.json
+>>>>>>> origin/main
 USER app
 
 EXPOSE 5601

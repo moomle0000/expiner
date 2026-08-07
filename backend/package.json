@@ -1,7 +1,13 @@
 {
+<<<<<<< HEAD
   "name": "expiner",
   "version": "0.0.0",
   "description": "expiner TypeScript + Mongoose + MongoDB + Express API Server",
+=======
+  "name": "express-upload",
+  "version": "0.0.0",
+  "description": "express-upload TypeScript + Mongoose + MongoDB + Express API Server",
+>>>>>>> origin/main
   "author": "",
   "license": "ISC",
   "scripts": {

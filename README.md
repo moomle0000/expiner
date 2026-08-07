@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # expiner
 
 > **The self-hostable alternative to Cloudinary — but for *every* file type.**
@@ -5,6 +6,15 @@
 expiner is an open-source, Docker-ready file storage and
 management service you can run on your own infrastructure. Where
 Cloudinary is laser-focused on images and videos, expiner
+=======
+# express-upload
+
+> **The self-hostable alternative to Cloudinary — but for *every* file type.**
+
+express-upload is an open-source, Docker-ready file storage and
+management service you can run on your own infrastructure. Where
+Cloudinary is laser-focused on images and videos, express-upload
+>>>>>>> origin/main
 happily accepts **anything**: PDFs, ZIP archives, design files, 3D
 models, raw data dumps, executables, anything your users throw at it.
 
@@ -80,8 +90,13 @@ models, raw data dumps, executables, anything your users throw at it.
 ### 1. Clone and configure
 
 ```bash
+<<<<<<< HEAD
 git clone https://github.com/<your-username>/expiner.git
 cd expiner
+=======
+git clone https://github.com/<your-username>/express-upload.git
+cd express-upload
+>>>>>>> origin/main
 cp .env.example .env
 ```
 
@@ -179,7 +194,11 @@ All knobs live in the root `.env`. Compose reads it automatically.
 | `BOOTSTRAP_USER_NAME` | `User` | no | Display name for the bootstrapped user. |
 | `FILE_CATEGORY_MAX_SIZE` | `524288000` (500 MB) | no | Theoretical cap; the actual multer limit is in `middlewares/fileUpload.middleware.ts`. |
 | `LOG_DIR` | `/app/logs` | no | Where backend logs are written (mounted to the `backend-logs` volume). |
+<<<<<<< HEAD
 | `UPLOAD_ROOT` | `/var/expiners` | no | Where uploaded files are stored (mounted to the `expiners` volume). |
+=======
+| `UPLOAD_ROOT` | `/var/express-uploads` | no | Where uploaded files are stored (mounted to the `express-uploads` volume). |
+>>>>>>> origin/main
 
 ### Generating a good `SECRET_KEY`
 
@@ -323,7 +342,11 @@ Full schema for every request/response body is at
 ## Client library — `@moomle/upload-client`
 
 A zero-dependency, ESM, TypeScript-first client for the file API.
+<<<<<<< HEAD
 Lets any web/Node project upload to an expiner server in a
+=======
+Lets any web/Node project upload to an express-upload server in a
+>>>>>>> origin/main
 few lines, with built-in progress events and cancellation.
 
 📦 **npm**: <https://www.npmjs.com/package/@moomle/upload-client>
@@ -579,6 +602,7 @@ files.example.com {
     encode gzip
 
     # API + short-link routes → backend
+<<<<<<< HEAD
     reverse_proxy /api/*    expiner-backend:5601
     reverse_proxy /auth/*   expiner-backend:5601
     reverse_proxy /users/*  expiner-backend:5601
@@ -591,6 +615,20 @@ files.example.com {
 
     # Everything else → frontend
     reverse_proxy expiner-frontend:3055
+=======
+    reverse_proxy /api/*    express-upload-backend:5601
+    reverse_proxy /auth/*   express-upload-backend:5601
+    reverse_proxy /users/*  express-upload-backend:5601
+    reverse_proxy /f/*      express-upload-backend:5601
+    reverse_proxy /info/*   express-upload-backend:5601
+    reverse_proxy /img/*    express-upload-backend:5601
+    reverse_proxy /photos/* express-upload-backend:5601
+    reverse_proxy /uploads/* express-upload-backend:5601
+    reverse_proxy /api-docs/* express-upload-backend:5601
+
+    # Everything else → frontend
+    reverse_proxy express-upload-frontend:3055
+>>>>>>> origin/main
 }
 ```
 
@@ -631,6 +669,7 @@ The backend doesn't need rebuilding.
 
 | Volume | Mounted at | What's in it |
 |---|---|---|
+<<<<<<< HEAD
 | `expiner_mongo-data` | `/data/db` | MongoDB data files |
 | `expiner_expiners` | `/var/expiners` | Uploaded files |
 | `expiner_backend-logs` | `/app/logs` | Winston daily-rotate logs (debug + error) |
@@ -638,6 +677,15 @@ The backend doesn't need rebuilding.
 Inspect the actual host path:
 ```bash
 docker volume inspect expiner_expiners
+=======
+| `express-upload_mongo-data` | `/data/db` | MongoDB data files |
+| `express-upload_express-uploads` | `/var/express-uploads` | Uploaded files |
+| `express-upload_backend-logs` | `/app/logs` | Winston daily-rotate logs (debug + error) |
+
+Inspect the actual host path:
+```bash
+docker volume inspect express-upload_express-uploads
+>>>>>>> origin/main
 ```
 
 ### Backups
@@ -647,9 +695,15 @@ docker volume inspect expiner_expiners
 docker compose -f docker-compose.mongo.yml stop backend
 
 # Snapshot the uploads + mongo volumes
+<<<<<<< HEAD
 docker run --rm -v expiner_expiners:/data -v $(pwd):/backup \
     alpine tar czf /backup/expiners-$(date +%F).tgz -C /data .
 docker run --rm -v expiner_mongo-data:/data -v $(pwd):/backup \
+=======
+docker run --rm -v express-upload_express-uploads:/data -v $(pwd):/backup \
+    alpine tar czf /backup/express-uploads-$(date +%F).tgz -C /data .
+docker run --rm -v express-upload_mongo-data:/data -v $(pwd):/backup \
+>>>>>>> origin/main
     alpine tar czf /backup/mongo-data-$(date +%F).tgz -C /data .
 
 # Restart
@@ -661,7 +715,11 @@ docker compose -f docker-compose.mongo.yml start backend
 ## Project layout
 
 ```
+<<<<<<< HEAD
 expiner/
+=======
+express-upload/
+>>>>>>> origin/main
 ├── backend/                     Express + Mongoose API
 │   ├── src/
 │   │   ├── app.ts               Express bootstrap
@@ -788,7 +846,11 @@ Before exposing this to the public internet:
 - [ ] Set `FRONTEND_ORIGIN` to your public frontend URL
 - [ ] Set `BACKEND_PORT` / `FRONTEND_PORT` to non-default values if
       you want to avoid scanners finding the stack
+<<<<<<< HEAD
 - [ ] Back up `expiners` and `mongo-data` volumes regularly
+=======
+- [ ] Back up `express-uploads` and `mongo-data` volumes regularly
+>>>>>>> origin/main
 - [ ] Keep Docker Engine, MongoDB, and the Node base image up to date
       (`docker compose pull && docker compose up -d --build`)
 

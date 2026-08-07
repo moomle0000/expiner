@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # docker-compose.yml — production stack for expiner.
+=======
+# docker-compose.yml — production stack for express-upload.
+>>>>>>> origin/main
 #
 # By default this file delegates to docker-compose.no-mongo.yml (external
 # MongoDB, MONGODB_URI must be set in the root .env). For an all-in-one

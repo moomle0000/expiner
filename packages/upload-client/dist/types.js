@@ -3,7 +3,11 @@
  *
  * These mirror the shape of the server response from
  * `POST /api/files/upload` and the `FileModel` schema in
+<<<<<<< HEAD
  * `expiner/src/models/files.model.ts`.
+=======
+ * `express-upload/src/models/files.model.ts`.
+>>>>>>> origin/main
  *
  * Only the fields the client cares about are typed — the server may return
  * more (e.g. `detectedMime`, `detectedExt`, `category`) and they will still

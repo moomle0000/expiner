@@ -1,7 +1,11 @@
 /**
  * @moomle/upload-client
  *
+<<<<<<< HEAD
  * Tiny browser/Node client for the expiner file API.
+=======
+ * Tiny browser/Node client for the express-upload file API.
+>>>>>>> origin/main
  * Uploads with progress + cancel. Zero runtime dependencies.
  *
  * ```ts

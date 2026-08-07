@@ -59,6 +59,7 @@ const imageSchema: Schema = new Schema(
   },
   {
     timestamps: true,
+<<<<<<< HEAD
     toJSON: {
       transform(_doc, ret) {
         delete ret.path;
@@ -66,6 +67,8 @@ const imageSchema: Schema = new Schema(
         return ret;
       },
     },
+=======
+>>>>>>> origin/main
   },
 );
 

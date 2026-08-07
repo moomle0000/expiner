@@ -8,12 +8,19 @@ import type { AuthFile } from "@/types/api";
 export interface FileDropzoneProps {
   onUploaded?: (file: AuthFile) => void;
   folder?: string;
+<<<<<<< HEAD
   category?: string;
+=======
+>>>>>>> origin/main
   accept?: string;
   multiple?: boolean;
 }
 
+<<<<<<< HEAD
 export function FileDropzone({ onUploaded, folder, category, accept, multiple = true }: FileDropzoneProps) {
+=======
+export function FileDropzone({ onUploaded, folder, accept, multiple = true }: FileDropzoneProps) {
+>>>>>>> origin/main
   const inputRef = useRef<HTMLInputElement>(null);
   const [isOver, setIsOver] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -28,7 +35,10 @@ export function FileDropzone({ onUploaded, folder, category, accept, multiple = 
         for (const file of list) {
           const fd = new FormData();
           fd.append("file", file);
+<<<<<<< HEAD
           if (category) fd.append("category", category);
+=======
+>>>>>>> origin/main
           const res = await api.post(ENDPOINTS.fileUpload, fd, {
             headers: { "Content-Type": "multipart/form-data", "X-Folder": folder ?? "" },
           });
@@ -47,7 +57,11 @@ export function FileDropzone({ onUploaded, folder, category, accept, multiple = 
         setUploading(false);
       }
     },
+<<<<<<< HEAD
     [folder, category, onUploaded, toast],
+=======
+    [folder, onUploaded, toast],
+>>>>>>> origin/main
   );
 
   return (

@@ -50,8 +50,15 @@ export class App {
        const allowedOrigins = [
       "http://localhost:3055",
       "http://localhost:5173",
+<<<<<<< HEAD
       "http://localhost:3000",
       process.env.FRONTEND_ORIGIN, // set this in the root .env to your public frontend URL
+=======
+      "https://srv-bs2.lmstream.xyz",
+      "https://rentease.lmstream.xyz",
+      "https://srv-expiner.lmstream.xyz",
+      process.env.FRONTEND_ORIGIN, // allow overriding via env without rebuild
+>>>>>>> origin/main
     ].filter(Boolean);
     // this.app.use(morgan(LOG_FORMAT, { stream }));
     // this.app.use(cors());

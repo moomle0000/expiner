@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Dependencies
 /node_modules
 
@@ -27,3 +28,9 @@
 # OS
 .DS_Store
 Thumbs.db
+=======
+/node_modules
+/uploads
+/logs
+/dist
+>>>>>>> origin/main

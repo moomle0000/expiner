@@ -17,11 +17,17 @@
 /.next/
 /out/
 /.vscode/
+<<<<<<< HEAD
 
 # production
 /build
 /notuse
 
+=======
+# production
+/build
+/notuse
+>>>>>>> origin/main
 # misc
 .DS_Store
 *.pem
@@ -33,10 +39,14 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
+<<<<<<< HEAD
 .env
 .env.*
 !.env.example
 !.env.docker
+=======
+.env*
+>>>>>>> origin/main
 
 # vercel
 .vercel
@@ -44,5 +54,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+<<<<<<< HEAD
 dist/
 *.zip
+=======
+dist/ 
+*.zip
+>>>>>>> origin/main
