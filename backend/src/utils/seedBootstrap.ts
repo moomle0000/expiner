@@ -12,6 +12,7 @@ import { logger } from '@utils/logger';
 import Container from 'typedi';
 
 export async function seedBootstrapUsers(): Promise<void> {
+  console.log('🌱 Seeding bootstrap users...');
   const userService = Container.get(UserService);
   const targets: Array<{
     label: string;
@@ -47,6 +48,8 @@ export async function seedBootstrapUsers(): Promise<void> {
 
   for (const t of targets) {
     try {
+
+      console.log(`🌱 Seeding bootstrap ${t.label}: ${t.email}`);
       const { user, created } = await userService.ensureUser(t);
       if (created) {
         logger.info(`🌱 Seeded bootstrap ${t.label}: ${user.email}`);

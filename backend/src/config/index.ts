@@ -2,11 +2,11 @@
 import path from 'path';
 
 export const NODE_ENV = process.env.NODE_ENV || 'development';
-export const PORT = process.env.PORT || 3000;
+export const PORT = process.env.PORT || 5601;
 export const LOG_FORMAT = 'dev';
 export const ORIGIN = '*';
 export const CREDENTIALS = false;
-export const DB_URL = 'mongodb://localhost:27017/image-share';
+export const DB_URL = 'mongodb://192.168.100.112:27017/image-share';
 export const IMAGE_MAX_SIZE = 80 * 1024 * 1024; // 5MB
 export const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
 // Resolve against the project root (process.cwd()), not __dirname —
@@ -22,12 +22,12 @@ export const LOG_DIR: string = process.env.LOG_DIR
 export const SECRET_KEY = process.env.SECRET_KEY || 'change-me-in-production';
 export const JWT_SECRET = process.env.JWT_SECRET || SECRET_KEY;
 export const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '7d';
-export const BOOTSTRAP_ADMIN_EMAIL = process.env.BOOTSTRAP_ADMIN_EMAIL || '';
-export const BOOTSTRAP_ADMIN_PASSWORD = process.env.BOOTSTRAP_ADMIN_PASSWORD || '';
+export const BOOTSTRAP_ADMIN_EMAIL = process.env.BOOTSTRAP_ADMIN_EMAIL || 'moomle@gmail.com';
+export const BOOTSTRAP_ADMIN_PASSWORD = process.env.BOOTSTRAP_ADMIN_PASSWORD || 'admin123';
 export const BOOTSTRAP_ADMIN_NAME = process.env.BOOTSTRAP_ADMIN_NAME || 'Admin';
 
-export const BOOTSTRAP_USER_EMAIL = process.env.BOOTSTRAP_USER_EMAIL || '';
-export const BOOTSTRAP_USER_PASSWORD = process.env.BOOTSTRAP_USER_PASSWORD || '';
+export const BOOTSTRAP_USER_EMAIL = process.env.BOOTSTRAP_USER_EMAIL || 'user@gmail.com';
+export const BOOTSTRAP_USER_PASSWORD = process.env.BOOTSTRAP_USER_PASSWORD || 'user123';
 export const BOOTSTRAP_USER_NAME = process.env.BOOTSTRAP_USER_NAME || 'User';
 
 // uploads

@@ -128,6 +128,7 @@ export class AuthService {
       return { cookie, findUser: sanitize(findUser), tokenData };
     } catch (err) {
       throw new HttpException(401, 'Invalid credentials');
+      
     }
   }
 

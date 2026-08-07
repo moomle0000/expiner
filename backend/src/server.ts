@@ -1,6 +1,5 @@
 import { App } from '@/app';
 import { UPLOAD_ROOT, IMAGE_STORAGE_PATH } from '@config';
-import { dbConnection } from '@database';
 import fs from 'fs';
 import path from 'path';
 import { LocationRoute } from './routes/location.route';
@@ -11,7 +10,7 @@ import { ApiKeyRoute } from './routes/apiKey.route';
 import { UserSelfRoute } from './routes/userSelf.route';
 import { FolderRoute } from './routes/folder.route';
 import { CategoryRoute } from './routes/category.route';
-import { seedBootstrapUsers } from '@utils/seedBootstrap';
+
 
 // Make sure the upload root + every sub-folder used by the upload middleware
 // exist before the server starts accepting requests. Cross-platform safe
@@ -46,9 +45,7 @@ const app = new App([
 ]);
 
 (async () => {
-  // Seed only after the DB connection is fully established — seeding queries
-  // with bufferCommands=false fail (and were swallowed) before this.
-  await dbConnection();
-  await seedBootstrapUsers();
+  
   app.listen();
+  
 })();

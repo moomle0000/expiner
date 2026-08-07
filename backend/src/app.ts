@@ -12,6 +12,7 @@ import { dbConnection } from '@database';
 import { Routes } from '@interfaces/routes.interface';
 import { logger, stream } from '@utils/logger';
 import path from 'path';
+import { seedBootstrapUsers } from '@utils/seedBootstrap';
 export class App {
   public app: express.Application;
   public env: string;
@@ -42,15 +43,18 @@ export class App {
   }
 
   private async connectToDatabase() {
-    await dbConnection();
+    await dbConnection().then(async () => {
+      console.log('Db connected');
+      await seedBootstrapUsers();
+    });
   }
 
   private initializeMiddlewares() {
     // this.app.use(morgan(LOG_FORMAT, { stream }));
-       const allowedOrigins = [
-      "http://localhost:3055",
-      "http://localhost:5173",
-      "http://localhost:3000",
+    const allowedOrigins = [
+      'http://localhost:3055',
+      'http://localhost:5173',
+      'http://localhost:3000',
       process.env.FRONTEND_ORIGIN, // set this in the root .env to your public frontend URL
     ].filter(Boolean);
     // this.app.use(morgan(LOG_FORMAT, { stream }));
@@ -61,10 +65,12 @@ export class App {
     // req.headers.cookie is the raw string and req.cookies is undefined.
     this.app.use(cookieParser());
 
-    this.app.use(cors({
-      origin: allowedOrigins,   // مصفوفة
-      credentials: true,        // مطلوب إذا كنت ترسل كوكي
-    }),);
+    this.app.use(
+      cors({
+        origin: allowedOrigins, // مصفوفة
+        credentials: true, // مطلوب إذا كنت ترسل كوكي
+      }),
+    );
     this.app.use(express.json({ limit: '1mb' }));
     this.app.use(express.urlencoded({ extended: true, limit: '1mb' }));
     this.app.use('/img', express.static(IMAGE_STORAGE_PATH));
@@ -92,5 +98,4 @@ export class App {
     this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(spec));
     this.app.use(express.static(path.join(__dirname, '../public')));
   }
-
 }

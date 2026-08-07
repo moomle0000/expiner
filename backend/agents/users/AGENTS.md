@@ -16,7 +16,7 @@
 - Middleware: `src/middlewares/auth.middleware.ts` — `authMiddleware` (Bearer JWT), `requireAdmin`, `requireSelfOrAdmin`
 - Global error handler: `src/middlewares/error.middleware.ts` — logs `error` level for 5xx, `warn` level for 4xx (so user-input failures like `Invalid credentials` don't show up as server errors)
 - Helper: `src/utils/Authorization.ts` — extract Bearer token from a `Cookie` header
-- Bootstrap seed: `src/utils/seedBootstrap.ts` — `seedBootstrapUsers()` called from `src/server.ts` **after** `await dbConnection()` (the App constructor's `connectToDatabase()` isn't awaited, so seeding without an explicit `await dbConnection()` failed with "Cannot call `users.findOne()` before initial connection is complete" when `bufferCommands=false`); reads `BOOTSTRAP_ADMIN_*` / `BOOTSTRAP_USER_*` from `@config` and idempotently creates the users via `UserService.ensureUser`
+- Bootstrap seed: `src/utils/seedBootstrap.ts` — `seedBootstrapUsers()` called from `src/server.ts` after the App constructor; reads `BOOTSTRAP_ADMIN_*` / `BOOTSTRAP_USER_*` from `@config` and idempotently creates the users via `UserService.ensureUser`
 
 ## Route map
 ```
