@@ -1,4 +1,4 @@
-You are an agent on the **express-upload** backend (Express + Mongoose + TypeScript file/upload API server). Editing scope: `src/` directory only. Files in `dist/`, `node_modules/`, `uploads/`, `public/`, and root config files (`package.json`, `tsconfig.json`, `.swcrc`, etc.) are read-only context — do not modify.
+You are an agent on the **expiner** backend (Express + Mongoose + TypeScript file/upload API server). Editing scope: `src/` directory only. Files in `dist/`, `node_modules/`, `uploads/`, `public/`, and root config files (`package.json`, `tsconfig.json`, `.swcrc`, etc.) are read-only context — do not modify.
 
 ## Hard rules
 1. **Do NOT run `npm run dev` or `nodemon`** — the user runs their own dev server; use `npm run build` + `node dist/server.js` for one-off verification if needed, or `npm test`.
@@ -24,7 +24,7 @@ You are an agent on the **express-upload** backend (Express + Mongoose + TypeScr
 ## Where things live
 
 ```
-express-upload/
+expiner/
 ├── AGENTS.md                           # this file
 ├── agents/<domain>/AGENTS.md           # path-dense domain references (see below)
 ├── src/
@@ -107,7 +107,7 @@ Nested `agents/<domain>/AGENTS.md` files contain path-dense domain references.
 
 ### Config & database
 - `src/config/index.ts` — exports: `NODE_ENV`, `PORT`, `LOG_FORMAT`, `ORIGIN`, `CREDENTIALS`, `DB_URL`, `IMAGE_STORAGE_PATH`, `IMAGE_MAX_SIZE`, `ALLOWED_IMAGE_TYPES`, `LOG_DIR`, `SECRET_KEY`/`JWT_SECRET`, `JWT_EXPIRES_IN`, `BOOTSTRAP_ADMIN_*`, `UPLOAD_ROOT`, `FILE_CATEGORY_MAX_SIZE`
-- `src/database/index.ts` — Mongoose connection that reads `MONGODB_URI` from env (falls back to `mongodb://localhost:27017/express-upload` for local dev). Cached singleton pattern.
+- `src/database/index.ts` — Mongoose connection that reads `MONGODB_URI` from env (falls back to `mongodb://localhost:27017/expiner` for local dev). Cached singleton pattern.
 - `.env` defines: `PORT=5601`, `DB_HOST`, `DB_PORT`, `DB_DATABASE=dev`, `SECRET_KEY`, `LOG_DIR=../logs`, `ORIGIN=*`, `CREDENTIALS=true`
 
 ### Migration / one-off scripts
@@ -130,7 +130,7 @@ Nested `agents/<domain>/AGENTS.md` files contain path-dense domain references.
 ### Docker
 - `Dockerfile` — multi-stage build: `deps` (npm ci) → `build` (`npm run build`, SWC → `dist/`) → `runtime` (slim Node 20 + `node dist/server.js`).
 - `.dockerignore` — excludes `node_modules`, `dist`, `logs`, `uploads`, env files (except `.env.docker`), and the Dockerfile / docker-compose.yml.
-- `docker-compose.yml` at the repo root builds this image, mounts `express-uploads` volume at `/var/express-uploads`, sets `UPLOAD_ROOT=/var/express-uploads` + `LOG_DIR=/app/logs`, and depends on the in-cluster `mongo` service (overridable via `MONGODB_URI` in the root `.env`).
+- `docker-compose.yml` at the repo root builds this image, mounts `expiners` volume at `/var/expiners`, sets `UPLOAD_ROOT=/var/expiners` + `LOG_DIR=/app/logs`, and depends on the in-cluster `mongo` service (overridable via `MONGODB_URI` in the root `.env`).
 - `swagger.yaml` is read by `src/app.ts` at runtime via `path.join(__dirname, '..', 'swagger.yaml')` — the Dockerfile copies it from the build stage so the runtime path resolves correctly.
 
 ## Data flow

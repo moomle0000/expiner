@@ -1,6 +1,6 @@
 # AGENTS.md
 
-You are working on the **frontend** for the `express-upload` media console.
+You are working on the **frontend** for the `expiner` media console.
 This repo is a Next.js Pages-Router SPA that talks to a separate backend at
 `http://localhost:5000`. The backend's contract is documented in
 `swagger.yaml` at the repo root.

@@ -1,4 +1,4 @@
-# docker-compose.mongo.yml — production stack for express-upload WITH in-cluster MongoDB.
+# docker-compose.mongo.yml — production stack for expiner WITH in-cluster MongoDB.
 #
 # Brings up: backend (Express API), frontend (Next.js standalone), and a
 # compose-managed MongoDB. Use this file when you want everything in
@@ -10,7 +10,7 @@
 services:
   mongo:
     image: mongo:7
-    container_name: express-upload-mongo
+    container_name: expiner-mongo
     restart: unless-stopped
     # Auth is OPTIONAL — these are commented out by default. Uncomment
     # MONGO_INITDB_ROOT_USERNAME/PASSWORD in the root .env AND switch
@@ -31,7 +31,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: express-upload-backend
+    container_name: expiner-backend
     restart: unless-stopped
     depends_on:
       mongo:
@@ -43,7 +43,7 @@ services:
       # in-cluster mongo service.
       MONGODB_URI: ${MONGODB_URI:-mongodb://mongo:27017/image-upload}
       LOG_DIR: /app/logs
-      UPLOAD_ROOT: /var/express-uploads
+      UPLOAD_ROOT: /var/expiners
       SECRET_KEY: ${SECRET_KEY:-replace-me-with-a-long-random-string}
       JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-7d}
       # Bootstrap users seeded at startup (if set). Safe to re-run: existing
@@ -61,7 +61,7 @@ services:
       - "${BACKEND_PORT:-5601}:5601"
     volumes:
       # Persist uploads across container restarts and expose them on the host.
-      - express-uploads:/var/express-uploads
+      - expiners:/var/expiners
       - backend-logs:/app/logs
 
   frontend:
@@ -73,7 +73,7 @@ services:
         # pass and as the URL the very first client paint sees, before
         # `_app.tsx`'s effect finishes its /api/_config fetch.
         NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:5601}
-    container_name: express-upload-frontend
+    container_name: expiner-frontend
     restart: unless-stopped
     depends_on:
       - backend
@@ -89,5 +89,5 @@ services:
 
 volumes:
   mongo-data:
-  express-uploads:
+  expiners:
   backend-logs:

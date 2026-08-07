@@ -3,7 +3,7 @@
  *
  * These mirror the shape of the server response from
  * `POST /api/files/upload` and the `FileModel` schema in
- * `express-upload/src/models/files.model.ts`.
+ * `expiner/src/models/files.model.ts`.
  *
  * Only the fields the client cares about are typed — the server may return
  * more (e.g. `detectedMime`, `detectedExt`, `category`) and they will still
@@ -97,7 +97,7 @@ export interface UploadOptions {
 }
 
 export interface UploaderConfig {
-  /** Base URL of the express-upload server, no trailing slash. */
+  /** Base URL of the expiner server, no trailing slash. */
   baseUrl: string;
 
   /**

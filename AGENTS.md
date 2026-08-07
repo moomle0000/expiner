@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Root documentation index for the `express-upload` monorepo. Two deployable
+Root documentation index for the `expiner` monorepo. Two deployable
 trees — `backend/` (Express + Mongoose + TypeScript API on port **5601**)
 and `frontend/` (Next.js Pages-Router SPA on port **3055**) — with five
 cross-tree business domains.
@@ -60,8 +60,8 @@ cross-tree business domains.
   `package-lock.json` both present; Bun and npm are interchangeable.
 - **DB** — MongoDB connection is read from `MONGODB_URI` in the root
   `.env` (`backend/src/database/index.ts` falls back to
-  `mongodb://localhost:27017/express-upload` for local dev). The
-  compose stack uses `mongodb://mongo:27017/express-upload` over the
+  `mongodb://localhost:27017/expiner` for local dev). The
+  compose stack uses `mongodb://mongo:27017/expiner` over the
   internal docker network.
   `DB_PORT` / `DB_DATABASE=dev`.
 - **Auth (two layers):** JWT bearer (`Authorization: Bearer <token>`,
@@ -74,7 +74,7 @@ cross-tree business domains.
 ## Where things live
 
 ```
-express-upload/                       # repo root — this file is the only doc here
+expiner/                       # repo root — this file is the only doc here
 ├── AGENTS.md                         # you are here (root index, table of contents only)
 ├── backend/
 │   ├── AGENTS.md                     # backend edit scope, hard rules, data flow
@@ -339,7 +339,7 @@ loads their files"):
 [FileModel — backend/src/models/files.model.ts]
         │  Mongoose ODM
         ▼
-[MongoDB at mongodb://mongo:27017/express-upload]
+[MongoDB at mongodb://mongo:27017/expiner]
         │
         ▼
 [Response envelope: { data: [...], message: "..." }]

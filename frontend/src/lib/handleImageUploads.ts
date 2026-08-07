@@ -3,7 +3,7 @@
 //
 // Original behavior: hardcoded uploads to a private host. All URLs have
 // been replaced with placeholders. If you ever revive this file, point
-// it at your own express-upload server (see src/lib/api.ts for the
+// it at your own expiner server (see src/lib/api.ts for the
 // current pattern using API_BASE_URL from src/lib/endpoints.ts).
 
 const PLACEHOLDER_URL = 'https://your-server.example.com/api/files/upload';

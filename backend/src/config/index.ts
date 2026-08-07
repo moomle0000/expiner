@@ -33,7 +33,7 @@ export const BOOTSTRAP_USER_NAME = process.env.BOOTSTRAP_USER_NAME || 'User';
 // uploads
 // ---------------------------------------------------------------------------
 // UPLOAD_ROOT can be:
-//   1. an absolute path  (e.g. /var/data/express-upload/uploads)
+//   1. an absolute path  (e.g. /var/data/expiner/uploads)
 //   2. a relative path   (resolved against the project root, NOT the cwd)
 // Defaults to `<project-root>/uploads` so it works on Windows, Linux and macOS
 // without any extra config.

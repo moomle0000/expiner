@@ -5,7 +5,7 @@ const MONGODB_URI =
   process.env.MONGODB_URI ??
   // Local dev fallback so `npm run dev` outside Docker still works.
   // Override MONGODB_URI in the root .env for any non-local environment.
-  'mongodb://localhost:27017/express-upload';
+  'mongodb://localhost:27017/expiner';
 
 if (!MONGODB_URI) {
   throw new Error(

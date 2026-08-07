@@ -1,7 +1,7 @@
 {
-  "name": "express-upload",
+  "name": "expiner",
   "version": "0.0.0",
-  "description": "express-upload TypeScript + Mongoose + MongoDB + Express API Server",
+  "description": "expiner TypeScript + Mongoose + MongoDB + Express API Server",
   "author": "",
   "license": "ISC",
   "scripts": {

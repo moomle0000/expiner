@@ -1,6 +1,6 @@
 # upload-client
 
-Tiny browser/Node client for the `express-upload` file API. Ships as `@moomle/upload-client`.
+Tiny browser/Node client for the `expiner` file API. Ships as `@moomle/upload-client`.
 
 ## Backend paths
 - Source: `packages/upload-client/src/index.ts` (re-exports the public API)

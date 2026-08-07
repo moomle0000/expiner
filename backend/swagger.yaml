@@ -1,9 +1,9 @@
 openapi: 3.0.3
 info:
-  title: express-upload API
+  title: expiner API
   version: 1.0.0
   description: |
-    REST API for the express-upload file server.
+    REST API for the expiner file server.
 
     ## Authentication
     Two authentication methods are supported on most `/api/*` and `/info/*` routes:
