@@ -7,10 +7,11 @@ admin sees their own files through the same hook.
 
 ## Pages
 - `src/pages/admin/files.tsx` — `AdminLayout` + `PageHeader` + `MyFilesGrid`.
-- `src/pages/dashboard/files.tsx` — `DashboardLayout` + `PageHeader` + `MyFilesGrid`.
+- `src/pages/dashboard/files/index.tsx` — `DashboardLayout` + `PageHeader` + `MyFilesGrid`.
 
 ## Feature components
-- `src/components/dashboard/MyFilesGrid.tsx` — upload controls (folder `Select`, category `Select` + free-text "New category" input) + Dropzone + type filter chips + a category filter `Select` (options derived from loaded files) + card grid. Each card: image preview (or `FileIcon`), a category `Tag` when set, per-file menu (Download / Open / Delete), public URL with `CopyButton`. Delete is confirmed via `ConfirmDialog`.
+- `src/components/dashboard/MyFilesGrid.tsx` — upload controls (folder `Select`, category `Select` + free-text "New category" input) + Dropzone + type filter chips + a category filter `Select` (options derived from loaded files) + the shared `FileCards` grid.
+- `src/components/ui/FileCards.tsx` — shared **file-manager** grid/table. Extract of the grid markup formerly inline in `MyFilesGrid`; reused by `MyFilesGrid`, `FolderDetail`, and `CategoryDetail` (see `agents/workspace/AGENTS.md`). Props: `{ files, onRemove(id), emptyTitle?, emptyDescription? }`. Includes a toolbar: search-by-name (`originalName`/`filename`), upload-date preset filter (today / 7d / 30d / this year), explicit `from`/`to` date-range inputs (override the preset when set), sort (newest / oldest / name A–Z / largest first), and a grid ⇄ list (table) view toggle. Cards and table rows both show the absolute upload date (`formatDate`) plus relative time, a category `Tag`, download/open/delete menu, and the copyable public link. Delete is confirmed via `ConfirmDialog`; "Clear filters" resets search/date/sort. Empty-list vs no-match states are distinguished.
 - `src/components/ui/FileDropzone.tsx` — Drag-and-drop and click-to-browse. Multipart upload via `POST /api/files/upload` with an optional `X-Folder` header and an optional `category` form field. Single toast covers the whole batch.
 - `src/components/ui/FileIcon.tsx` — File-type → icon + color mapping. Helper `fileCategoryOf(mime)` for callers.
 

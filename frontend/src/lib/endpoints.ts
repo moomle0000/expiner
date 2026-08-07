@@ -50,7 +50,7 @@ function toStringOrValue(): string {
   return getApiBaseUrl();
 }
 export const API_BASE_URL: string = new Proxy(
-  {} as string,
+  {},
   {
     get(_target, prop) {
       if (
